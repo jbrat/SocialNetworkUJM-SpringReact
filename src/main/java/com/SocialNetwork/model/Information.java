@@ -1,21 +1,43 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.SocialNetwork.model;
+
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
- * @author kevin
+ * @author UJM's students
  */
-public class Information {
+@Entity
+public class Information implements Serializable {
+    
+    /**
+     * Id of the class for the database
+     */
+    @Id
     private int idInformation;
-    private int telephone;
-    private String favori;
-    private String rue;
-    private String ville;
-    private int codePostal;
+    
+    private static final long serialVersionUID = 1L;
+    
+    /**
+     * phoneNumber of a person
+     */
+    private int phoneNumber;
+   
+    /**
+     * The street of a person
+     */
+    private String street;
+    
+    /**
+     * THe city of a person
+     */
+    private String city;
+    
+    /**
+     * The postal code for a person
+     */
+    private int postalCode;
     
     public Information() {
         
@@ -29,43 +51,45 @@ public class Information {
         this.idInformation = idInformation;
     }
     
-    public int getTelephone() {
-        return telephone;
-    }
-    
-    public void setTelephone(int telephone) {
-        this.telephone = telephone;
-    }
-    
-    public String getFavori() {
-        return favori;
-    }
-    
-    public void setFavori(String favori) {
-        this.favori = favori;
-    }
-    
     public String getRue() {
-        return rue;
+        return street;
     }
     
-    public void setRue(String rue) {
-        this.rue = rue;
+    public void setRue(String street) {
+        this.street = street;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(int postalCode) {
+        this.postalCode = postalCode;
     }
     
-    public String getVille() {
-        return ville;
-    }
     
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
-    
-    public int getCodePostal() {
-        return codePostal;
-    }
-    
-    public void setCodePostal(int codePostal) {
-        this.codePostal = codePostal;
-    }
 }
