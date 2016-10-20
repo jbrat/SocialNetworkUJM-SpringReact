@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 /**
  * Class for the actuality
@@ -18,30 +19,35 @@ public class Actuality implements Serializable{
      * IdActuality in the Database
      */
     @Id
-    private int idActuality;
-    
-    private static final long serialVersionUID = 1L;
+    @NotNull
+    private long idActuality;
     
     /**
      * The Owner
      */
     @OneToOne
+    @NotNull
     private Person person;
     
     /**
      * The title of the actuality
      */
+    @NotNull
     private String title;
     
     /**
      * The message of the actuality
      */
+    @NotNull
     private String message;
     
     /**
      * The date of the actuality
      */
+    @NotNull
     private Date date;
+    
+    public Actuality() {}
     
     public Actuality(Person person, String title, String message, Date date) {
         this.person = person;

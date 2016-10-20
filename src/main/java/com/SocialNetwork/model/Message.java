@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 /**
  *  Class Message for chat
@@ -18,20 +19,21 @@ public class Message implements Serializable {
      * Id message in the database
      */
     @Id
-    private int idMessage;
-    
-     private static final long serialVersionUID = 1L;
+    @NotNull
+    private long idMessage;
     
     /**
      * The receiver of the message
      */
     @ManyToOne
+    @NotNull
     private Person receiver;
     
     /**
      * The Sender of the message
      */
     @ManyToOne 
+    @NotNull
     private Person sender;
     
     /**
@@ -42,8 +44,10 @@ public class Message implements Serializable {
     /**
      * The date
      */
+    @NotNull
     private Date date;
 
+    public Message() {}
     
     public Message(Person receiver, Person sender, String message, Date date) {
         this.receiver = receiver;
@@ -56,7 +60,7 @@ public class Message implements Serializable {
         this.date = date;
     }
     
-    public int getidMessage() {
+    public long getidMessage() {
         return idMessage;
     }
 
@@ -76,7 +80,7 @@ public class Message implements Serializable {
         this.sender = sender;
     }
     
-    public void setidMessage(int idMessage) {
+    public void setidMessage(long idMessage) {
         this.idMessage = idMessage;
     }
   

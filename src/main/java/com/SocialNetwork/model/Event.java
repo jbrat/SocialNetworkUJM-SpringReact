@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 /**
  * Class for an Event in the UJM
@@ -20,9 +21,8 @@ public class Event implements Serializable{
      * Id of the Event in Database
      */
     @Id
-    private int idEvent;
-    
-    private static final long serialVersionUID = 1L;
+    @NotNull
+    private long idEvent;
     
     /**
      * The person list
@@ -40,11 +40,13 @@ public class Event implements Serializable{
      * The owner of the event
      */
     @OneToOne
+    @NotNull
     private Person owner;
     
     /**
      * Name of the event
      */
+    @NotNull
     private String name;
     
     /**
@@ -55,8 +57,10 @@ public class Event implements Serializable{
     /**
      * Date of the event
      */
+    @NotNull
     private Date date;
     
+    public Event() {}
     
     public Event(Person owner, String name, String description, Date date) {
         this.owner = owner;
@@ -64,6 +68,32 @@ public class Event implements Serializable{
         this.description = description;
         this.date = date;
     }
+
+    public Person getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Person owner) {
+        this.owner = owner;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
     
     
     public Date getDate() {

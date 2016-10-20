@@ -2,9 +2,12 @@ package com.SocialNetwork.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 /**
  * Class Person which use to have informations for a Person
@@ -18,33 +21,38 @@ public class Person implements Serializable {
      * Id of the person in Database
      */
     @Id
-    private int idPerson;
-    
-    private static final long serialVersionUID = 1L;
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long idPerson;
 
     /**
      * lastName of the Person
      */
+    @NotNull
     private String lastName;
     
     /**
      * firstName of the Person
      */
+    @NotNull
     private String firstName;
     
     /**
      * email of the Person
      */
+    @NotNull
     private String mail;
     
     /**
      * login for the Person
      */
+    @NotNull
     private String login;
     
     /**
      * password for the Person
      */
+    @NotNull
     private String password;
     
     /**
@@ -59,17 +67,19 @@ public class Person implements Serializable {
     @ManyToOne
     private FriendsGroup group;
   
-    public void setidPersonne(int idPerson, String lastName, String firstName) {
+    public Person() {}
+    
+    public void Person(int idPerson, String lastName, String firstName) {
         this.idPerson = idPerson;
         this.lastName = lastName;
         this.firstName = firstName;
     }
 
-    public int getIdPerson() {
+    public long getIdPerson() {
         return idPerson;
     }
 
-    public void setIdPerson(int idPerson) {
+    public void setIdPerson(long idPerson) {
         this.idPerson = idPerson;
     }
 

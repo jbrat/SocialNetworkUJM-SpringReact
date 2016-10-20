@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 /**
  * Class Friends Group for have a list of students
@@ -19,13 +20,13 @@ public class FriendsGroup implements Serializable {
      * Id of the group
      */
     @Id
-    private int idGroupe;
-    
-    private static final long serialVersionUID = 1L;
+    @NotNull
+    private long idGroup;
     
     /**
      * Name of the group
      */
+    @NotNull
     private String name;
     
     /**
@@ -34,17 +35,18 @@ public class FriendsGroup implements Serializable {
     @OneToMany
     private ArrayList<Person> groupPeoples = new ArrayList<Person>();
     
+    public FriendsGroup() {}
     
     public FriendsGroup(String name) {
         this.name = name;
     }
     
-    public int getIdGroupe() {
-        return idGroupe;
+    public long getIdGroup() {
+        return idGroup;
     }
     
-    public void setIdGroupe(int idGroupe) {
-        this.idGroupe = idGroupe;
+    public void setIdGroup(int idGroupe) {
+        this.idGroup = idGroupe;
     }
     
     public String getName() {

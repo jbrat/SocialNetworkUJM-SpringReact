@@ -1,4 +1,4 @@
-package com.socialNetwork.repository;
+package com.SocialNetwork.model;
 
 import com.SocialNetwork.model.Event;
 import java.io.Serializable;
@@ -9,6 +9,6 @@ import org.springframework.data.repository.CrudRepository;
  * 
  * @author UJM's students
  */
-public interface EventRepository extends CrudRepository<Event, Serializable>{
+public interface EventRepository extends CrudRepository<Event, Long>{
     
 }

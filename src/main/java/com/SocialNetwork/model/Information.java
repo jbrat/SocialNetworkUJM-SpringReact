@@ -3,6 +3,7 @@ package com.SocialNetwork.model;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -15,9 +16,8 @@ public class Information implements Serializable {
      * Id of the class for the database
      */
     @Id
-    private int idInformation;
-    
-    private static final long serialVersionUID = 1L;
+    @NotNull
+    private long idInformation;
     
     /**
      * phoneNumber of a person
@@ -39,15 +39,13 @@ public class Information implements Serializable {
      */
     private int postalCode;
     
-    public Information() {
-        
-    }
+    public Information() {}
     
-    public int getIdInformation() {
+    public long getIdInformation() {
         return idInformation;
     }
     
-    public void setIdInformation(int idInformation) {
+    public void setIdInformation(long idInformation) {
         this.idInformation = idInformation;
     }
     

@@ -1,4 +1,4 @@
-package com.socialNetwork.repository;
+package com.SocialNetwork.model;
 
 import com.SocialNetwork.model.Actuality;
 import java.io.Serializable;
@@ -9,6 +9,6 @@ import org.springframework.data.repository.CrudRepository;
  * 
  * @author UJM's students
  */
-public interface ActualityRepository extends CrudRepository<Actuality, Serializable>{
+public interface ActualityRepository extends CrudRepository<Actuality, Long>{
     
 }

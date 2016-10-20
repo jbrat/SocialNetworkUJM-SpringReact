@@ -24,13 +24,9 @@ public class HomeController {
      * 
      * @return template
      */
-    @RequestMapping("/home") 
+    @RequestMapping("/") 
     public String home(Model model) {
         return "index";
     }
-    
-    @RequestMapping("/test")
-    public String testStatement() {
-        return "index";
-    }
+
 }
