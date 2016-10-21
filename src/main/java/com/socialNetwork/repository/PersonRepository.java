@@ -1,6 +1,6 @@
-package com.SocialNetwork.model;
+package com.socialNetwork.repository;
 
-import com.SocialNetwork.model.Person;
+import com.socialNetwork.model.Person;
 import org.springframework.data.repository.CrudRepository;
 
 /**

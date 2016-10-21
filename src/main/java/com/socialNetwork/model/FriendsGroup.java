@@ -1,4 +1,4 @@
-package com.SocialNetwork.model;
+package com.socialNetwork.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,10 +29,13 @@ public class FriendsGroup implements Serializable {
     @NotNull
     private String name;
     
+    @NotNull
+    private Person owner;
+    
     /**
      * List of the participants in the group
      */
-    @OneToMany
+    //@OneToMany
     private ArrayList<Person> groupPeoples = new ArrayList<Person>();
     
     public FriendsGroup() {}
@@ -47,6 +50,14 @@ public class FriendsGroup implements Serializable {
     
     public void setIdGroup(int idGroupe) {
         this.idGroup = idGroupe;
+    }
+
+    public Person getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Person owner) {
+        this.owner = owner;
     }
     
     public String getName() {

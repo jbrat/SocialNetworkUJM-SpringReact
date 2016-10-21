@@ -1,6 +1,6 @@
 package com.socialNetwork.controllers;
 
-import com.SocialNetwork.model.ActualityRepository;
+import com.socialNetwork.repository.ActualityRepository;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

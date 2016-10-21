@@ -2,7 +2,21 @@
 <html>
     <head lang="en" th:replace="fragments/header :: header"/>
     <body>
-        <div>Group add !</div>
+        <h1>Group add !</h1>
+        
+        <form method="POST" th:action="@{/addGroup}" th:object="${friendsGroup}">
+           <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" th:field="*{name}" /></td>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+         
+            </table>
+        </form>
         
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   

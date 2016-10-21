@@ -1,4 +1,4 @@
-package com.SocialNetwork.model;
+package com.socialNetwork.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -25,7 +25,7 @@ public class Actuality implements Serializable{
     /**
      * The Owner
      */
-    @OneToOne
+    //@OneToOne
     @NotNull
     private Person person;
     

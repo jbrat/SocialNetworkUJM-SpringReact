@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
-    <head lang="en" th:replace="fragments/header :: header"/>
+    <head lang="en" th:replace="fragments/header :: header" />
     <body>
-        <div>Groups !</div>
+        <h1>Groups !</h1>
+        
+        <ul>
+            <li th:each="group : ${ groups }" th:text="${group.name}" />          
+        </ul>
         
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   

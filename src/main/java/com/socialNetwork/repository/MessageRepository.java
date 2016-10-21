@@ -1,7 +1,6 @@
-package com.SocialNetwork.model;
+package com.socialNetwork.repository;
 
-import com.SocialNetwork.model.Message;
-import java.io.Serializable;
+import com.socialNetwork.model.Message;
 import org.springframework.data.repository.CrudRepository;
 
 /**

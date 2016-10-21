@@ -1,4 +1,4 @@
-package com.SocialNetwork.model;
+package com.socialNetwork.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -25,14 +25,14 @@ public class Message implements Serializable {
     /**
      * The receiver of the message
      */
-    @ManyToOne
+    //@ManyToOne
     @NotNull
     private Person receiver;
     
     /**
      * The Sender of the message
      */
-    @ManyToOne 
+    //@ManyToOne 
     @NotNull
     private Person sender;
     
