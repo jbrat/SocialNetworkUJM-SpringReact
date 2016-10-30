@@ -30,13 +30,13 @@ public class FriendsGroup implements Serializable {
     private String name;
     
     @NotNull
-    private Person owner;
+    private User owner;
     
     /**
      * List of the participants in the group
      */
     //@OneToMany
-    private ArrayList<Person> groupPeoples = new ArrayList<Person>();
+    private ArrayList<User> groupPeoples = new ArrayList<User>();
     
     public FriendsGroup() {}
     
@@ -52,11 +52,11 @@ public class FriendsGroup implements Serializable {
         this.idGroup = idGroupe;
     }
 
-    public Person getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(Person owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
     
@@ -68,15 +68,15 @@ public class FriendsGroup implements Serializable {
         this.name = name;
     }
     
-    public void addPeople(Person p) {
+    public void addPeople(User p) {
         groupPeoples.add(p);
     }
     
-    public boolean removePeople(Person p) {
+    public boolean removePeople(User p) {
         return groupPeoples.remove(p);
     }
     
-    public List<Person> getPeoples() {
+    public List<User> getPeoples() {
         return groupPeoples;
     }
     

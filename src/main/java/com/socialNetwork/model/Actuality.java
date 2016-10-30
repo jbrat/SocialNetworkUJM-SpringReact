@@ -27,7 +27,7 @@ public class Actuality implements Serializable{
      */
     //@OneToOne
     @NotNull
-    private Person person;
+    private User person;
     
     /**
      * The title of the actuality
@@ -49,18 +49,18 @@ public class Actuality implements Serializable{
     
     public Actuality() {}
     
-    public Actuality(Person person, String title, String message, Date date) {
+    public Actuality(User person, String title, String message, Date date) {
         this.person = person;
         this.title = title;
         this.message = message;
         this.date = date;
     }
 
-    public Person getPerson() {
+    public User getPerson() {
         return person;
     }
 
-    public void setPerson(Person person) {
+    public void setPerson(User person) {
         this.person = person;
     }
 

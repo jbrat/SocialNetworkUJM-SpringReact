@@ -28,20 +28,20 @@ public class Event implements Serializable{
      * The person list
      */
     @OneToMany
-    private List<Person> peoplesInvited;
+    private List<User> peoplesInvited;
     
     /**
      * The persons which participate at the event
      */
     @OneToMany
-    private List<Person> peoplesParticipate;
+    private List<User> peoplesParticipate;
     
     /**
      * The owner of the event
      */
     @OneToOne
     @NotNull
-    private Person owner;
+    private User owner;
     
     /**
      * Name of the event
@@ -62,18 +62,18 @@ public class Event implements Serializable{
     
     public Event() {}
     
-    public Event(Person owner, String name, String description, Date date) {
+    public Event(User owner, String name, String description, Date date) {
         this.owner = owner;
         this.name = name;
         this.description = description;
         this.date = date;
     }
 
-    public Person getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(Person owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
 

@@ -1,9 +1,15 @@
 package com.socialNetwork.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -15,15 +21,22 @@ import javax.validation.constraints.NotNull;
  * @author UJM student's
  */
 @Entity
-public class Person implements Serializable {
+public class User implements Serializable {
     
     /**
      * Id of the person in Database
-     */
+     *
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idPerson;
+    private long idUser;
+    */
+    
+    /**
+     * login for the Person
+     */
+    @Id
+    private String login;
 
     /**
      * lastName of the Person
@@ -44,12 +57,6 @@ public class Person implements Serializable {
     private String mail;
     
     /**
-     * login for the Person
-     */
-    @NotNull
-    private String login;
-    
-    /**
      * password for the Person
      */
     @NotNull
@@ -66,23 +73,39 @@ public class Person implements Serializable {
      */
     @ManyToOne
     private FriendsGroup group;
-  
-    public Person() {}
     
-    public void Person(int idPerson, String lastName, String firstName) {
-        this.idPerson = idPerson;
+    private String derivedPassword;
+    
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private Set<UserRole> roles = new HashSet<>();
+
+    public User() {}
+    
+    public void User(int idUser, String lastName, String firstName) {
+        //this.idUser = idUser;
         this.lastName = lastName;
         this.firstName = firstName;
+        this.roles.add(UserRole.USER);
+        this.derivedPassword = null;
+    }
+    
+    public void User(int idUser, String lastName, String firstName, List<String> roles) {
+        //this.idUser = idUser;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.roles.add(UserRole.USER);
+        this.roles.addAll(roles.stream().map(UserRole::valueOf).collect(Collectors.toList()));
+    }
+    /*
+    public long getIdUser() {
+        return idUser;
     }
 
-    public long getIdPerson() {
-        return idPerson;
+    public void setIdPerson(long idUser) {
+        this.idUser = idUser;
     }
-
-    public void setIdPerson(long idPerson) {
-        this.idPerson = idPerson;
-    }
-
+    */
     public String getLastName() {
         return lastName;
     }
@@ -138,6 +161,16 @@ public class Person implements Serializable {
     public void setGroup(FriendsGroup group) {
         this.group = group;
     }
-  
-    
+
+    public String getDerivedPassword() {
+        return derivedPassword;
+    }
+
+    public void setDerivedPassword(String derivedPassword) {
+        this.derivedPassword = derivedPassword;
+    }
+
+    public Set<UserRole> getRoles() {
+        return roles;
+    }
 }

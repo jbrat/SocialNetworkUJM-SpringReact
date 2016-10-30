@@ -1,0 +1,16 @@
+<html>
+    <head lang="en" th:replace="fragments/header :: header"/>
+    <body>
+        <form th:action="@{/login}" method="post">
+            <input name="username" type="text" />
+            <input name="password" type="password" />
+            <input value="Sign In" type="submit" />
+        </form>
+        <form th:action:="@{/logout}" method="post">
+            <input type="submit" value="logout" />
+        </form>
+              
+        <a href="@{/loginFacebook}">Connection Facebook</a>
+        <div lang="en" th:replace="fragments/footer :: footer"/>
+    </body>
+</html>

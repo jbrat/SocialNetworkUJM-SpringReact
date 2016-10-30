@@ -27,14 +27,14 @@ public class Message implements Serializable {
      */
     //@ManyToOne
     @NotNull
-    private Person receiver;
+    private User receiver;
     
     /**
      * The Sender of the message
      */
     //@ManyToOne 
     @NotNull
-    private Person sender;
+    private User sender;
     
     /**
      * The message String, HTML
@@ -49,7 +49,7 @@ public class Message implements Serializable {
 
     public Message() {}
     
-    public Message(Person receiver, Person sender, String message, Date date) {
+    public Message(User receiver, User sender, String message, Date date) {
         this.receiver = receiver;
         this.sender = sender;
         
@@ -64,19 +64,19 @@ public class Message implements Serializable {
         return idMessage;
     }
 
-    public Person getReceiver() {
+    public User getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(Person receiver) {
+    public void setReceiver(User receiver) {
         this.receiver = receiver;
     }
 
-    public Person getSender() {
+    public User getSender() {
         return sender;
     }
 
-    public void setSender(Person sender) {
+    public void setSender(User sender) {
         this.sender = sender;
     }
     
