@@ -1,8 +1,11 @@
 <html>
     <head lang="en" th:replace="fragments/header :: header"/>
-    <body>
+    <body xmlns:th="http://www.thymeleaf.org">
         <div>TODO write content</div>
-        
+        <div>Actualites !</div>
+    <ul>
+        <li th:each="a : ${actualities}" th:text="${a.message}"></li>
+    </ul>
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>
 </html>
