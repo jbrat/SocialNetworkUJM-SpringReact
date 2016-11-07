@@ -1,7 +1,9 @@
 package com.socialNetwork.controllers;
 
+import com.socialNetwork.model.Event;
 import com.socialNetwork.repository.EventRepository;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +27,10 @@ public class EventController {
     }
     
     @RequestMapping("/addEvents")
-    public String addEvents() {
+    public String addEvents( 
+        Model m,
+        @Valid Event event) {
+        eventRep.save(event);
         return "addEvents";
     }
     
