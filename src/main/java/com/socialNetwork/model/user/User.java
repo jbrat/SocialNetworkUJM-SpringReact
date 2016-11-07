@@ -1,15 +1,13 @@
-package com.socialNetwork.model;
+package com.socialNetwork.model.user;
 
+import com.socialNetwork.model.FriendsGroup;
+import com.socialNetwork.model.Information;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -25,17 +23,15 @@ public class User implements Serializable {
     
     /**
      * Id of the person in Database
-     *
+     */
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idUser;
-    */
-    
+   
     /**
      * login for the Person
      */
-    @Id
     private String login;
 
     /**
@@ -74,38 +70,25 @@ public class User implements Serializable {
     @ManyToOne
     private FriendsGroup group;
     
-    private String derivedPassword;
+    private String passwordHash;
     
-    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private Set<UserRole> roles = new HashSet<>();
+    private UserRole role;
 
     public User() {}
     
-    public void User(int idUser, String lastName, String firstName) {
+    public void User(int idUser, String lastName, String firstName, UserRole role, String password) {
         //this.idUser = idUser;
         this.lastName = lastName;
         this.firstName = firstName;
-        this.roles.add(UserRole.USER);
-        this.derivedPassword = null;
+        this.role = role;
+        this.passwordHash = password;
     }
-    
-    public void User(int idUser, String lastName, String firstName, List<String> roles) {
-        //this.idUser = idUser;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.roles.add(UserRole.USER);
-        this.roles.addAll(roles.stream().map(UserRole::valueOf).collect(Collectors.toList()));
-    }
-    /*
+
     public long getIdUser() {
         return idUser;
     }
-
-    public void setIdPerson(long idUser) {
-        this.idUser = idUser;
-    }
-    */
+    
     public String getLastName() {
         return lastName;
     }
@@ -162,15 +145,19 @@ public class User implements Serializable {
         this.group = group;
     }
 
-    public String getDerivedPassword() {
-        return derivedPassword;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setDerivedPassword(String derivedPassword) {
-        this.derivedPassword = derivedPassword;
+    public void setPasswordHash(String password) {
+        this.passwordHash = password;
     }
 
-    public Set<UserRole> getRoles() {
-        return roles;
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }

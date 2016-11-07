@@ -1,16 +1,27 @@
+<!DOCTYPE html>
 <html>
     <head lang="en" th:replace="fragments/header :: header"/>
     <body>
-        <form th:action="@{/login}" method="post">
-            <input name="username" type="text" />
-            <input name="password" type="password" />
-            <input value="Sign In" type="submit" />
-        </form>
-        <form th:action:="@{/logout}" method="post">
-            <input type="submit" value="logout" />
-        </form>
-              
-        <a href="@{/loginFacebook}">Connection Facebook</a>
-        <div lang="en" th:replace="fragments/footer :: footer"/>
-    </body>
+    <form role="form" action="/login" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <div>
+            <label for="email">Email address</label>
+            <input type="email" name="email" id="email" required="" />
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required="" />
+        </div>
+        <div>
+            <label for="remember-me">Remember me</label>
+            <input type="checkbox" name="remember-me" id="remember-me"/>
+        </div>
+        <button type="submit">Sign in</button>
+    </form>
+
+    <span th:if="${error.isPresent()}">
+        <p>The email or password you have entered is invalid, try again.</p>
+    </span>
+    <div lang="en" th:replace="fragments/footer :: footer"/>
+    </body>   
 </html>

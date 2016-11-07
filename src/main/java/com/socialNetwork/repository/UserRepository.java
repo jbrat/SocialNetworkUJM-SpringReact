@@ -1,7 +1,7 @@
 package com.socialNetwork.repository;
 
-import com.socialNetwork.model.User;
-import java.util.List;
+import com.socialNetwork.model.user.User;
+import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -9,7 +9,6 @@ import org.springframework.data.repository.CrudRepository;
  * 
  * @author UJM's students
  */
-public interface UserRepository extends CrudRepository<User, String>{
-    
-    public List<User> findAllByOrderByLogin();
+public interface UserRepository extends CrudRepository<User, Long>{
+    Optional<User> findOneByMail(String email);
 }
