@@ -34,14 +34,14 @@ public class HomeController {
     @RequestMapping("/") 
     public String home(Model model) {
         
-        if (connectionRepository.findPrimaryConnection(Facebook.class) == null) {
+      /*  if (connectionRepository.findPrimaryConnection(Facebook.class) == null) {
             return "redirect:/connect/facebook";
         }
 
         String [] fields = { "id", "email",  "first_name", "last_name" };
         User u = facebook.fetchObject("me", User.class, fields);
 
-        System.err.println(u.getLastName() + " " + u.getFirstName());
+        System.err.println(u.getLastName() + " " + u.getFirstName());*/
         return "index";
     }
 }
