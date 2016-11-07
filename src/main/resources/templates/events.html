@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+    <head lang="en" th:replace="fragments/header :: header" />
     <body>
-        <div>TODO write content</div>
-    </body>
+        <h1>Events !</h1>
+        
+        <ul>
+            <li th:each="event : ${ events }" th:text="${event.name}" />          
+        </ul>
+        <h1>Events add !</h1>
+        <a href="/addEvents">Add events</a>
+        <div lang="en" th:replace="fragments/footer :: footer"/>
+    </body>   
 </html>
