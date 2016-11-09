@@ -1,7 +1,51 @@
-<div th:fragment="footer">
-    <p>Create an account on Facebook</p>
-    <a href="https://fr-fr.facebook.com/"  target="_blank"><img src="images/facebook_logo.png" alt="Create an account on Facebook"/></a>  
-    <p>@ Copyright UJM Stutends Kevin Abrial, Julien BRAT, Youssef Mchich</p>
-    <p>Any questions ? Send Email to</p>
-    <a  onclick="var aaa='@'; var m='ujmstudent'+aaa+'gmail.com'; this.innerHTML = m; this.title = m;       this.href = 'mail'+'to:'+m;       this.onclick = null;       return false;       "><img src="images/clickhere.png" alt="Click to reveal"/></a>
+<div th:fragment="footer">    
+        <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4>
+                        <strong>UJM Student's Social Network</strong>
+                    </h4>
+                    <p>34 rue docteur Paul Michelon
+                        <br />Saint-Etienne, 42120</p>
+                    <ul class="list-unstyled">
+                        <li>
+                            <i class="fa fa-phone fa-fw"></i> 
+                            (123) 000-000
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope-o fa-fw"></i>
+                            <a href="mailto:ujmstudents@gmail.com">ujmstudents@gmail.com</a>
+                        </li>
+                    </ul>
+                    <br />
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
+                        </li>
+                    </ul>
+                    <hr class="small" />
+                    <p class="text-muted">Copyright &copy; UJM SocialNetwork Students 2016</p>
+                </div>
+            </div>
+        </div>
+        <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
+    </footer>
+       
+            
+    <!-- Jquery script -->
+    <script src="js/jquery.js"></script>
+    
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+        
+    <!-- Javascript home -->
+    <script src="js/home.js" type="text/javascript" />
 </div>
