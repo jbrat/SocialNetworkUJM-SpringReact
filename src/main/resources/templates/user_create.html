@@ -4,8 +4,48 @@
     <body>
         <div>Register</div>
         <div th:replace="${form}"></div>
-        
-        
+        <table>
+                <tr>
+                    <td>
+                    <input type="radio" name="gender" value="mister" checked> Mr<br>
+                    <input type="radio" name="gender" value="miss"> Ms<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lastname: </td>
+                    <td><input type="text" th:field="*{lastname}"  placeholder="Lastname..."/></td>
+                    <td th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Lastname Error</td>
+                </tr>
+                <tr>
+                    <td>Firstname: </td>
+                    <td><input type="text" th:field="*{firstname}"  placeholder="Firstname..."/></td>
+                    <td th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Firstname Error</td>
+                </tr>
+                <tr>
+                    <td>Login: </td>
+                    <td><input type="text" th:field="*{lastname}"  placeholder="Lastname..."/></td>
+                    <td th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Lastname Error</td>
+                </tr>
+                <tr>
+                    <td>Password: </td>
+                    <td><input type="password" th:field="*{password}"  placeholder="Password..."/></td>
+                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
+                </tr>
+                <tr>
+                    <td>Password: </td>
+                    <td><input type="password" th:field="*{password}"  placeholder="Password..."/></td>
+                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
+                </tr>
+                <tr>
+                    <td>E-mail: </td>
+                    <td><input type="email" th:field="*{email}"  placeholder="Email..."/></td>
+                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
+                </tr>
+                <tr>
+                    <td><button type="reset">Reset</button></td>
+                    <td><button type="submit">Submit</button></td>
+                </tr>      
+            </table>
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   
 </html>

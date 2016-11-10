@@ -20,27 +20,27 @@ public class EventController {
         
     @Inject
     private EventRepository eventRep;
+    /**
+     * Method to join the events page
+     * @return template
+     */
     
-    @RequestMapping("/events")
-    public String getEvents() {
+     @RequestMapping("/events") 
+    // use @RequestBody to return String format
+    public String home(
+            Model model,
+            Event event) {
+     
+        model.addAttribute("events", eventRep.findAll());
         return "events";
     }
     
-    @RequestMapping("/addEvents")
-    public String addEvents( 
-        Model m,
-        @Valid Event event) {
+    @RequestMapping("/addevents")
+    public String addevents(
+            Model m,
+            @Valid Event event) {
+        
         eventRep.save(event);
-        return "addEvents";
-    }
-    
-    @RequestMapping("/deleteEvents/{idEvent}")
-    public String deleteEvents(@PathVariable int idEvent) {
-        return "index";
-    }
-    
-    @RequestMapping("/event/{idEvent}")
-    public String getEvent(@PathVariable int idEvent) {
-        return "index";
+        return "redirect:/events";
     }
 }
