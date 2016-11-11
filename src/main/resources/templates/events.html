@@ -35,13 +35,18 @@
                 </li>
             </ul>
         </nav>
-         
-        <h1>Events !</h1>
         
+        <!-- Header -->
+            <header id="top" class="header">
+                <div class="text-vertical-center">
+                <h1>Events</h1>
+                </div>
+            </header>
             <ul>
                 <li th:each="event : ${ events }" th:text="${event.name}" />
             </ul>
             <hr/>
+            <h2>Add Events</h2>
             <form method="post" th:action="@{/addevents}" th:object="${event}">
             <div class="input-group input-group-lg">
                 <span class="input-group-addon" id="sizing-addon1"><img src="images/logo_events.png"/></span>
