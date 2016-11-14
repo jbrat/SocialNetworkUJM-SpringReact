@@ -2,6 +2,12 @@
 <html>
     <head lang="en" th:replace="fragments/header :: header"/>
     <body>
+    <!-- Header -->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1>Welcome to UJM social Network</h1>
+            <h3>The free social network for the University of Saint-Etienne</h3>
+               
     <form role="form" action="/login" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div>
@@ -16,12 +22,18 @@
             <label for="remember-me">Remember me</label>
             <input type="checkbox" name="remember-me" id="remember-me"/>
         </div>
-        <button type="submit">Sign in</button>
+        <button type="reset" class="btn btn-primary">Reset</button>
+        <button type="submit" class="btn btn-success">Sign in</button>
     </form>
-
-    <span th:if="${error.isPresent()}">
-        <p>The email or password you have entered is invalid, try again.</p>
-    </span>
+    <form role="form" action="/user_create" method="post">
+        <button type="submit" class="btn btn-danger">Sign up</button>
+    </form>
+        <span th:if="${error.isPresent()}">
+            <p>The email or password you have entered is invalid, try again.</p>
+        </span>
+            
+        </div>
+    </header>
     <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   
 </html>

@@ -2,13 +2,63 @@
 <html>
     <head lang="en" th:replace="fragments/header :: header" />
     <body>
-        <h1>Events !</h1>
+         <!-- Navigation -->
+        <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle">
+            <i class="fa fa-bars"></i>
+        </a>
+         
+        <nav id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle">
+                    <i class="fa fa-times"></i>
+                </a>
+                <li class="sidebar-brand">
+                    <a href="#top" onclick="$('#menu-close').click();">Start Bootstrap</a>
+                </li>
+                <li>
+                    <a href="/" onclick="$('#menu-close').click();">Home</a>
+                </li>
+                <li>
+                    <a href="/actualities" onclick="$('#menu-close').click();">Actualities</a>
+                </li>
+                <li>
+                    <a href="/events" onclick="$('#menu-close').click();">Events</a>
+                </li>
+                <li>
+                    <a href="/groups" onclick="$('#menu-close').click();">Groups</a>
+                </li>
+                <li>
+                    <a href="#message" onclick="$('#menu-close').click();">Messages</a>
+                </li>
+                <li>
+                    <a href="#contact" onclick="$('#menu-close').click();">Contact</a>
+                </li>
+            </ul>
+        </nav>
         
-        <ul>
-            <li th:each="event : ${ events }" th:text="${event.name}" />          
-        </ul>
-        <h1>Events add !</h1>
-        <a href="/addEvents">Add events</a>
+        <!-- Header -->
+            <header id="top" class="header">
+                <div class="text-vertical-center">
+                <h1>Events</h1>
+                </div>
+            </header>
+            <ul>
+                <li th:each="event : ${ events }" th:text="${event.name}" />
+            </ul>
+            <hr/>
+            <h2>Add Events</h2>
+            <form method="post" th:action="@{/addevents}" th:object="${event}">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1"><img src="images/logo_events.png"/></span>
+            <input type="text" class="form-control" th:field="*{owner}" aria-describedby="sizing-addon1" placeholder="Owner..."/>
+            <input type="text" class="form-control" th:field="*{name}" aria-describedby="sizing-addon1" placeholder="Name..."/>  
+            <input type="text" class="form-control" th:field="*{description}" aria-describedby="sizing-addon1" placeholder="Description..."/>
+            <input type="date" class="form-control" th:field="*{date}" aria-describedby="sizing-addon1" placeholder="Date..."/>
+            </div>
+            <br/>
+            <input type="reset" value="Reset" class="btn btn-primary"/>
+            <input type="submit" value="Submit" class="btn btn-success"/>
+            </form>
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   
 </html>
