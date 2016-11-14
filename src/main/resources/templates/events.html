@@ -47,7 +47,7 @@
             </ul>
             <hr />
             <h2>Add Events</h2>
-            <form method="post" th:action="@{/addevents}" th:object="${event}">
+            <form method="post" th:action="@{/addevent}" th:object="${event}">
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon" id="sizing-addon1"><img src="images/logo_events.png"/></span>
                     <input type="text" class="form-control" th:field="*{owner}" aria-describedby="sizing-addon1" placeholder="Owner..."/>
