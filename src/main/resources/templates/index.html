@@ -16,16 +16,16 @@
                     <a href="#top" onclick="$('#menu-close').click();">Start Bootstrap</a>
                 </li>
                 <li>
-                    <a href="/" onclick="$('#menu-close').click();">Home</a>
+                    <a th:href="@{/}" onclick="$('#menu-close').click();">Home</a>
                 </li>
                 <li>
-                    <a href="/actualities" onclick="$('#menu-close').click();">Actualities</a>
+                    <a th:href="@{/actualities}" onclick="$('#menu-close').click();">Actualities</a>
                 </li>
                 <li>
-                    <a href="/events" onclick="$('#menu-close').click();">Events</a>
+                    <a href="@{/events}" onclick="$('#menu-close').click();">Events</a>
                 </li>
                 <li>
-                    <a href="/groups" onclick="$('#menu-close').click();">Groups</a>
+                    <a href="@{/groups}" onclick="$('#menu-close').click();">Groups</a>
                 </li>
                 <li>
                     <a href="#message" onclick="$('#menu-close').click();">Messages</a>
@@ -45,10 +45,10 @@
                 <h1>Welcome to UJM social Network</h1>
                 <h3>The free social network for the University of Saint-Etienne</h3>
                 <br />
-                <a href="login" class="btn btn-dark btn-lg">Connect</a>
+                <a th:href="@{/login}" class="btn btn-dark btn-lg">Connect</a>
                 <br />
                 <br />
-                <a href="/connect/facebook" class="btn btn-dark btn-lg">Connect with Facebook</a>
+                <a th:href="@{/connect/facebook}" class="btn btn-dark btn-lg">Connect with Facebook</a>
             </div>
         </header>
         

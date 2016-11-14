@@ -43,19 +43,19 @@ public class UserController {
 
     @RequestMapping(value = "/user/create", method = RequestMethod.GET)
     public ModelAndView getUserCreatePage() {
-        return new ModelAndView("user_create", "form", new UserCreateForm());
+        return new ModelAndView("register", "form", new UserCreateForm());
     }
 
     @RequestMapping(value = "/user/create", method = RequestMethod.POST)
     public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "user_create";
+            return "register";
         }
         try {
             userService.create(form);
         } catch (DataIntegrityViolationException e) {
             bindingResult.reject("email.exists", "Email already exists");
-            return "user_create";
+            return "register";
         }
         return "redirect:/users";
     }
