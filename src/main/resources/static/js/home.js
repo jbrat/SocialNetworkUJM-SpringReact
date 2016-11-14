@@ -73,3 +73,12 @@ var onMapClickHandler = function(event) {
     // Enable map zooming with mouse scroll when the user clicks the map
 $('.map').on('click', onMapClickHandler);
 
+
+
+/**
+ * Footer Img for mail
+ */
+$('.imgFooterMail').click(() => {
+    $('.imgFooterMail').text("ujmstudent@gmail.com");
+    $('.imgFooterMail').attr('href', 'mailto:ujmstudent@gmail.com');
+});

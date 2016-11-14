@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -20,13 +19,13 @@ public class EventController {
         
     @Inject
     private EventRepository eventRep;
+    
     /**
      * Method to join the events page
-     * @return template
+     * 
+     * @return String name of template
      */
-    
      @RequestMapping("/events") 
-    // use @RequestBody to return String format
     public String home(
             Model model,
             Event event) {

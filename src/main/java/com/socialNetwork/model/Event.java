@@ -43,7 +43,6 @@ public class Event implements Serializable{
     @OneToOne
     @NotNull
     private User owner;
-    
     /**
      * Name of the event
      */
@@ -77,7 +76,7 @@ public class Event implements Serializable{
     public void setOwner(User owner) {
         this.owner = owner;
     }
-
+    
     public String getName() {
         return name;
     }
@@ -93,9 +92,6 @@ public class Event implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
-    
     
     public Date getDate() {
         return date;

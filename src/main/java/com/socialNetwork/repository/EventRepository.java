@@ -8,6 +8,4 @@ import org.springframework.data.repository.CrudRepository;
  * 
  * @author UJM's students
  */
-public interface EventRepository extends CrudRepository<Event, Long>{
-    
-}
+public interface EventRepository extends CrudRepository<Event, Long> {}
