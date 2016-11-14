@@ -13,22 +13,25 @@
                     <i class="fa fa-times"></i>
                 </a>
                 <li class="sidebar-brand">
-                    <a href="#top" onclick="$('#menu-close').click();">Start Bootstrap</a>
+                    <a th:href="@{#top}" onclick="$('#menu-close').click();">Start Bootstrap</a>
                 </li>
                 <li>
-                    <a href="/" onclick="$('#menu-close').click();">Home</a>
+                    <a th:href="@{/}" onclick="$('#menu-close').click();">Home</a>
                 </li>
                 <li>
-                    <a href="/actualities" onclick="$('#menu-close').click();">Actualities</a>
+                    <a th:href="@{/actualities}" onclick="$('#menu-close').click();">Actualities</a>
                 </li>
                 <li>
-                    <a href="/events" onclick="$('#menu-close').click();">Events</a>
+                    <a th:href="@{/events}" onclick="$('#menu-close').click();">Events</a>
                 </li>
                 <li>
-                    <a href="/groups" onclick="$('#menu-close').click();">Groups</a>
+                    <a th:href="@{/groups}" onclick="$('#menu-close').click();">Groups</a>
                 </li>
                 <li>
                     <a href="#message" onclick="$('#menu-close').click();">Messages</a>
+                </li>
+                <li>
+                    <a href="#profile" onclick="$('#menu-close').click();">Profile</a>
                 </li>
                 <li>
                     <a href="#contact" onclick="$('#menu-close').click();">Contact</a>
@@ -42,9 +45,20 @@
                 <h1>Events</h1>
                 </div>
             </header>
-            <ul>
-                <li th:each="event : ${ events }" th:text="${event.name}" />
-            </ul>
+            <table class="table table-hover">
+                <tr>
+                    <th>Owner</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                </tr>
+                <tr th:each="event : ${ events }">
+                    <td th:text="${event.owner}"></td>
+                    <td th:text="${event.name}"></td>
+                    <td th:text="${event.description}"></td>
+                    <td th:text="${event.date}"></td>
+                </tr>
+            </table>
             <hr />
             <h2>Add Events</h2>
             <form method="post" th:action="@{/addevent}" th:object="${event}">
@@ -53,7 +67,7 @@
                     <input type="text" class="form-control" th:field="*{owner}" aria-describedby="sizing-addon1" placeholder="Owner..."/>
                     <input type="text" class="form-control" th:field="*{name}" aria-describedby="sizing-addon1" placeholder="Name..."/>  
                     <input type="text" class="form-control" th:field="*{description}" aria-describedby="sizing-addon1" placeholder="Description..."/>
-                    <input type="date" class="form-control" th:field="*{date}" aria-describedby="sizing-addon1" placeholder="Date..."/>
+                    <input type="date" class="form-control" th:field="*{date}" aria-describedby="sizing-addon1" placeholder="DD/MM/YYYY..."/>
                 </div>
                 <br />
                 <input type="reset" value="Reset" class="btn btn-primary"/>

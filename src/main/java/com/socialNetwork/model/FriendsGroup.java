@@ -31,7 +31,7 @@ public class FriendsGroup implements Serializable {
     private String name;
     
     @NotNull
-    private User owner;
+    private String owner;
     
     /**
      * List of the participants in the group
@@ -45,6 +45,11 @@ public class FriendsGroup implements Serializable {
         this.name = name;
     }
     
+    public FriendsGroup(String owner, String name) {
+        this.owner = owner;
+        this.name = name;
+    }
+    
     public long getIdGroup() {
         return idGroup;
     }
@@ -53,11 +58,11 @@ public class FriendsGroup implements Serializable {
         this.idGroup = idGroupe;
     }
 
-    public User getOwner() {
+    public String getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(String owner) {
         this.owner = owner;
     }
     
@@ -80,5 +85,5 @@ public class FriendsGroup implements Serializable {
     public List<User> getPeoples() {
         return groupPeoples;
     }
-    
+
 }

@@ -2,50 +2,59 @@
 <html>
     <head lang="en" th:replace="fragments/header :: header"/>
     <body>
-        <div>Register</div>
-        <div th:replace="${form}"></div>
-        <table>
-                <tr>
-                    <td>
-                    <input type="radio" name="gender" value="mister" checked> Mr<br>
-                    <input type="radio" name="gender" value="miss"> Ms<br>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Lastname: </td>
-                    <td><input type="text" th:field="*{lastname}"  placeholder="Lastname..."/></td>
-                    <td th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Lastname Error</td>
-                </tr>
-                <tr>
-                    <td>Firstname: </td>
-                    <td><input type="text" th:field="*{firstname}"  placeholder="Firstname..."/></td>
-                    <td th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Firstname Error</td>
-                </tr>
-                <tr>
-                    <td>Login: </td>
-                    <td><input type="text" th:field="*{lastname}"  placeholder="Lastname..."/></td>
-                    <td th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Lastname Error</td>
-                </tr>
-                <tr>
-                    <td>Password: </td>
-                    <td><input type="password" th:field="*{password}"  placeholder="Password..."/></td>
-                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
-                </tr>
-                <tr>
-                    <td>Password: </td>
-                    <td><input type="password" th:field="*{password}"  placeholder="Password..."/></td>
-                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
-                </tr>
-                <tr>
-                    <td>E-mail: </td>
-                    <td><input type="email" th:field="*{email}"  placeholder="Email..."/></td>
-                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
-                </tr>
-                <tr>
-                    <td><button type="reset">Reset</button></td>
-                    <td><button type="submit">Submit</button></td>
-                </tr>      
-            </table>
+        <!-- Navigation -->
+        <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle">
+            <i class="fa fa-bars"></i>
+        </a>
+         
+        <nav id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle">
+                    <i class="fa fa-times"></i>
+                </a>
+                <li class="sidebar-brand">
+                    <a th:href="@{#top}" onclick="$('#menu-close').click();">Start Bootstrap</a>
+                </li>
+                <li>
+                    <a th:href="@{/}" onclick="$('#menu-close').click();">Home</a>
+                </li>
+                <li>
+                    <a th:href="@{/actualities}" onclick="$('#menu-close').click();">Actualities</a>
+                </li>
+                <li>
+                    <a th:href="@{/events}" onclick="$('#menu-close').click();">Events</a>
+                </li>
+                <li>
+                    <a th:href="@{/groups}" onclick="$('#menu-close').click();">Groups</a>
+                </li>
+                <li>
+                    <a href="#message" onclick="$('#menu-close').click();">Messages</a>
+                </li>
+                <li>
+                    <a href="#profile" onclick="$('#menu-close').click();">Profile</a>
+                </li>
+                <li>
+                    <a href="#contact" onclick="$('#menu-close').click();">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <form method="post" th:action="@{/}" th:object="${user}">
+            <input type="text" th:field="*{lastName}"  placeholder="LastName..."/>
+            <input type="text" th:field="*{firstName}"  placeholder="FirstName..."/>
+            <input type="text" th:field="*{login}"  placeholder="Login..."/>
+            <input type="password" th:field="*{password}"  placeholder="Password..."/>
+            <input type="password" th:field="*{passwordRepeated}"  placeholder="Password Repeated..."/>
+            <input type="email" th:field="*{email}"  placeholder="Email..."/>
+            <button type="reset">Reset</button>
+            <button type="submit">Submit</button>
+        </form>
+        
+        <!-- Header -->
+        <header id="top" class="header">
+            <div class="text-vertical-center">
+                <h1>Registrer to UJM social Network</h1>
+            </div>
+        </header>
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   
 </html>

@@ -2,12 +2,13 @@ package com.socialNetwork.controllers;
 
 import com.socialNetwork.model.Actuality;
 import com.socialNetwork.repository.ActualityRepository;
-import java.util.List;
+import com.socialNetwork.viewmodel.ActualityViewModel;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Controller to manage the actualities
@@ -21,31 +22,27 @@ public class ActualityController {
     @Inject
     private ActualityRepository actualityRep;
     
-    @RequestMapping("/actualities")
-    public String getActualities(Model m) { 
+    /**
+     * Method to join the actualities page
+     * 
+     * @return String name of template
+     */
+     @RequestMapping("/actualities") 
+    public String home(
+            Model model,ActualityViewModel actuality) {
+        model.addAttribute("actuality", actuality);
         
-        List<Actuality> actualities =  (List<Actuality>) actualityRep.findAll();
-        Actuality act = new Actuality();
-        m.addAttribute("actualities",actualities);
+        model.addAttribute("actualities", actualityRep.findAll());
         
         return "actualities";
     }
     
-    @RequestMapping("/addActualities")
-    public String addActualities() {
+    @RequestMapping(value = "/addactuality", method = RequestMethod.POST)
+    public String addevent(Model m, @Valid ActualityViewModel actuality) {
+  
+        Actuality newActuality = actuality.parse();
+        actualityRep.save(newActuality);
         
-        
-                
-        return "index";
-    }
-    
-    @RequestMapping("/deleteActualities/{idActuality}")
-    public String deleteActualities(@PathVariable int idActuality) {
-        return "index";
-    }
-    
-    @RequestMapping("/actuality/{idActuality}")
-    public String getActuality(@PathVariable int idActuality) {
-        return "index";
+        return "redirect:/actualities";
     }
 }

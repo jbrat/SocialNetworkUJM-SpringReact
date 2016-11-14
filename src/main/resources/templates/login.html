@@ -14,23 +14,29 @@
                 <i class="fa fa-times"></i>
             </a>
             <li class="sidebar-brand">
-                <a href="#top" onclick="$('#menu-close').click();">Start Bootstrap</a>
-            </li>
-            <li>
-                <a href="#top" onclick="$('#menu-close').click();">Home</a>
-            </li>
-            <li>
-                <a href="#about" onclick="$('#menu-close').click();">About</a>
-            </li>
-            <li>
-                <a href="#services" onclick="$('#menu-close').click();">Services</a>
-            </li>
-            <li>
-                <a href="#portfolio" onclick="$('#menu-close').click();">Portfolio</a>
-            </li>
-            <li>
-                <a href="#contact" onclick="$('#menu-close').click();">Contact</a>
-            </li>
+                    <a th:href="@{#top}" onclick="$('#menu-close').click();">Start Bootstrap</a>
+                </li>
+                <li>
+                    <a th:href="@{/}" onclick="$('#menu-close').click();">Home</a>
+                </li>
+                <li>
+                    <a th:href="@{/actualities}" onclick="$('#menu-close').click();">Actualities</a>
+                </li>
+                <li>
+                    <a th:href="@{/events}" onclick="$('#menu-close').click();">Events</a>
+                </li>
+                <li>
+                    <a th:href="@{/groups}" onclick="$('#menu-close').click();">Groups</a>
+                </li>
+                <li>
+                    <a href="#message" onclick="$('#menu-close').click();">Messages</a>
+                </li>
+                <li>
+                    <a href="#profile" onclick="$('#menu-close').click();">Profile</a>
+                </li>
+                <li>
+                    <a href="#contact" onclick="$('#menu-close').click();">Contact</a>
+                </li>
         </ul>
     </nav>
         
@@ -57,11 +63,9 @@
         <button type="reset" class="btn btn-primary">Reset</button>
         <button type="submit" class="btn btn-success">Sign in</button>
     </form>
-    <form role="form" action="/user_create" method="post">
-        <button type="submit" class="btn btn-danger">Sign up</button>
-    </form>
+    <a th:href="@{/user/create}"><button type="submit" class="btn btn-danger">Sign up</button></a>
         <span th:if="${error.isPresent()}">
-            <p>The email or password you have entered is invalid, try again.</p>
+            <h3 class="redMessage">The email or password you have entered is invalid, try again.</h3>
         </span>
             
         </div>

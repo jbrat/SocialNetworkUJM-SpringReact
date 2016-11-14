@@ -17,6 +17,7 @@ body {
 }
 
 .text-vertical-center {
+    color: lightsalmon;
     display: table-cell;
     text-align: center;
     vertical-align: middle;
