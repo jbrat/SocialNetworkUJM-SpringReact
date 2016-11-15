@@ -28,7 +28,7 @@
                     <a th:href="@{/groups}" onclick="$('#menu-close').click();">Groups</a>
                 </li>
                 <li>
-                    <a th:href="@/{messages}" onclick="$('#menu-close').click();">Messages</a>
+                    <a th:href="@{/messages}" onclick="$('#menu-close').click();">Messages</a>
                 </li>
                 <li>
                     <a href="#profile" onclick="$('#menu-close').click();">Profile</a>
@@ -38,13 +38,13 @@
                 </li>
             </ul>
         </nav>
-        <form method="post" th:action="@{/}" th:object="${user}">
+        <form method="post" th:each="user : ${ users }" th:action="@{/login}" th:object="${user}">
             <input type="text" th:field="*{lastName}"  placeholder="LastName..."/>
             <input type="text" th:field="*{firstName}"  placeholder="FirstName..."/>
             <input type="text" th:field="*{login}"  placeholder="Login..."/>
             <input type="password" th:field="*{password}"  placeholder="Password..."/>
             <input type="password" th:field="*{passwordRepeated}"  placeholder="Password Repeated..."/>
-            <input type="email" th:field="*{email}"  placeholder="Email..."/>
+            <input type="email" th:field="*{mail}"  placeholder="Email..."/>
             <button type="reset">Reset</button>
             <button type="submit">Submit</button>
         </form>
