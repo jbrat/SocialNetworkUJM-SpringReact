@@ -3,13 +3,13 @@
     <head lang="en" th:replace="fragments/header :: header" />
     <body>
          <!-- Navigation -->
-        <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle">
+        <a id="menu-toggle" th:href="@{#}" class="btn btn-dark btn-lg toggle">
             <i class="fa fa-bars"></i>
         </a>
          
         <nav id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle">
+                <a id="menu-close" th:href="@{#}" class="btn btn-light btn-lg pull-right toggle">
                     <i class="fa fa-times"></i>
                 </a>
                 <li class="sidebar-brand">
@@ -28,7 +28,7 @@
                     <a th:href="@{/groups}" onclick="$('#menu-close').click();">Groups</a>
                 </li>
                 <li>
-                    <a href="#message" onclick="$('#menu-close').click();">Messages</a>
+                    <a th:href="@{/messages}" onclick="$('#menu-close').click();">Messages</a>
                 </li>
                 <li>
                     <a href="#profile" onclick="$('#menu-close').click();">Profile</a>
@@ -60,7 +60,7 @@
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon" id="sizing-addon1"><img src="images/logo_groups.png"/></span>
                     <input type="text" class="form-control" th:field="*{owner}" aria-describedby="sizing-addon1" placeholder="Owner..."/>
-                    <input type="text" class="form-control" th:field="*{name}" aria-describedby="sizing-addon1" placeholder="Name..."/>  
+                    <input type="text" class="form-control" th:field="*{name}" aria-describedby="sizing-addon1" placeholder="Name..."/>   
                 </div>
                 <br />
                 <input type="reset" value="Reset" class="btn btn-primary"/>

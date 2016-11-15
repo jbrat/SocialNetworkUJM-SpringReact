@@ -37,21 +37,21 @@
                     <a href="#contact" onclick="$('#menu-close').click();">Contact</a>
                 </li>
             </ul>
-        </nav>
-
+        </nav> 
+ 
         <!-- Header -->
         <header id="top" class="header">
             <div class="text-vertical-center">
-                <h1>Welcome to UJM social Network</h1>
-                <h3>The free social network for the University of Saint-Etienne</h3>
-                <br />
-                <a th:href="@{/login}" class="btn btn-dark btn-lg">Connect</a>
-                <br />
-                <br />
-                <a th:href="@{/connect/facebook}" class="btn btn-dark btn-lg">Connect with Facebook</a>
+                <h1>Messenger to UJM social Network</h1>
             </div>
         </header>
         
-        <div lang="en" th:replace="fragments/footer :: footer"/>
-    </body>   
+        <div id="container">TODO write content</div>
+        <script type="text/babel" src="js/messages.jsx"></script>
+        <script>alert(React.version)</script>  
+        
+    </body>
+    
+    <div lang="en" th:replace="fragments/footer :: footer"/>
+
 </html>

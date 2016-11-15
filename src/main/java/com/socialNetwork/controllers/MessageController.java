@@ -22,9 +22,9 @@ public class MessageController {
     @Inject
     private MessageRepository messageRep; 
     
-    @RequestMapping("/getMessages")
+    @RequestMapping("/messages")
     public String getMessages() {
-        return "index";
+        return "messages";
     }
     
     @RequestMapping("/getMessageByPerson/{idPerson}")

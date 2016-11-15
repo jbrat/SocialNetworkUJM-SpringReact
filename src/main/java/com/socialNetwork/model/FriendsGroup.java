@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -22,6 +24,7 @@ public class FriendsGroup implements Serializable {
      */
     @Id
     @NotNull
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long idGroup;
     
     /**
@@ -45,9 +48,10 @@ public class FriendsGroup implements Serializable {
         this.name = name;
     }
     
-    public FriendsGroup(String owner, String name) {
+    public FriendsGroup(String owner, String name, ArrayList<User> groupPeoples) {
         this.owner = owner;
         this.name = name;
+        this.groupPeoples = groupPeoples;
     }
     
     public long getIdGroup() {
@@ -82,7 +86,7 @@ public class FriendsGroup implements Serializable {
         return groupPeoples.remove(p);
     }
     
-    public List<User> getPeoples() {
+    public ArrayList<User> getPeoples() {
         return groupPeoples;
     }
 
