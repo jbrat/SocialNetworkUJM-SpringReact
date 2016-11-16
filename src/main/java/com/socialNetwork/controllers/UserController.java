@@ -1,63 +1,49 @@
 package com.socialNetwork.controllers;
 
-import com.socialNetwork.model.user.UserCreateForm;
-import com.socialNetwork.model.user.UserCreateFormValidator;
-import com.socialNetwork.model.user.UserService;
-import java.util.NoSuchElementException;
+import com.socialNetwork.exception.EmailAlreadyExistException;
+import com.socialNetwork.exception.PasswordNotMatchException;
+import com.socialNetwork.model.user.User;
+import com.socialNetwork.model.user.UserVMValidator;
+import com.socialNetwork.model.user.UserViewModel;
+import com.socialNetwork.repository.UserRepository;
+import javax.inject.Inject;
 import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class UserController {
-
-    private final UserService userService;
-   
-    private final UserCreateFormValidator userCreateFormValidator;
-
-    @Autowired
-    public UserController(UserService userService, UserCreateFormValidator userCreateFormValidator) {
-        this.userService = userService;
-        this.userCreateFormValidator = userCreateFormValidator;
-    }
-
-    @InitBinder("form")
-    public void initBinder(WebDataBinder binder) {
-        binder.addValidators(userCreateFormValidator);
-    }
-
-    @RequestMapping("/user/{id}")
-    public ModelAndView getUserPage(@PathVariable Long id) {
-        return new ModelAndView("user", "user", userService.getUserById(id)
-                .orElseThrow(() -> new NoSuchElementException(String.format("User=%s not found", id))));
-    }
-
+    
+    @Inject
+    private UserVMValidator userVMValidator;
+    
+    @Inject
+    private UserRepository userRepo;
+    
     @RequestMapping(value = "/user/create", method = RequestMethod.GET)
-    public ModelAndView getUserCreatePage() {
-        return new ModelAndView("register", "form", new UserCreateForm());
+    public String getUserCreatePage(Model model, UserViewModel userVM) {
+        model.addAttribute("user", userVM);
+ 
+        return "register";
     }
 
     @RequestMapping(value = "/user/create", method = RequestMethod.POST)
-    public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "register";
-        }
+    public String handleUserCreate(Model model, @Valid UserViewModel user, BindingResult bindingResult) {
+        
         try {
-            userService.create(form);
-        } catch (DataIntegrityViolationException e) {
-            bindingResult.reject("email.exists", "Email already exists");
+            userVMValidator.validateUserVM(user);
+            User u = user.parse();
+            userRepo.save(user.parse());
+            
+        } catch (PasswordNotMatchException | EmailAlreadyExistException ex) {
+            model.addAttribute("error", ex.getMessage());
+            model.addAttribute("user", user);
             return "register";
         }
-        return "redirect:/users";
+        
+        return "redirect:/login";
     }
-
 }

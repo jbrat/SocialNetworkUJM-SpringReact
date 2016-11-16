@@ -1,5 +1,7 @@
 package com.socialNetwork.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.User;
@@ -33,7 +35,7 @@ public class HomeController {
      */
     @RequestMapping("/") 
     public String home(Model model) {
-        
+       
       /*  if (connectionRepository.findPrimaryConnection(Facebook.class) == null) {
             return "redirect:/connect/facebook";
         }

@@ -38,23 +38,78 @@
                 </li>
             </ul>
         </nav>
-        <form method="post" th:each="user : ${ users }" th:action="@{/login}" th:object="${user}">
-            <input type="text" th:field="*{lastName}"  placeholder="LastName..."/>
-            <input type="text" th:field="*{firstName}"  placeholder="FirstName..."/>
-            <input type="text" th:field="*{login}"  placeholder="Login..."/>
-            <input type="password" th:field="*{password}"  placeholder="Password..."/>
-            <input type="password" th:field="*{passwordRepeated}"  placeholder="Password Repeated..."/>
-            <input type="email" th:field="*{mail}"  placeholder="Email..."/>
-            <button type="reset">Reset</button>
-            <button type="submit">Submit</button>
-        </form>
-        
         <!-- Header -->
         <header id="top" class="header">
             <div class="text-vertical-center">
                 <h1>Registrer to UJM social Network</h1>
             </div>
         </header>
+        <form method="post" th:action="@{/user/create}" th:object="${user}">
+        <table>
+            <tr>
+                <td>
+                    <label>Lastname :</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{lastName}"  placeholder="LastName..."/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Firstname : </label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{firstName}"  placeholder="FirstName..."/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Email : </label>
+                </td>
+                <td>
+                    <input type="email" th:field="*{email}"  placeholder="Email..."/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Login : </label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{login}"  placeholder="Login..."/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Password : </label>
+                </td>
+                <td>
+                    <input type="password" th:field="*{password}"  placeholder="Password..."/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Confirm password :</label>
+                </td>
+                <td>
+                    <input type="password" th:field="*{passwordRepeated}"  placeholder="Password Repeated..."/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="reset">Reset</button>
+                </td>
+                <td>
+                    <button type="submit">Submit</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span th:if="${$error}" th:text="${error}"></span>
+                </td>
+            </tr>
+            </table>
+        </form>
+            
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   
 </html>

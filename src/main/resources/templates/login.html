@@ -63,7 +63,10 @@
         <button type="reset" class="btn btn-primary">Reset</button>
         <button type="submit" class="btn btn-success">Sign in</button>
     </form>
+            <br />
     <a th:href="@{/user/create}"><button type="submit" class="btn btn-danger">Sign up</button></a>
+    <a th:href="@{/connect/facebook}"><button type="submit" class="btn btn-danger">Sign up with facebook</button></a>
+    
         <span th:if="${error.isPresent()}">
             <h3 class="redMessage">The email or password you have entered is invalid, try again.</h3>
         </span>
