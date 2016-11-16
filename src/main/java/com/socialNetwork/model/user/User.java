@@ -21,11 +21,12 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class User implements Serializable {
     
+    private static final long serialVersionUID = 1L;
+    
     /**
      * Id of the person in Database
      */
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idUser;
    
@@ -56,7 +57,7 @@ public class User implements Serializable {
      * password for the Person
      */
     @NotNull
-    private String password;
+    private String passwordHash;
     
     /**
      * Supplementary informations for a Person
@@ -70,27 +71,18 @@ public class User implements Serializable {
     @ManyToOne
     private FriendsGroup group;
     
-    private String passwordHash;
-    
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
     public User() {}
     
-    public void User(String lastName, String firstName, String login, String password, String passwordRepeated, String mail) {
+    public User(String lastName, String firstName, String login, String passwordHash, String mail) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.login = login;
-        this.passwordHash = password;
-        this.passwordHash = passwordRepeated;
+        this.passwordHash = passwordHash;
         this.mail = mail;
-    }
-    
-    public void User(int idUser, String lastName, String firstName, UserRole role, String password) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.role = role;
-        this.passwordHash = password;
+        this.role = UserRole.USER;
     }
 
     public long getIdUser() {
@@ -128,15 +120,7 @@ public class User implements Serializable {
     public void setLogin(String login) {
         this.login = login;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    
     public Information getInformation() {
         return information;
     }

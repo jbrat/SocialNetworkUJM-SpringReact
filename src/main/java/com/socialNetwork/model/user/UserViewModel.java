@@ -1,13 +1,15 @@
 package com.socialNetwork.model.user;
+
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * Class to create a user with the form 
  *
  * @author UJM's students
  */
-public class UserCreateForm {
+public class UserViewModel {
 
     @NotEmpty
     private String login = "";
@@ -78,5 +80,9 @@ public class UserCreateForm {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+    
+    public User parse() {
+        return new User(lastName, firstName, login, new BCryptPasswordEncoder().encode(password), email);
     }
 }
