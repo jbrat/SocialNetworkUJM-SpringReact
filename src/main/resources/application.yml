@@ -1,11 +1,9 @@
-
- 
 # SQL DATABASE CONFIGURATION #
 spring:
     datasource:
         url: jdbc:mysql://localhost:3306/pwaProject?useSSL=false
         username: root
-        password: ********
+        password: 13111995tiger
         validationQuery: SELECT 1
         testWhileIdle: true
     jpa:
