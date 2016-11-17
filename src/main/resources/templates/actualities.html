@@ -44,19 +44,34 @@
                 <h1>Actualities</h1>
                 </div>
             </header>
-            <table class="table table-hover">
+               
+            <hr/>
+            
+            <table id="search" class="table table-hover">
+                <thead>
                 <tr>
                     <th>Person</th>
                     <th>Title</th>
                     <th>Message</th>
                     <th>Date</th>
                 </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>Person</th>
+                    <th>Title</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                </tr>
+                </tfoot>
+                <tbody>
                 <tr th:each="actuality : ${ actualities }">
                     <td th:text="${actuality.person}"></td>
                     <td th:text="${actuality.title}"></td>
                     <td th:text="${actuality.message}"></td>
                     <td th:text="${actuality.date}"></td>
-                </tr>                
+                </tr>
+                </tbody>
             </table>
             <hr />
             <hr/>

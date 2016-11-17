@@ -38,21 +38,35 @@
                 </li>
             </ul>
         </nav>
+        
         <!-- Header -->
             <header id="top" class="header">
                 <div class="text-vertical-center">
                 <h1>Groups</h1>
                 </div>
             </header>
-            <table class="table table-hover">
+        
+            <hr/>
+            
+            <table id="search" class="table table-hover">
+                <thead>
                 <tr>
                     <th>Owner</th>
                     <th>Name</th>
                 </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>Owner</th>
+                    <th>Name</th>
+                </tr>
+                </tfoot>
+                <tbody>
                 <tr th:each="group : ${ groups }">
                     <td th:text="${group.owner}"></td>
                     <td th:text="${group.name}"></td>
                 </tr>
+                </tbody>
             </table>
             <hr />
             <h2>Add Groups</h2>
