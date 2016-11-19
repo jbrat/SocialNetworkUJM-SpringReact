@@ -12,7 +12,6 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.4.1.RELEASE</version>
         <relativePath/>
-        <!-- lookup parent from repository -->
     </parent>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -85,12 +84,6 @@
             <version>1</version>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialNetwork</groupId>
-            <artifactId>socialNetwork</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <type>jar</type>
         </dependency>
     </dependencies>
     <build>
