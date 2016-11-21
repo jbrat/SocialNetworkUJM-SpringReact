@@ -7,7 +7,9 @@
             <i class="fa fa-bars"></i>
         </a>
         
+        <span th:if="${user}">
         <nav lang="en" th:replace="fragments/sidebar :: sidebar"/>
+        </span>
         
         <!-- Header -->
         <header id="top" class="header">
@@ -15,11 +17,21 @@
                 <h1>Welcome to UJM social Network</h1>
                 <h3>The free social network for the University of Saint-Etienne</h3>
                 <br />
+                <p id="welcome"><span th:if="${user}" th:text="'Welcome ' + ${user.lastName} + ' ' + ${user.firstName} + '.'"></span></p>
+                
                 
                 <a th:if='!${user}' th:href="@{/login}" class="btn btn-dark btn-lg">Connect</a>
             </div>
         </header>
-        
+        <br/><br/>
+        <div class="container">
+            <span th:if='!${user}'>
+                <blockquote>
+                    <p class="bg-info">Dear Users of UJM, <br/>this website is for you, after create an account you will go to the connect page to access in all functionality (We have events, groups &amp; actualities and more surprise things when you are connected) <br/>Enjoy.</p> 
+                <footer>From UJM's website</footer>
+                </blockquote>
+            </span>
+        </div>    
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   
 </html>

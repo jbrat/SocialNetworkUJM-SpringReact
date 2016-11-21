@@ -2,50 +2,16 @@
 <html>
     <head lang="en" th:replace="fragments/header :: header"/>
     <body>
-        <!-- Navigation -->
-        <a id="menu-toggle" th:href="@{#}" class="btn btn-dark btn-lg toggle">
-            <i class="fa fa-bars"></i>
-        </a>
         
-        <nav id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <a id="menu-close" th:href="@{#}" class="btn btn-light btn-lg pull-right toggle">
-                    <i class="fa fa-times"></i>
-                </a>
-                <li class="sidebar-brand">
-                    <a th:href="@{#top}" onclick="$('#menu-close').click();">Start Bootstrap</a>
-                </li>
-                <li>
-                    <a th:href="@{/}" onclick="$('#menu-close').click();">Home</a>
-                </li>
-                <li>
-                    <a th:href="@{/actualities}" onclick="$('#menu-close').click();">Actualities</a>
-                </li>
-                <li>
-                    <a th:href="@{/events}" onclick="$('#menu-close').click();">Events</a>
-                </li>
-                <li>
-                    <a th:href="@{/groups}" onclick="$('#menu-close').click();">Groups</a>
-                </li>
-                <li>
-                    <a th:href="@{/messages}" onclick="$('#menu-close').click();">Messages</a>
-                </li>
-                <li>
-                    <a href="#profile" onclick="$('#menu-close').click();">Profile</a>
-                </li>
-                <li>
-                    <a href="#contact" onclick="$('#menu-close').click();">Contact</a>
-                </li>
-            </ul>
-        </nav>
         <!-- Header -->
         <header id="top" class="header">
             <div class="text-vertical-center">
                 <h1>Registrer to UJM social Network</h1>
             </div>
         </header>
+        
         <form method="post" th:action="@{/user/create}" th:object="${user}">
-        <table>
+        <table class="table table-hover">
             <tr>
                 <td>
                     <label>Lastname :</label>
@@ -94,22 +60,18 @@
                     <input type="password" th:field="*{passwordRepeated}"  placeholder="Password Repeated..."/>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <button type="reset">Reset</button>
-                </td>
-                <td>
-                    <button type="submit">Submit</button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span th:if="${$error}" th:text="${error}"></span>
-                </td>
-            </tr>
+            <span th:if="${$error}" th:text="${error}"></span>
             </table>
+
+            <button type="reset" class="btn btn-primary">Reset</button>
+            <button type="submit" class="btn btn-success btnright">Submit</button>
+           
+             
         </form>
-            
+        
+        <br/><br/>
+        <a th:href="@{/}"><button type="submit" class="btn btn-danger">Connect with facebook</button></a>
+        <a th:href="@{/login}"><button type="submit" class="btn btn-danger">Go back to Connect</button></a>  
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   
 </html>

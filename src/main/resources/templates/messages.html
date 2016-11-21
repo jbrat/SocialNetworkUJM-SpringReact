@@ -7,37 +7,7 @@
             <i class="fa fa-bars"></i>
         </a>
         
-        <nav id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <a id="menu-close" th:href="@{#}" class="btn btn-light btn-lg pull-right toggle">
-                    <i class="fa fa-times"></i>
-                </a>
-                <li class="sidebar-brand">
-                    <a th:href="@{#top}" onclick="$('#menu-close').click();">Start Bootstrap</a>
-                </li>
-                <li>
-                    <a th:href="@{/}" onclick="$('#menu-close').click();">Home</a>
-                </li>
-                <li>
-                    <a th:href="@{/actualities}" onclick="$('#menu-close').click();">Actualities</a>
-                </li>
-                <li>
-                    <a th:href="@{/events}" onclick="$('#menu-close').click();">Events</a>
-                </li>
-                <li>
-                    <a th:href="@{/groups}" onclick="$('#menu-close').click();">Groups</a>
-                </li>
-                <li>
-                    <a th:href="@{/messages}" onclick="$('#menu-close').click();">Messages</a>
-                </li>
-                <li>
-                    <a href="#profile" onclick="$('#menu-close').click();">Profile</a>
-                </li>
-                <li>
-                    <a href="#contact" onclick="$('#menu-close').click();">Contact</a>
-                </li>
-            </ul>
-        </nav> 
+       <nav lang="en" th:replace="fragments/sidebar :: sidebar"/>
  
         <!-- Header -->
         <header id="top" class="header">
@@ -47,8 +17,12 @@
         </header>
         
         <div id="container">TODO write content</div>
-        <script type="text/babel" src="js/messages.jsx"></script>
-        <script>alert(React.version)</script>  
+        <script type="text/babel" src="js/messapp.jsx"></script> 
+        <script type="text/babel" src="js/userlist.jsx"></script> 
+        <script type="text/babel" src="js/changenameform.jsx"></script> 
+        <script type="text/babel" src="js/message.jsx"></script> 
+        <script type="text/babel" src="js/messageform.jsx"></script> 
+        <script type="text/babel" src="js/messagelist.jsx"></script> 
         
     </body>
     
