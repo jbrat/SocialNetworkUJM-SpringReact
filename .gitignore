@@ -23,4 +23,4 @@ nbdist/
 .nb-gradle/
 
 nbactions.xml
-src/main/resources/application.yml
+application.yml

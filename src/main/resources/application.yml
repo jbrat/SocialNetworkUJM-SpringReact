@@ -1,9 +1,9 @@
 # SQL DATABASE CONFIGURATION #
 spring:
     datasource:
-        url: jdbc:mysql://localhost:3306/pwaProject?useSSL=false
-        username: root
-        password: 13111995tiger
+        url: jdbc:mysql://127.0.0.1:3306/pwaDatabase?useSSL=false
+        username: pwaDatabase
+        password: *****
         validationQuery: SELECT 1
         testWhileIdle: true
     jpa:
@@ -16,8 +16,6 @@ spring:
         facebook:
             appId: 1821624328073601
             appSecret: 6af48180a320e2a17f6d17eedffb6f20
-
-
             
 #spring:
 #    datasource:
