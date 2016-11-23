@@ -1,10 +1,13 @@
 package com.socialNetwork.controllers;
 
 import com.socialNetwork.model.Actuality;
+import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.ActualityRepository;
 import com.socialNetwork.viewmodel.ActualityViewModel;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +36,12 @@ public class ActualityController {
         model.addAttribute("actuality", actuality);
         
         model.addAttribute("actualities", actualityRep.findAll());
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+           CurrentUser u = (CurrentUser) auth.getPrincipal();
+           model.addAttribute("user", u.getUser());
+        }   
         
         return "actualities";
     }

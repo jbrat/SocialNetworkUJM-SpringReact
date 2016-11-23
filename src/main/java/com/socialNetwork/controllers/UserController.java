@@ -2,12 +2,15 @@ package com.socialNetwork.controllers;
 
 import com.socialNetwork.exception.EmailAlreadyExistException;
 import com.socialNetwork.exception.PasswordNotMatchException;
+import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.model.user.User;
 import com.socialNetwork.model.user.UserVMValidator;
 import com.socialNetwork.model.user.UserViewModel;
 import com.socialNetwork.repository.UserRepository;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,4 +49,17 @@ public class UserController {
         
         return "redirect:/login";
     }
+    
+    @RequestMapping(value="/profil", method = RequestMethod.GET)
+    public String getProfil(Model model) {
+             
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+           CurrentUser u = (CurrentUser) auth.getPrincipal();
+           model.addAttribute("user", u.getUser());
+           return "profil";
+        } else {
+            return "redirect:/login";
+        }
+    } 
 }

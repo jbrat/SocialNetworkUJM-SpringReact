@@ -1,10 +1,13 @@
 package com.socialNetwork.controllers;
 
 import com.socialNetwork.model.Event;
+import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.EventRepository;
 import com.socialNetwork.viewmodel.EventViewModel;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,12 @@ public class EventController {
         model.addAttribute("event", event);
         
         model.addAttribute("events", eventRep.findAll());
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+           CurrentUser u = (CurrentUser) auth.getPrincipal();
+           model.addAttribute("user", u.getUser());
+        }   
         
         return "events";
     }

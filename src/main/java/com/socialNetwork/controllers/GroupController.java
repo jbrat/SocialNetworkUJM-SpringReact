@@ -1,10 +1,13 @@
 package com.socialNetwork.controllers;
 
 import com.socialNetwork.model.FriendsGroup;
+import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.FriendsGroupRepository;
 import com.socialNetwork.viewmodel.FriendsGroupViewModel;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +34,12 @@ public class GroupController {
         model.addAttribute("group", group);
         
         model.addAttribute("groups", groupRep.findAll());
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+           CurrentUser u = (CurrentUser) auth.getPrincipal();
+           model.addAttribute("user", u.getUser());
+        }   
         
         return "groups";
     }

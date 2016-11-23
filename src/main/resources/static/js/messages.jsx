@@ -31,6 +31,20 @@ class MessApp extends React.Component {
     };
   }
 
+  loadData(){
+    superagent
+      .get('/api/messages') // not HATEOS :(
+      .end( (err, response) => {
+          if (err == null) {
+            this.setState({mess: response.body._embedded.messages});
+          }
+      })
+  }
+
+  componentDidMount() {
+    this.loadData()
+  }
+
   addMessage(name, message) {
     var newMess = {name, message};
     this.setState({
@@ -39,13 +53,13 @@ class MessApp extends React.Component {
   }
 
   render(){
-    var lesMessages = (this.state.mess.map(listemess => (<li key={listemess.name} >{listemess.name} : {listemess.message}</li>)));
+    var NamesMessages = (this.state.mess.map(listemess => (<li key={listemess.name} >{listemess.name} :> {listemess.message}</li>)));
     return (
       <div>
       <h1>Welcome to the {this.props.title} of UJM</h1>
       <hr/>
       <ul>
-      {lesMessages}
+      {NamesMessages}
       </ul>
       <hr/>
       <MessageNew onAdd={ this.addMessage.bind(this) }></MessageNew>

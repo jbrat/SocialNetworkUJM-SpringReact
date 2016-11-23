@@ -1,5 +1,6 @@
 package com.socialNetwork.controllers;
 
+import com.socialNetwork.model.user.CurrentUser;
 import java.util.Optional;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +20,7 @@ public class LoginController {
         if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
             return "redirect:/";
         }
+       
         model.addAttribute("error", error);
         return "login";
     }

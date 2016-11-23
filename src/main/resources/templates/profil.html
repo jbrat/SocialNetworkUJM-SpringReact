@@ -34,11 +34,11 @@
                 </tr>
                 </tfoot>
                 <tbody>
-                <tr th:each="users : ${ user }">
-                    <td th:text="${users.login}"></td>
-                    <td th:text="${users.lastName}"></td>
-                    <td th:text="${users.firstName}"></td>
-                    <td th:text="${users.mail}"></td>
+                <tr>
+                    <td th:text="${user.login}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.firstName}"></td>
+                    <td th:text="${user.mail}"></td>
                 </tr>
                 </tbody>
             </table>
