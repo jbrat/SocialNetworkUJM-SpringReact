@@ -73,6 +73,14 @@ public class Event implements Serializable{
         this.date = date;
     }
     
+    public long getIdEvent() {
+        return idEvent;
+    }
+
+    public void setIdEvent(long idEvent) {
+        this.idEvent = idEvent;
+    }
+    
     public String getOwner() {
         return owner;
     }

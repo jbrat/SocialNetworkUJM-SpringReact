@@ -10,8 +10,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Controller to manage the events
@@ -46,10 +48,22 @@ public class EventController {
     }
     
     @RequestMapping(value = "/addevent", method = RequestMethod.POST)
-    public String addevent(Model m, @Valid EventViewModel event) {
+    public String addEvent(Model m, @Valid EventViewModel event) {
   
         Event newEvent = event.parse();
         eventRep.save(newEvent);
+        
+        return "redirect:/events";
+    }
+    
+    @RequestMapping("/deleteevents/{idEvent}")
+    public String deleteEvent(@PathVariable int idEvent) {
+        
+        return "redirect:/events";
+    }
+
+    @RequestMapping("/updateevents/{idEvent}")
+    public String updateEvent(@PathVariable int idEvent) {
         
         return "redirect:/events";
     }

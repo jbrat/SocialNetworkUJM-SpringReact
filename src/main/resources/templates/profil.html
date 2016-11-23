@@ -23,6 +23,8 @@
                     <th>LastName</th>
                     <th>FirstName</th>
                     <th>E-mail</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -31,6 +33,8 @@
                     <th>LastName</th>
                     <th>FirstName</th>
                     <th>E-mail</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -39,6 +43,8 @@
                     <td th:text="${user.lastName}"></td>
                     <td th:text="${user.firstName}"></td>
                     <td th:text="${user.mail}"></td>
+                    <td><a th:href="@{'/updateuser?id=' + ${user.idUser}}"><button type="submit" class="btn btn-info">Update</button></a></td>
+                    <td><a th:href="@{'/deleteuser?id=' + ${user.idUser}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
                 </tr>
                 </tbody>
             </table>

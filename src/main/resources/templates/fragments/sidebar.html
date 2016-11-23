@@ -1,34 +1,40 @@
 <nav id="sidebar-wrapper" th:fragment="sidebar">
        <ul class="sidebar-nav">
-           <a id="menu-close" th:href="@{#}" class="btn btn-light btn-lg pull-right toggle">
+            <a id="menu-close" th:href="@{#}" class="btn btn-light btn-lg pull-right toggle">
                <i class="fa fa-times"></i>
-           </a>
-           <li class="sidebar-brand">
+            </a>
+            <li class="sidebar-brand">
                <a th:href="@{#top}" onclick="$('#menu-close').click();">Welcome <span th:if="${user}" th:text="${user.lastName} + ' ' + ${user.firstName}"></span></a>
-           </li>
-           <li>
+            </li>
+            <li>
                <a th:href="@{/}" onclick="$('#menu-close').click();">Home</a>
-           </li>
-           <li>
+            </li>
+            <li>
                <a th:href="@{/actualities}" onclick="$('#menu-close').click();">Actualities</a>
-           </li>
-           <li>
+            </li>
+            <li>
                <a th:href="@{/events}" onclick="$('#menu-close').click();">Events</a>
-           </li>
-           <li>
+            </li>
+            <li>
                <a th:href="@{/groups}" onclick="$('#menu-close').click();">Groups</a>
-           </li>
-           <li>
+            </li>
+            <li>
                <a th:href="@{/messages}" onclick="$('#menu-close').click();">Messages</a>
-           </li>
-           <li th:if="${user}">
+            </li>
+            <li th:if="${user}">
                <a th:href="@{/profil}" onclick="$('#menu-close').click();">Profile</a>
-           </li>
-           <li th:if="${user}">
+            </li>
+            <li th:if="${user}">
                <a th:href="@{/logout}" onclick="$('#menu-close').click();">Disconnect</a>
-           </li>
-           <li>
+            </li>
+            <li>
                <a href="#contact" onclick="$('#menu-close').click();">Contact</a>
-           </li>
+            </li>
+            <li th:if="${user}">
+               <a th:href="@{'/updateuser?id=' + ${user.idUser}}" onclick="$('#menu-close').click();">Update Profile</a>
+            </li>
+            <li th:if="${user}">
+               <a th:href="@{'/deleteuser?id=' + ${user.idUser}}" onclick="$('#menu-close').click();">Delete Profile</a>
+            </li>
        </ul>
    </nav>

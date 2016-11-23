@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -45,11 +46,23 @@ public class GroupController {
     }
     
     @RequestMapping(value = "/addgroup", method = RequestMethod.POST)
-    public String addevent(Model m, @Valid FriendsGroupViewModel group) {
+    public String addGroup(Model m, @Valid FriendsGroupViewModel group) {
   
         FriendsGroup newGroup = group.parse();
         groupRep.save(newGroup);
             
+        return "redirect:/groups";
+    }
+    
+    @RequestMapping("/deletegroup/{idGroup}")
+    public String deleteGroup(@PathVariable int idGroup) {
+        
+        return "redirect:/groups";
+    }
+    
+    @RequestMapping("/updategroup/{idGroup}")
+    public String updateGroup(@PathVariable int idGroup) {
+        
         return "redirect:/groups";
     }
 }

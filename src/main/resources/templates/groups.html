@@ -23,18 +23,24 @@
                 <tr>
                     <th>Owner</th>
                     <th>Name</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
                     <th>Owner</th>
                     <th>Name</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
                 </tfoot>
                 <tbody>
                 <tr th:each="group : ${ groups }">
                     <td th:text="${group.owner}"></td>
                     <td th:text="${group.name}"></td>
+                    <td><a th:href="@{'/updategroup?id=' + ${group.idGroup}}"><button type="submit" class="btn btn-info">Update</button></a></td>
+                    <td><a th:href="@{'/deletegroup?id=' + ${group.idGroup}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
                 </tr>
                 </tbody>
             </table>

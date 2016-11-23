@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -47,10 +48,22 @@ public class ActualityController {
     }
     
     @RequestMapping(value = "/addactuality", method = RequestMethod.POST)
-    public String addevent(Model m, @Valid ActualityViewModel actuality) {
+    public String addActuality(Model m, @Valid ActualityViewModel actuality) {
   
         Actuality newActuality = actuality.parse();
         actualityRep.save(newActuality);
+        
+        return "redirect:/actualities";
+    }
+    
+    @RequestMapping("/deleteactuality/{idActuality}")
+    public String deleteActuality(@PathVariable int idActuality) {
+        
+        return "redirect:/actualities";
+    }
+    
+    @RequestMapping("/updateactuality/{idActuality}")
+    public String updateActuality(@PathVariable int idActuality) {
         
         return "redirect:/actualities";
     }
