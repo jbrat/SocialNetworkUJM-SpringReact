@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -64,11 +65,25 @@ public class UserController {
         }
     }
     
-     @RequestMapping("/deleteprofil/{idUser}")
-    public String deleteProfil(@PathVariable int idUser) {
+     @RequestMapping(value="/deleteProfil")
+    public String deleteProfil(@RequestParam("id") long idUser) {
+      
+      //userRepo.findOne(idUser);
+        userRepo.delete(idUser);
+            return "redirect:/profil";
         
-        return "redirect:/";
     }
+    
+    /**@RequestMapping(value="/profil/delete/{idUser}", method=RequestMethod.GET)
+    public String delete(@PathVariable long idUser) {
+
+    //userRepo.delete(idUser);
+    userRepo.delete(userRepo.findOne(idUser));
+
+    return "redirect:/";
+
+}**/
+    
     
     @RequestMapping("/updateprofil/{idUser}")
     public String updateProfil(@PathVariable int idUser) {
