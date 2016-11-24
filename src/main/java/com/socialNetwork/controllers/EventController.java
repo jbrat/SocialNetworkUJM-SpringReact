@@ -65,12 +65,6 @@ public class EventController {
         return "redirect:/events";
     }
     
-    /** @RequestMapping("/deleteevents/{idEvent}")
-    public String deleteEvent(@PathVariable int idEvent) {
-        
-        return "redirect:/events";
-    }**/
-    
      @RequestMapping(value="/deleteEvent")
     public String deleteEvent(@RequestParam("id") long idEvent) {
       
@@ -85,26 +79,33 @@ public class EventController {
         public String editEvent(@RequestParam("id") long idEvent, Map<String, Object> map) {
             Event event = eventRep.findOne(idEvent);
             map.put("event", event);
-            
-            return "redirect:/eventUpdate";
+            eventRep.delete(idEvent);
+            return "eventUpdate";
         
     }
+    
         
-    @RequestMapping(value="/updateEvent/", method = RequestMethod.POST)
-        public String updateEvent(Event event, Map<String, Object> map) {
+                
+    @RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
+        public String updateEvent(Model m, @Valid EventViewModel event) {
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CurrentUser u = (CurrentUser) auth.getPrincipal();
+        
+        Event newEvent = event.parse(u.getUser());
+        eventRep.save(newEvent);
             
+            return "redirect:/events";
+            }
+        
+    /**@RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
+        public String updateEvent(@RequestParam("id") long idEvent) {
+            Event event = eventRep.findOne(idEvent);
             eventRep.save(event);
             
-            return "redirect:/event";
+            return "redirect:/events";
         
-    }
-    
-    /**
-    @RequestMapping("/updateevents/{idEvent}")
-    public String updateEvent(@PathVariable int idEvent) {
+    }  **/ 
+
         
-        return "redirect:/events";
-    }**/
-    
-    
 }

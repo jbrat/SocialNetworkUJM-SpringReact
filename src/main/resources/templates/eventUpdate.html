@@ -12,11 +12,12 @@
         <!-- Header -->
             <header id="top" class="header">
                 <div class="text-vertical-center">
-                <h1>Events</h1>
+                    <h1 th:text=" 'Update Event:' + ' ' + ${event.idEvent}"></h1>
                 </div>
             </header>
-            <h2>Update Events</h2>
-            <form method="post" th:action="@{/updateEvent}" th:object="${event}">
+            <h2 th:text=" 'Update Event:' + ' ' + ${event.idEvent}"></h2>
+            <!--form method="post" th:action="@{/updateEvent}" th:object="${event}"-->
+            <form method="post" th:action="@{'/updateEvent?id=' + ${event.idEvent}}" th:object="${event}">
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon" id="sizing-addon1"><img src="images/logo_events.png"/></span>
                     <input type="text" class="form-control" th:field="*{owner}" aria-describedby="sizing-addon1" placeholder="Owner..."/>
