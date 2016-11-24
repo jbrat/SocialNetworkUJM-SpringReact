@@ -1,5 +1,77 @@
+class MessageNew extends React.Component {
+  render() {
+    var addMess = event => {
+      event.preventDefault();
+      this.props.onAdd(
+        this.refs.nameInput.value,
+        this.refs.messageInput.value
+    );
+    this.refs.nameInput.value = "";
+    this.refs.messageInput.value = "";
+    }
+  return (
+    <form>
+      <input type="text" placeholder="Name..." ref="nameInput"/><br/>
+      <input type="text" placeholder="Message..." ref="messageInput"/><br/>
+      <input type="reset" value="Reset" />
+      <input type="submit" value="Submit" onClick={addMess}/>
+    </form>
+  )
+  }
+}
+
+
+class MessApp extends React.Component {
+
+   constructor(props) {
+    super(props);
+    this.state = {
+      mess: [
+      ]
+    };
+  }
+
+  loadData(){
+    superagent
+      .get('/api/messages') // not HATEOS :(
+      .end( (err, response) => {
+          if (err == null) {
+            this.setState({mess: response.body._embedded.messages});
+          }
+      })
+  }
+
+  componentDidMount() {
+    this.loadData()
+  }
+
+  addMessage(name, message) {
+    var newMess = {name, message};
+    this.setState({
+      mess: [...this.state.mess, newMess]
+    })
+  }
+
+  render(){
+    var NamesMessages = (this.state.mess.map(listemess => (<li key={listemess.name} >{listemess.name} :> {listemess.message}</li>)));
+    return (
+      <div>
+      <h1>Welcome to the {this.props.title} of UJM</h1>
+      <hr/>
+      <ul>
+      {NamesMessages}
+      </ul>
+      <hr/>
+      <MessageNew onAdd={ this.addMessage.bind(this) }></MessageNew>
+      </div>
+    )
+
+  }
+}
+
 ReactDOM.render(
-  <div>Hello <em>hardcoded</em>
+  <div>
+  <MessApp title="Messenger"></MessApp>
   </div>,
   document.getElementById('container')
 )

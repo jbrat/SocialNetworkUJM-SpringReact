@@ -7,37 +7,7 @@
             <i class="fa fa-bars"></i>
         </a>
          
-        <nav id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <a id="menu-close" th:href="@{#}" class="btn btn-light btn-lg pull-right toggle">
-                    <i class="fa fa-times"></i>
-                </a>
-                <li class="sidebar-brand">
-                    <a th:href="@{#top}" onclick="$('#menu-close').click();">Start Bootstrap</a>
-                </li>
-                <li>
-                    <a th:href="@{/}" onclick="$('#menu-close').click();">Home</a>
-                </li>
-                <li>
-                    <a th:href="@{/actualities}" onclick="$('#menu-close').click();">Actualities</a>
-                </li>
-                <li>
-                    <a th:href="@{/events}" onclick="$('#menu-close').click();">Events</a>
-                </li>
-                <li>
-                    <a th:href="@{/groups}" onclick="$('#menu-close').click();">Groups</a>
-                </li>
-                <li>
-                    <a th:href="@{/messages}" onclick="$('#menu-close').click();">Messages</a>
-                </li>
-                <li>
-                    <a href="#profile" onclick="$('#menu-close').click();">Profile</a>
-                </li>
-                <li>
-                    <a href="#contact" onclick="$('#menu-close').click();">Contact</a>
-                </li>
-            </ul>
-        </nav>
+        <nav lang="en" th:replace="fragments/sidebar :: sidebar"/>
         
         <!-- Header -->
             <header id="top" class="header">
@@ -55,6 +25,8 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Date</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -63,6 +35,8 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Date</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -71,6 +45,8 @@
                     <td th:text="${event.name}"></td>
                     <td th:text="${event.description}"></td>
                     <td th:text="${event.date}"></td>
+                    <td><a th:href="@{'/updateevent?id=' + ${event.idEvent}}"><button type="submit" class="btn btn-info">Update</button></a></td>
+                    <td><a th:href="@{'/deleteevent?id=' + ${event.idEvent}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
                 </tr>
                 </tbody>
             </table>
@@ -86,7 +62,7 @@
                 </div>
                 <br />
                 <input type="reset" value="Reset" class="btn btn-primary"/>
-                <input type="submit" value="Submit" class="btn btn-success"/>
+                <input type="submit" value="Submit" class="btn btn-success btnright"/>
             </form>
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   

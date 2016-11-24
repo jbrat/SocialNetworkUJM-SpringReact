@@ -5,9 +5,13 @@
  */
 package com.socialNetwork.controllers;
 
+import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.MessageRepository;
 import javax.inject.Inject;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,7 +27,13 @@ public class MessageController {
     private MessageRepository messageRep; 
     
     @RequestMapping("/messages")
-    public String getMessages() {
+    public String getMessages(Model model) {
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+           CurrentUser u = (CurrentUser) auth.getPrincipal();
+           model.addAttribute("user", u.getUser());
+        }   
         return "messages";
     }
     

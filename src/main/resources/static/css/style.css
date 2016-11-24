@@ -6,3 +6,13 @@
 tr:nth-child(even) {
     background-color: lightgray;
 }
+
+#welcome {
+    color: salmon;
+    font-weight : bold;
+    font-size: xx-large;
+}
+
+.btnright {
+    float: right
+}

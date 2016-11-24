@@ -60,6 +60,14 @@ public class Actuality implements Serializable{
         this.date = date;
     }
 
+    public long getIdActuality() {
+        return idActuality;
+    }
+
+    public void setIdActuality(long idActuality) {
+        this.idActuality = idActuality;
+    }
+    
     public String getPerson() {
         return person;
     }

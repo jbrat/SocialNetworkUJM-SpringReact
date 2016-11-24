@@ -1,8 +1,8 @@
 package com.socialNetwork.exception;
 
 /**
- *
- * @author julien
+ * Class to Email Exception
+ * @author UJM's students
  */
 public class EmailAlreadyExistException extends Exception {
     

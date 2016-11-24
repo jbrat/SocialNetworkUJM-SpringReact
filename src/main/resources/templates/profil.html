@@ -1,16 +1,55 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+    <head lang="en" th:replace="fragments/header :: header"/>
     <body>
-        <div>TODO write content</div>
-    </body>
+        <!-- Navigation -->
+        <a id="menu-toggle" th:href="@{#}" class="btn btn-dark btn-lg toggle">
+            <i class="fa fa-bars"></i>
+        </a>
+        
+        <nav lang="en" th:replace="fragments/sidebar :: sidebar"/>
+        
+        <!-- Header -->
+        <header id="top" class="header">
+            <div class="text-vertical-center">
+                <h1>Profile</h1>
+            </div>
+        </header>
+        
+        <table id="search" class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Login</th>
+                    <th>LastName</th>
+                    <th>FirstName</th>
+                    <th>E-mail</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>Login</th>
+                    <th>LastName</th>
+                    <th>FirstName</th>
+                    <th>E-mail</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                <tr>
+                    <td th:text="${user.login}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.firstName}"></td>
+                    <td th:text="${user.mail}"></td>
+                    <td><a th:href="@{'/updateuser?id=' + ${user.idUser}}"><button type="submit" class="btn btn-info">Update</button></a></td>
+                    <td><a th:href="@{'/deleteuser?id=' + ${user.idUser}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
+                </tr>
+                </tbody>
+            </table>
+        
+        
+        <div lang="en" th:replace="fragments/footer :: footer"/>
+    </body>   
 </html>

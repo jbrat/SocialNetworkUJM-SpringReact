@@ -25,7 +25,7 @@ public class Information implements Serializable {
     /**
      * phoneNumber of a person
      */
-    private int phoneNumber;
+    private String phoneNumber;
    
     /**
      * The street of a person
@@ -40,9 +40,16 @@ public class Information implements Serializable {
     /**
      * The postal code for a person
      */
-    private int postalCode;
+    private String postalCode;
     
     public Information() {}
+    
+    public Information(String phoneNumber, String street, String city, String postalCode) {
+        this.phoneNumber = phoneNumber;
+        this.street = street;
+        this.city = city;
+        this.postalCode = postalCode;
+    }
     
     public long getIdInformation() {
         return idInformation;
@@ -60,11 +67,11 @@ public class Information implements Serializable {
         this.street = street;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -84,11 +91,11 @@ public class Information implements Serializable {
         this.city = city;
     }
 
-    public int getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(int postalCode) {
+    public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
     
