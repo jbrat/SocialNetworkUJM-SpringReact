@@ -33,16 +33,15 @@ public class EventController {
      * @return String name of template
      */
     @RequestMapping("/events") 
-    public String home(
-            Model model,EventViewModel event) {
-        model.addAttribute("event", event);
+    public String home(Model model, EventViewModel event) {
         
+        model.addAttribute("event", event);
         model.addAttribute("events", eventRep.findAll());
         
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
-           CurrentUser u = (CurrentUser) auth.getPrincipal();
-           model.addAttribute("user", u.getUser());
+            CurrentUser u = (CurrentUser) auth.getPrincipal();
+            model.addAttribute("user", u.getUser());
         }   
         
         return "events";
@@ -56,7 +55,11 @@ public class EventController {
     @RequestMapping(value = "/addevent", method = RequestMethod.POST)
     public String addEvent(Model m, @Valid EventViewModel event) {
   
-        Event newEvent = event.parse();
+                
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CurrentUser u = (CurrentUser) auth.getPrincipal();
+        
+        Event newEvent = event.parse(u.getUser());
         eventRep.save(newEvent);
         
         return "redirect:/events";

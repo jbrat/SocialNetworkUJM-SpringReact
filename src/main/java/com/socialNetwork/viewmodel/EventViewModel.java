@@ -6,8 +6,9 @@
 package com.socialNetwork.viewmodel;
 
 import com.socialNetwork.model.Event;
+import com.socialNetwork.model.user.User;
+import com.socialNetwork.utils.DateOperation;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
 
@@ -17,11 +18,6 @@ import javax.validation.constraints.NotNull;
  */
 public class EventViewModel {
     
-    /**
-     * The owner of the event
-     */
-    @NotNull
-    private String owner;
     /**
      * Name of the event
      */
@@ -37,14 +33,6 @@ public class EventViewModel {
      * date of the event 
      */
     private String date;
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
 
     public String getName() {
         return name;
@@ -73,25 +61,24 @@ public class EventViewModel {
     /**
      * Method to convert EventViewModel into the Event model
      * 
+     * @param User the owner of the creation
+     * 
      * @return Event
      */
-    public Event parse() {
-        
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    public Event parse(User u) {
 
         try {
-            Date date = formatter.parse(this.getDate());
-  
-            Event e = new Event(this.getOwner(), 
+            System.out.println(getDate());
+            Event e = new Event(u, 
                 this.getName(), 
                 this.getDescription(), 
-                date);
+                DateOperation.shortFormat(getDate()));
         
             return e;
 
         } catch (ParseException e) {
  
-            return new Event(this.getOwner(),
+            return new Event(u,
                 this.getName(),
                 this.getDescription(),
                 new Date());

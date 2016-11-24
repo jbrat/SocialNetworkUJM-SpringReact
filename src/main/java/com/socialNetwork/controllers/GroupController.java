@@ -53,7 +53,10 @@ public class GroupController {
     @RequestMapping(value = "/addgroup", method = RequestMethod.POST)
     public String addGroup(Model m, @Valid FriendsGroupViewModel group) {
   
-        FriendsGroup newGroup = group.parse();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CurrentUser u = (CurrentUser) auth.getPrincipal();
+        
+        FriendsGroup newGroup = group.parse(u.getUser());
         groupRep.save(newGroup);
             
         return "redirect:/groups";

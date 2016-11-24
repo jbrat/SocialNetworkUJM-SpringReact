@@ -50,16 +50,13 @@
         <a id="to-top" th:href="@{#top}" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
     </footer>
 
-        
     <!-- Jquery script -->
-    <script th:src="@{/js/jquery.js}"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     
     <!-- Bootstrap Core JavaScript -->
     <script th:src="@{/js/bootstrap.min.js}"></script>
         
-    <!-- Javascript home -->
-    <script th:src="@{/js/home.js}" type="text/javascript" />
-    
     <!-- Script React JS Librabry -->
     <script th:src="@{/lib/react.js}"></script>
     <script th:src="@{/lib/react-dom.js}"></script>
@@ -70,4 +67,15 @@
     <script th:src="@{/js/jquery.dataTables.min.js}"></script>
     <script th:src="@{/js/dataTables.bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/searchtable.js}"></script>
+    
+    <!-- Date picker & Time picker -->
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+    </script>
+    
+    <!-- Javascript home -->
+    <script th:src="@{/js/home.js}" type="text/javascript" />
 </div>
