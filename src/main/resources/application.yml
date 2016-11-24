@@ -3,7 +3,7 @@ spring:
     datasource:
         url: jdbc:mysql://127.0.0.1:3306/pwaDatabase?useSSL=false
         username: pwaDatabase
-        password: *
+        password: **************
         validationQuery: SELECT 1
         testWhileIdle: true
     jpa:

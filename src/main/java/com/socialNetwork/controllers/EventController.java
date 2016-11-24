@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Controller to manage the events
@@ -31,7 +30,7 @@ public class EventController {
      * 
      * @return String name of template
      */
-     @RequestMapping("/events") 
+    @RequestMapping("/events") 
     public String home(
             Model model,EventViewModel event) {
         model.addAttribute("event", event);
