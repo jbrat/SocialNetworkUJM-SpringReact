@@ -4,6 +4,7 @@ import com.socialNetwork.model.Event;
 import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.EventRepository;
 import com.socialNetwork.viewmodel.EventViewModel;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.security.core.Authentication;
@@ -72,14 +73,35 @@ public class EventController {
       
       //userRepo.findOne(idUser);
         eventRep.delete(idEvent);
-            return "redirect:/events";
+        
+        return "redirect:/events";
         
     }
+    
+    @RequestMapping(value="/editEvent")
+        public String editEvent(@RequestParam("id") long idEvent, Map<String, Object> map) {
+            Event event = eventRep.findOne(idEvent);
+            map.put("event", event);
+            
+            return "redirect:/eventUpdate";
+        
+    }
+        
+    @RequestMapping(value="/updateEvent/", method = RequestMethod.POST)
+        public String updateEvent(Event event, Map<String, Object> map) {
+            
+            eventRep.save(event);
+            
+            return "redirect:/event";
+        
+    }
+    
+    /**
     @RequestMapping("/updateevents/{idEvent}")
     public String updateEvent(@PathVariable int idEvent) {
         
         return "redirect:/events";
-    }
+    }**/
     
     
 }

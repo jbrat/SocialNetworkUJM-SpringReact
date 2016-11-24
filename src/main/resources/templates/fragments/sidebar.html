@@ -37,7 +37,8 @@
                <a th:href="@{'/updateuser?id=' + ${user.idUser}}" onclick="$('#menu-close').click();">Update Profile</a>
             </li>
             <li th:if="${user}">
-               <a th:href="@{'/deleteuser?id=' + ${user.idUser}}" onclick="$('#menu-close').click();">Delete Profile</a>
+               <!--a th:href="@{'/deleteuser?id=' + ${user.idUser}}" onclick="$('#menu-close').click();">Delete Profile</a-->
+               <a th:href="@{'/deleteUser?id='+ ${user.idUser}}" onclick="$('#menu-close').click();">Delete Profile</a>
             </li>
        </ul>
    </nav>
