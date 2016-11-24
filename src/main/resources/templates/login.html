@@ -8,8 +8,10 @@
             <i class="fa fa-bars"></i>
     </a>
         
-    <nav lang="en" th:replace="fragments/sidebar :: sidebar"/>
-        
+    <span th:if="${user}">
+        <nav lang="en" th:replace="fragments/sidebar :: sidebar"/>
+    </span>
+    
     <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">

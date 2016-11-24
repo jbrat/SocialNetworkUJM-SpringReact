@@ -51,6 +51,7 @@ public class UserController {
             userVMValidator.validateUserVM(user);
             User u = user.parse();
             userRepo.save(user.parse());
+
             
         } catch (PasswordNotMatchException | EmailAlreadyExistException ex) {
             model.addAttribute("error", ex.getMessage());
