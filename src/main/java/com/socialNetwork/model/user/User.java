@@ -51,7 +51,7 @@ public class User implements Serializable {
      * email of the Person
      */
     @NotNull
-    private String mail;
+    private String email;
     
     /**
      * password for the Person
@@ -81,7 +81,7 @@ public class User implements Serializable {
         this.firstName = firstName;
         this.login = login;
         this.passwordHash = passwordHash;
-        this.mail = mail;
+        this.email = mail;
         this.role = UserRole.USER;
     }
 
@@ -105,12 +105,12 @@ public class User implements Serializable {
         this.firstName = firstName;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getLogin() {

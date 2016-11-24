@@ -7,17 +7,17 @@ import com.socialNetwork.model.user.User;
 import com.socialNetwork.model.user.UserVMValidator;
 import com.socialNetwork.model.user.UserViewModel;
 import com.socialNetwork.repository.UserRepository;
+import com.socialNetwork.utils.AuthentificationTools;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,7 +45,6 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String getUserCreatePage(Model model, UserViewModel userVM) {
         model.addAttribute("user", userVM);
-        //userRepo.save(userVM.parse());
         
         return "register";
     }
@@ -60,8 +59,10 @@ public class UserController {
 
             
         } catch (PasswordNotMatchException | EmailAlreadyExistException ex) {
+            System.out.println(ex.getMessage());
             model.addAttribute("error", ex.getMessage());
             model.addAttribute("user", user);
+            
             return "register";
         }
         
@@ -80,44 +81,64 @@ public class UserController {
         if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
            CurrentUser u = (CurrentUser) auth.getPrincipal();
            model.addAttribute("user", u.getUser());
+           
            return "profil";
         } else {
             return "redirect:/login";
         }
     }
     
-     @RequestMapping(value="/deleteProfil")
-    public String deleteProfil(@RequestParam("id") long idUser) {
-      
-      //userRepo.findOne(idUser);
-        userRepo.delete(idUser);
+    @RequestMapping(value="/updateUser", method = RequestMethod.GET)
+    public String updateUser(Model model, @RequestParam("id") long idUser) {
+       
+        if(!AuthentificationTools.getCurrentUserId().equals(idUser)) {
             return "redirect:/profil";
+        }
+       
+        model.addAttribute("user", AuthentificationTools.getCurrentUser());
         
+        return "updateProfil";
     }
     
-    public String deleteUser(@RequestParam("id") long idUser) {
-      
-      //userRepo.findOne(idUser);
-        userRepo.delete(idUser);
-            return "redirect:/login";
-        
-    }
-    
-    /**@RequestMapping(value="/profil/delete/{idUser}", method=RequestMethod.GET)
-    public String delete(@PathVariable long idUser) {
-
-    //userRepo.delete(idUser);
-    userRepo.delete(userRepo.findOne(idUser));
-
-    return "redirect:/";
-
-}**/
-    
-    
-    @RequestMapping("/updateprofil/{idUser}")
-    public String updateProfil(@PathVariable int idUser) {
+    @RequestMapping(value="/updateProfil", method = RequestMethod.POST)
+    public String updateUser(@Valid UserViewModel user) {
+  
+        userRepo.save(user.update(AuthentificationTools.getCurrentUser()));
         
         return "redirect:/profil";
+    }
+    
+    @RequestMapping(value="/updatePassword", method = RequestMethod.GET)
+    public String updatePassword(Model model) {
+        return "updatePassword";
+    }
+    
+    @RequestMapping(value="/UpdatePassword", method = RequestMethod.POST)
+    public String updatePassword(Model model, @RequestParam String password, @RequestParam String passwordRepeated) {
+  
+        if(!password.equals(passwordRepeated)) {
+            model.addAttribute("error", "The two password isn't similar");
+            return "updatePassword";
+        }
+        
+        User u = AuthentificationTools.getCurrentUser();
+        u.setPasswordHash(new BCryptPasswordEncoder().encode(password));
+        userRepo.save(u);
+        
+        return "redirect:/profil";
+    }
+    
+    @RequestMapping(value="/deleteUser")
+    public String deleteUser(@RequestParam("id") long idUser) {
+
+        if(!AuthentificationTools.getCurrentUserId().equals(idUser)) {
+            return "redirect:/";
+        }
+        
+        userRepo.delete(idUser);
+        
+        return "redirect:/logout";
+        
     }
     
     /**
@@ -128,10 +149,7 @@ public class UserController {
     @RequestMapping(value="/getCurrentUser", method = RequestMethod.GET)
     public @ResponseBody User getCurrentUser() {
         
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CurrentUser u = (CurrentUser) auth.getPrincipal();
-        
-        return u.getUser();    
+        return AuthentificationTools.getCurrentUser();    
     }
     
     /**
@@ -145,10 +163,7 @@ public class UserController {
 
         for(User u : userRepo.findAll()) {
             listUsers.add(u.getFirstName() + u.getLastName());
-        }
-
-        
-        return null;
-        
+        }        
+        return null;      
     }
 }

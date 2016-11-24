@@ -34,6 +34,9 @@
                <a href="#contact" onclick="$('#menu-close').click();">Contact</a>
             </li>
             <li th:if="${user}">
+               <a th:href="@{/updatePassword}" onclick="$('#menu-close').click();">Update Password</a>
+            </li>
+            <li th:if="${user}">
                <a th:href="@{'/updateuser?id=' + ${user.idUser}}" onclick="$('#menu-close').click();">Update Profile</a>
             </li>
             <li th:if="${user}">

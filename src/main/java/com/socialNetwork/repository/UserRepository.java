@@ -11,5 +11,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author UJM's students
  */
 public interface UserRepository extends CrudRepository<User, Long>{
-    Optional<User> findOneByMail(String email);
+    Optional<User> findOneByEmail(String email);
 }

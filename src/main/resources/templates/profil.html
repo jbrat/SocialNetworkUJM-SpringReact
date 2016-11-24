@@ -19,7 +19,7 @@
         <table id="search" class="table table-hover">
                 <thead>
                 <tr>
-                    <th>Youssef</th>
+                    <th>Login</th>
                     <th>LastName</th>
                     <th>FirstName</th>
                     <th>E-mail</th>
@@ -42,10 +42,10 @@
                     <td th:text="${user.login}"></td>
                     <td th:text="${user.lastName}"></td>
                     <td th:text="${user.firstName}"></td>
-                    <td th:text="${user.mail}"></td>
-                    <td><a th:href="@{'/updateuser?id=' + ${user.idUser}}"><button type="submit" class="btn btn-info">Update</button></a></td>
+                    <td th:text="${user.email}"></td>
+                    <td><a th:href="@{'/updateUser?id=' + ${user.idUser}}"><button type="submit" class="btn btn-info">Update</button></a></td>
                     <!--td><a th:href="@{'/deleteuser?id=' + ${user.idUser}}"><button type="submit" class="btn btn-danger">Delete</button></a></td-->
-                    <td><a th:href="@{'/deleteProfil?id='+ ${user.idUser}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
+                    <td><a th:href="@{'/deleteUser?id='+ ${user.idUser}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
                     <!--td><a href="#" th:href="@{/profil/delete/} + ${user.idUser}"><button type="submit" class="btn btn-danger">Delete</button></a></td-->
                 </tr>
                 </tbody>

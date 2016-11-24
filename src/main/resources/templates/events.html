@@ -60,7 +60,6 @@
                     <input type="text" class="form-control" th:field="*{name}" aria-describedby="sizing-addon1" placeholder="Name..."/>  
                     <input type="text" class="form-control" th:field="*{description}" aria-describedby="sizing-addon1" placeholder="Description..."/>
                     <br /><br />
-
                     <span class="input-append" id="datetimepicker">
                         <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text" th:field="*{date}"/><br />
                         <span class="add-on">
@@ -68,12 +67,12 @@
                             </i>
                         </span>
                     </span>
-
-                    <input type="reset" value="Reset" class="btn btn-primary"/>
-                    <input type="submit" value="Submit" class="btn btn-success btnright"/>
+                    <br />
+                    <button type="reset" class="btn btn-primary">Reset</button>
+                    <button type="submit" class="btn btn-success btnright">Submit</button>
                 </div>
-
             </form>
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" />
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   
 </html>

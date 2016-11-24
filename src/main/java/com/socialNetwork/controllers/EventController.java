@@ -3,15 +3,14 @@ package com.socialNetwork.controllers;
 import com.socialNetwork.model.Event;
 import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.EventRepository;
+import com.socialNetwork.utils.AuthentificationTools;
 import com.socialNetwork.viewmodel.EventViewModel;
-import java.util.Map;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,12 +53,8 @@ public class EventController {
      */
     @RequestMapping(value = "/addevent", method = RequestMethod.POST)
     public String addEvent(Model m, @Valid EventViewModel event) {
-  
-                
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CurrentUser u = (CurrentUser) auth.getPrincipal();
-        
-        Event newEvent = event.parse(u.getUser());
+
+        Event newEvent = event.parse(AuthentificationTools.getCurrentUser());
         eventRep.save(newEvent);
         
         return "redirect:/events";
@@ -68,23 +63,34 @@ public class EventController {
      @RequestMapping(value="/deleteEvent")
     public String deleteEvent(@RequestParam("id") long idEvent) {
       
-      //userRepo.findOne(idUser);
+        Event actu = eventRep.findOne(idEvent);
+        
+        if(!AuthentificationTools.getCurrentUserId().equals(actu.getOwner().getIdUser())) {
+            return "redirect:/";
+        }
+        
         eventRep.delete(idEvent);
         
         return "redirect:/events";
-        
+  
     }
     
     @RequestMapping(value="/editEvent")
-        public String editEvent(@RequestParam("id") long idEvent, Map<String, Object> map) {
+    public String editEvent(@RequestParam("id") long idEvent) {
             Event event = eventRep.findOne(idEvent);
+<<<<<<< HEAD
             map.put("event", event);
             eventRep.delete(idEvent);
             return "eventUpdate";
+=======
+            
+            return "redirect:/eventUpdate";
+>>>>>>> 9f23cdc937531a0b3929e8f30cc9b6d1012e773b
         
     }
     
         
+<<<<<<< HEAD
                 
     @RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
         public String updateEvent(Model m, @Valid EventViewModel event) {
@@ -108,4 +114,12 @@ public class EventController {
     }  **/ 
 
         
+=======
+    @RequestMapping(value="/updateEvent/", method = RequestMethod.POST)
+    public String updateEvent(Event event) {
+            eventRep.save(event);
+            
+            return "redirect:/event";  
+    }
+>>>>>>> 9f23cdc937531a0b3929e8f30cc9b6d1012e773b
 }
