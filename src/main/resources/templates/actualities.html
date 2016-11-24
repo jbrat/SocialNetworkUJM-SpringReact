@@ -48,7 +48,8 @@
                     <td th:text="${actuality.message}"></td>
                     <td th:text="${actuality.date}"></td>
                     <td><a th:href="@{'/updateactuality?id=' + ${actuality.idActuality}}"><button type="submit" class="btn btn-info">Update</button></a></td>
-                    <td><a th:href="@{'/deleteactuality?id=' + ${actuality.idActuality}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
+                    <!--td><a th:href="@{'/deleteactuality?id=' + ${actuality.idActuality}}"><button type="submit" class="btn btn-danger">Delete</button></a></td-->
+                    <td><a th:href="@{'/deleteActuality?id='+ ${actuality.idActuality}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
                 </tr>
                 </tbody>
             </table>

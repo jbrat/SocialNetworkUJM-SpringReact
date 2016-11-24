@@ -41,6 +41,7 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String getUserCreatePage(Model model, UserViewModel userVM) {
         model.addAttribute("user", userVM);
+        //userRepo.save(userVM.parse());
         
         return "register";
     }
