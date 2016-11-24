@@ -1,6 +1,5 @@
 package com.socialNetwork.controllers;
 
-import com.socialNetwork.model.user.CurrentUser;
 import java.util.Optional;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Controller to manage the login
+ * 
+ * @author UJM's students
+ */
 @Controller
 public class LoginController {
 

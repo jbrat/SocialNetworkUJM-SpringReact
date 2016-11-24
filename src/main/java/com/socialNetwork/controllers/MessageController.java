@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.socialNetwork.controllers;
 
 import com.socialNetwork.model.user.CurrentUser;
@@ -26,6 +21,11 @@ public class MessageController {
     @Inject
     private MessageRepository messageRep; 
     
+    /**
+     * Method to join the messages page
+     * 
+     * @return String name of template
+     */
     @RequestMapping("/messages")
     public String getMessages(Model model) {
         

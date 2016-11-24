@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.socialNetwork.controllers;
 
 import com.socialNetwork.model.Information;
@@ -30,6 +25,11 @@ public class InformationController {
         @Inject
         public InformationRepository informationRep;
         
+        /**
+         * Method to join the information page
+         * 
+         * @return String name of template
+        */
         @RequestMapping("/information")
         public String getInformation(Model model, InformationViewModel information) {
             
@@ -46,6 +46,11 @@ public class InformationController {
             return "information";
         }
         
+        /**
+         * Method to add an information to the informations page
+         * 
+         * @return String name of template
+        */
         @RequestMapping(value = "/addinformation", method = RequestMethod.POST)
         public String addEvent(Model m, @Valid InformationViewModel information) {
   

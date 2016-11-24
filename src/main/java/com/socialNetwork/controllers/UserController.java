@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Controller to manage the users
+ * 
+ * @author UJM's students
+ */
 @Controller
 public class UserController {
     
@@ -27,6 +32,11 @@ public class UserController {
     @Inject
     private UserRepository userRepo;
     
+    /**
+     * Method to join the users page
+     * 
+     * @return String name of template
+     */
     @RequestMapping(value = "/user/create", method = RequestMethod.GET)
     public String getUserCreatePage(Model model, UserViewModel userVM) {
         model.addAttribute("user", userVM);
@@ -51,6 +61,11 @@ public class UserController {
         return "redirect:/login";
     }
     
+    /**
+     * Method to join the login page
+     * 
+     * @return String name of template
+     */
     @RequestMapping(value="/profil", method = RequestMethod.GET)
     public String getProfil(Model model) {
              
