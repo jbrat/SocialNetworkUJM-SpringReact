@@ -18,7 +18,9 @@ public class WebSecu extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-             .antMatchers("/**", "/public/**").permitAll()
+              
+            .antMatchers("/", "/login", "/register", "/js/**", "/lib/**", "/images/**", "/fonts/**", "/css/**").permitAll()
+            .antMatchers("/**").hasAuthority("USER")
             .antMatchers("/users/**").hasAuthority("ADMIN")
             .anyRequest().fullyAuthenticated()
             .and()

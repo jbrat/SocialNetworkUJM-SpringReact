@@ -37,14 +37,14 @@ public class UserController {
      * 
      * @return String name of template
      */
-    @RequestMapping(value = "/user/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String getUserCreatePage(Model model, UserViewModel userVM) {
         model.addAttribute("user", userVM);
- 
+        
         return "register";
     }
 
-    @RequestMapping(value = "/user/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String handleUserCreate(Model model, @Valid UserViewModel user, BindingResult bindingResult) {
         
         try {
