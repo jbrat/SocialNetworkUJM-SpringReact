@@ -8,8 +8,10 @@
             <i class="fa fa-bars"></i>
     </a>
         
-    <nav lang="en" th:replace="fragments/sidebar :: sidebar"/>
-        
+    <span th:if="${user}">
+        <nav lang="en" th:replace="fragments/sidebar :: sidebar"/>
+    </span>
+    
     <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">
@@ -34,7 +36,7 @@
         <button type="submit" class="btn btn-success">Sign in</button>
     </form>
             <br />
-    <a th:href="@{/user/create}"><button type="submit" class="btn btn-danger">Sign up</button></a>
+    <a th:href="@{/register}"><button type="submit" class="btn btn-danger">Sign up</button></a>
     <a th:href="@{/}"><button type="submit" class="btn btn-danger">Connect with facebook</button></a>
     
         <span th:if="${error.isPresent()}">

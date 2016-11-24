@@ -45,6 +45,11 @@ public class GroupController {
         return "groups";
     }
     
+    /**
+     * Method to add a group the groups page
+     * 
+     * @return String name of template
+     */
     @RequestMapping(value = "/addgroup", method = RequestMethod.POST)
     public String addGroup(Model m, @Valid FriendsGroupViewModel group) {
   

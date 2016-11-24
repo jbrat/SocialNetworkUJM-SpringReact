@@ -47,6 +47,11 @@ public class EventController {
         return "events";
     }
     
+    /**
+     * Method to add a event the events page
+     * 
+     * @return String name of template
+     */
     @RequestMapping(value = "/addevent", method = RequestMethod.POST)
     public String addEvent(Model m, @Valid EventViewModel event) {
   

@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Controller to manage the users
+ * 
+ * @author UJM's students
+ */
 @Controller
 public class UserController {
     
@@ -28,20 +33,26 @@ public class UserController {
     @Inject
     private UserRepository userRepo;
     
-    @RequestMapping(value = "/user/create", method = RequestMethod.GET)
+    /**
+     * Method to join the users page
+     * 
+     * @return String name of template
+     */
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String getUserCreatePage(Model model, UserViewModel userVM) {
         model.addAttribute("user", userVM);
- 
+        
         return "register";
     }
 
-    @RequestMapping(value = "/user/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String handleUserCreate(Model model, @Valid UserViewModel user, BindingResult bindingResult) {
         
         try {
             userVMValidator.validateUserVM(user);
             User u = user.parse();
             userRepo.save(user.parse());
+
             
         } catch (PasswordNotMatchException | EmailAlreadyExistException ex) {
             model.addAttribute("error", ex.getMessage());
@@ -52,6 +63,11 @@ public class UserController {
         return "redirect:/login";
     }
     
+    /**
+     * Method to join the login page
+     * 
+     * @return String name of template
+     */
     @RequestMapping(value="/profil", method = RequestMethod.GET)
     public String getProfil(Model model) {
              

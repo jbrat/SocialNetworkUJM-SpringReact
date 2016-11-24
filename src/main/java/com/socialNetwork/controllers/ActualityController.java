@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * 
  * @author UJM's students
  */
-
 @Controller
 public class ActualityController {
         
@@ -31,7 +30,7 @@ public class ActualityController {
      * 
      * @return String name of template
      */
-     @RequestMapping("/actualities") 
+    @RequestMapping("/actualities") 
     public String home(
             Model model,ActualityViewModel actuality) {
         model.addAttribute("actuality", actuality);
@@ -47,6 +46,11 @@ public class ActualityController {
         return "actualities";
     }
     
+    /**
+     * Method to add a actuality to the actualities page
+     * 
+     * @return String name of template
+     */
     @RequestMapping(value = "/addactuality", method = RequestMethod.POST)
     public String addActuality(Model m, @Valid ActualityViewModel actuality) {
   
