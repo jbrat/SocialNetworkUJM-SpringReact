@@ -31,12 +31,10 @@ public class InformationController {
         public InformationRepository informationRep;
         
         @RequestMapping("/information")
-        public String getInformation(
-                Model model, InformationViewModel information ) {
-            model.addAttribute("information", information);
-        
-            model.addAttribute("informations", informationRep.findAll());
+        public String getInformation(Model model, InformationViewModel information) {
             
+            model.addAttribute("information", information);
+            model.addAttribute("informations", informationRep.findAll());     
              
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
@@ -44,6 +42,7 @@ public class InformationController {
                 model.addAttribute("user", u.getUser());
                 
             }
+            
             return "information";
         }
         
