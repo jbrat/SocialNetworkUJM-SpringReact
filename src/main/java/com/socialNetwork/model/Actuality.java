@@ -1,12 +1,15 @@
 package com.socialNetwork.model;
 
+import com.socialNetwork.model.user.User;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import com.socialNetwork.utils.DateOperation;
 
 /**
  * Class for the actuality
@@ -27,9 +30,9 @@ public class Actuality implements Serializable{
     /**
      * The Owner
      */
-    //@OneToOne
+    @OneToOne
     @NotNull
-    private String person;
+    private User person;
     
     /**
      * The title of the actuality
@@ -51,7 +54,7 @@ public class Actuality implements Serializable{
     
     public Actuality() {}
     
-    public Actuality(String person, String title, String message, Date date) {
+    public Actuality(User person, String title, String message, Date date) {
         this.person = person;
         this.title = title;
         this.message = message;
@@ -66,11 +69,11 @@ public class Actuality implements Serializable{
         this.idActuality = idActuality;
     }
     
-    public String getPerson() {
+    public User getPerson() {
         return person;
     }
 
-    public void setPerson(String person) {
+    public void setPerson(User person) {
         this.person = person;
     }
 
@@ -90,8 +93,8 @@ public class Actuality implements Serializable{
         this.message = message;
     }
     
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        return DateOperation.shortFormat(date);
     }
     
     public void setDate(Date date) {

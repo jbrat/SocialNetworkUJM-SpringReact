@@ -7,9 +7,12 @@ package com.socialNetwork.viewmodel;
 
 import com.socialNetwork.model.Actuality;
 import com.socialNetwork.model.user.User;
+import com.socialNetwork.repository.UserRepository;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -18,12 +21,8 @@ import javax.validation.constraints.NotNull;
  */
 public class ActualityViewModel {
     
-    /**
-     * The Owner
-     */
-    //@OneToOne
-    @NotNull
-    private String person;
+    @Inject
+    private UserRepository userRepo;
     
     /**
      * The title of the actuality
@@ -36,20 +35,7 @@ public class ActualityViewModel {
      */
     @NotNull
     private String message;
-    
-    /**
-     * The date of the actuality
-     */
-    @NotNull
-    private String date;
-    
-    public String getPerson() {
-        return person;
-    }
 
-    public void setPerson(String person) {
-        this.person = person;
-    }
 
     public String getTitle() {
         return title;
@@ -66,41 +52,22 @@ public class ActualityViewModel {
     public void setMessage(String message) {
         this.message = message;
     }
-    
-    public String getDate() {
-        return date;
-    }
-    
-    public void setDate(String date) {
-        this.date = date;
-    }
+
     
      /**
      * Method to convert ActualityViewModel into the Actuality model
      * 
      * @return Actuality
      */
-    public Actuality parse() {
+    public Actuality parse(User u) {
         
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-
-        try {
-            Date date = formatter.parse(this.getDate());
-  
-            Actuality actuality = new Actuality(this.getPerson(), 
-                this.getTitle(), 
-                this.getMessage(), 
-                date);
+        Actuality actuality = new Actuality(u, 
+            this.getTitle(), 
+            this.getMessage(), 
+            new Date());
         
             return actuality;
 
-        } catch (ParseException actuality) {
- 
-            return new Actuality(this.getPerson(),
-                this.getTitle(),
-                this.getMessage(),
-                new Date());
-        }
     }
     
 }

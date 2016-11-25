@@ -31,16 +31,15 @@ public class ActualityController {
      * @return String name of template
      */
     @RequestMapping("/actualities") 
-    public String home(
-            Model model,ActualityViewModel actuality) {
-        model.addAttribute("actuality", actuality);
+    public String home(Model model, ActualityViewModel actuality) {
         
+        model.addAttribute("actuality", actuality);
         model.addAttribute("actualities", actualityRep.findAll());
         
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
-           CurrentUser u = (CurrentUser) auth.getPrincipal();
-           model.addAttribute("user", u.getUser());
+            CurrentUser u = (CurrentUser) auth.getPrincipal();
+            model.addAttribute("user", u.getUser());
         }   
         
         return "actualities";
@@ -53,8 +52,11 @@ public class ActualityController {
      */
     @RequestMapping(value = "/addactuality", method = RequestMethod.POST)
     public String addActuality(Model m, @Valid ActualityViewModel actuality) {
-  
-        Actuality newActuality = actuality.parse();
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CurrentUser u = (CurrentUser) auth.getPrincipal();
+
+        Actuality newActuality = actuality.parse(u.getUser());
         actualityRep.save(newActuality);
         
         return "redirect:/actualities";
