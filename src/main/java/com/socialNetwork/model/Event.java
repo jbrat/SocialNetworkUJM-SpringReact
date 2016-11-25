@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -46,7 +47,8 @@ public class Event implements Serializable{
      * The owner of the event
      */
     @NotNull
-    private String owner;
+    @OneToOne
+    private User owner;
     /**
      * Name of the event
      */
@@ -66,7 +68,7 @@ public class Event implements Serializable{
     
     public Event() {}
     
-    public Event(String owner, String name, String description, Date date) {
+    public Event(User owner, String name, String description, Date date) {
         this.owner = owner;
         this.name = name;
         this.description = description;
@@ -81,11 +83,11 @@ public class Event implements Serializable{
         this.idEvent = idEvent;
     }
     
-    public String getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
     

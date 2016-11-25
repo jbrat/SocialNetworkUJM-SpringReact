@@ -64,7 +64,7 @@ public class User implements Serializable {
      */
     @OneToOne
     private Information information;
-    
+  
     /**
      * The group of the Person ( can be null ) 
      */

@@ -57,6 +57,8 @@ public class ActualityViewModel {
      /**
      * Method to convert ActualityViewModel into the Actuality model
      * 
+     * @param User the owner of the creation
+     * 
      * @return Actuality
      */
     public Actuality parse(User u) {

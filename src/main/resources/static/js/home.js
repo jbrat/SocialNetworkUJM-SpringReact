@@ -82,3 +82,12 @@ $('.imgFooterMail').click(() => {
     $('.imgFooterMail').text("ujmstudent@gmail.com");
     $('.imgFooterMail').attr('href', 'mailto:ujmstudent@gmail.com');
 });
+
+
+/**
+ * DateTime picker
+ */
+$('#datetimepicker').datetimepicker({
+    format: 'dd/MM/yyyy hh:mm:ss',
+    language: 'fr'
+});
