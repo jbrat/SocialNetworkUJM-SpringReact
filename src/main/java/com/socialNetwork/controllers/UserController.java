@@ -95,6 +95,14 @@ public class UserController {
         
     }
     
+    public String deleteUser(@RequestParam("id") long idUser) {
+      
+      //userRepo.findOne(idUser);
+        userRepo.delete(idUser);
+            return "redirect:/login";
+        
+    }
+    
     /**@RequestMapping(value="/profil/delete/{idUser}", method=RequestMethod.GET)
     public String delete(@PathVariable long idUser) {
 
