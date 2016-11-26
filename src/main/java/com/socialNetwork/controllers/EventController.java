@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Controller to manage the events
@@ -63,15 +64,25 @@ public class EventController {
         return "redirect:/events";
     }
     
-    @RequestMapping("/deleteevents/{idEvent}")
+    /** @RequestMapping("/deleteevents/{idEvent}")
     public String deleteEvent(@PathVariable int idEvent) {
         
         return "redirect:/events";
+    }**/
+    
+     @RequestMapping(value="/deleteEvent")
+    public String deleteEvent(@RequestParam("id") long idEvent) {
+      
+      //userRepo.findOne(idUser);
+        eventRep.delete(idEvent);
+            return "redirect:/events";
+        
     }
-
     @RequestMapping("/updateevents/{idEvent}")
     public String updateEvent(@PathVariable int idEvent) {
         
         return "redirect:/events";
     }
+    
+    
 }

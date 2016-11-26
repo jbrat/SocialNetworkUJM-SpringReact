@@ -47,6 +47,7 @@
                     <td th:text="${actuality.title}"></td>
                     <td th:text="${actuality.message}"></td>
                     <td th:text="${actuality.date}"></td>
+
                     <td>
                         <a th:href="@{'/updateactuality?id=' + ${actuality.idActuality}}">
                             <button type="submit" class="btn btn-info">Update</button>

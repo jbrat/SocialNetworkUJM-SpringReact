@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Controller to manage the actualities
@@ -62,11 +63,21 @@ public class ActualityController {
         return "redirect:/actualities";
     }
     
-    @RequestMapping("/deleteactuality/{idActuality}")
+    /**@RequestMapping("/deleteactuality/{idActuality}")
     public String deleteActuality(@PathVariable int idActuality) {
         
         return "redirect:/actualities";
+    }**/
+    
+    @RequestMapping(value="/deleteActuality")
+    public String deleteEvent(@RequestParam("id") long idActuality) {
+      
+        actualityRep.delete(idActuality);
+        
+            return "redirect:/actualities";
+        
     }
+    
     
     @RequestMapping("/updateactuality/{idActuality}")
     public String updateActuality(@PathVariable int idActuality) {

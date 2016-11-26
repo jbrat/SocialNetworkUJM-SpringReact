@@ -45,6 +45,7 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String getUserCreatePage(Model model, UserViewModel userVM) {
         model.addAttribute("user", userVM);
+        //userRepo.save(userVM.parse());
         
         return "register";
     }
@@ -85,11 +86,25 @@ public class UserController {
         }
     }
     
-     @RequestMapping("/deleteprofil/{idUser}")
-    public String deleteProfil(@PathVariable int idUser) {
+     @RequestMapping(value="/deleteProfil")
+    public String deleteProfil(@RequestParam("id") long idUser) {
+      
+      //userRepo.findOne(idUser);
+        userRepo.delete(idUser);
+            return "redirect:/profil";
         
-        return "redirect:/";
     }
+    
+    /**@RequestMapping(value="/profil/delete/{idUser}", method=RequestMethod.GET)
+    public String delete(@PathVariable long idUser) {
+
+    //userRepo.delete(idUser);
+    userRepo.delete(userRepo.findOne(idUser));
+
+    return "redirect:/";
+
+}**/
+    
     
     @RequestMapping("/updateprofil/{idUser}")
     public String updateProfil(@PathVariable int idUser) {
