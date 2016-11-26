@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -107,7 +108,25 @@ public class UserController {
         return "redirect:/profil";
     }
     
+    @RequestMapping(value="/updatePassword", method = RequestMethod.GET)
+    public String updatePassword(Model model) {
+        return "updatePassword";
+    }
     
+    @RequestMapping(value="/UpdatePassword", method = RequestMethod.POST)
+    public String updatePassword(Model model, @RequestParam String password, @RequestParam String passwordRepeated) {
+  
+        if(!password.equals(passwordRepeated)) {
+            model.addAttribute("error", "The two password isn't similar");
+            return "updatePassword";
+        }
+        
+        User u = AuthentificationTools.getCurrentUser();
+        u.setPasswordHash(new BCryptPasswordEncoder().encode(password));
+        userRepo.save(u);
+        
+        return "redirect:/profil";
+    }
     
     @RequestMapping(value="/deleteUser")
     public String deleteUser(@RequestParam("id") long idUser) {

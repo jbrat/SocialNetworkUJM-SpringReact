@@ -66,10 +66,7 @@ public class ActualityController {
     public String deleteEvent(@RequestParam("id") long idActuality) {
 
         Actuality actu = actualityRep.findOne(idActuality);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CurrentUser u = (CurrentUser) auth.getPrincipal();
-        
-        if(!u.getId().equals(actu.getPerson().getIdUser())) {
+        if(!AuthentificationTools.getCurrentUserId().equals(actu.getPerson().getIdUser())) {
             return "redirect:/";
         }
        

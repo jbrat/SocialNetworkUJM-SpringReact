@@ -1,19 +1,16 @@
 package com.socialNetwork.controllers;
 
-import com.socialNetwork.model.Actuality;
 import com.socialNetwork.model.Event;
 import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.EventRepository;
 import com.socialNetwork.utils.AuthentificationTools;
 import com.socialNetwork.viewmodel.EventViewModel;
-import java.util.Map;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,10 +64,8 @@ public class EventController {
     public String deleteEvent(@RequestParam("id") long idEvent) {
       
         Event actu = eventRep.findOne(idEvent);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CurrentUser u = (CurrentUser) auth.getPrincipal();
         
-        if(!u.getId().equals(actu.getOwner().getIdUser())) {
+        if(!AuthentificationTools.getCurrentUserId().equals(actu.getOwner().getIdUser())) {
             return "redirect:/";
         }
         

@@ -45,7 +45,7 @@
                     <td th:text="${user.email}"></td>
                     <td><a th:href="@{'/updateUser?id=' + ${user.idUser}}"><button type="submit" class="btn btn-info">Update</button></a></td>
                     <!--td><a th:href="@{'/deleteuser?id=' + ${user.idUser}}"><button type="submit" class="btn btn-danger">Delete</button></a></td-->
-                    <td><a th:href="@{'/deleteProfil?id='+ ${user.idUser}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
+                    <td><a th:href="@{'/deleteUser?id='+ ${user.idUser}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
                     <!--td><a href="#" th:href="@{/profil/delete/} + ${user.idUser}"><button type="submit" class="btn btn-danger">Delete</button></a></td-->
                 </tr>
                 </tbody>
