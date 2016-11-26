@@ -110,7 +110,14 @@ public class UserController {
     
     @RequestMapping(value="/updatePassword", method = RequestMethod.GET)
     public String updatePassword(Model model) {
-        return "updatePassword";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+           CurrentUser u = (CurrentUser) auth.getPrincipal();
+           model.addAttribute("user", u.getUser());    
+           return "updatePassword";
+        } else {
+           return "redirect:/login";
+        }    
     }
     
     @RequestMapping(value="/UpdatePassword", method = RequestMethod.POST)
@@ -125,7 +132,7 @@ public class UserController {
         u.setPasswordHash(new BCryptPasswordEncoder().encode(password));
         userRepo.save(u);
         
-        return "redirect:/profil";
+        return "redirect:/logout";
     }
     
     @RequestMapping(value="/deleteUser")
