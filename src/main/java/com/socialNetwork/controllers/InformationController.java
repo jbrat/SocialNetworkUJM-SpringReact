@@ -52,7 +52,7 @@ public class InformationController {
          * @return String name of template
         */
         @RequestMapping(value = "/addinformation", method = RequestMethod.POST)
-        public String addEvent(Model m, @Valid InformationViewModel information) {
+        public String addinformation(Model m, @Valid InformationViewModel information) {
   
             Information newInformation = information.parse();
             informationRep.save(newInformation);

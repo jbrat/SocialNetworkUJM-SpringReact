@@ -16,3 +16,25 @@ tr:nth-child(even) {
 .btnright {
     float: right
 }
+
+.react {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    text-align: center;
+    color: white;
+}
+
+.react {
+    box-shadow: 6px 6px 6px salmon;
+    margin-left: 100px;
+    transition: box-shadow 1s,margin-right 1s;
+}
+
+.react:hover {
+    box-shadow: 3px 3px 3px lightseagreen;
+   /* transition: box-shadow 1s;*/
+    margin-right: 90px;
+}
+
+

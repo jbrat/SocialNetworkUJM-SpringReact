@@ -145,10 +145,7 @@ public class UserController {
 
         for(User u : userRepo.findAll()) {
             listUsers.add(u.getFirstName() + u.getLastName());
-        }
-
-        
-        return null;
-        
+        }        
+        return null;      
     }
 }
