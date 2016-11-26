@@ -84,28 +84,17 @@ public class EventController {
     }
     
     @RequestMapping(value="/editEvent")
-    public String editEvent(@RequestParam("id") long idEvent, Map<String, Object> map) {
+    public String editEvent(@RequestParam("id") long idEvent) {
             Event event = eventRep.findOne(idEvent);
-            map.put("event", event);
             
             return "redirect:/eventUpdate";
         
     }
         
     @RequestMapping(value="/updateEvent/", method = RequestMethod.POST)
-    public String updateEvent(Event event, Map<String, Object> map) {
-            
+    public String updateEvent(Event event) {
             eventRep.save(event);
             
             return "redirect:/event";  
     }
-    
-    /**
-    @RequestMapping("/updateevents/{idEvent}")
-    public String updateEvent(@PathVariable int idEvent) {
-        
-        return "redirect:/events";
-    }**/
-    
-    
 }
