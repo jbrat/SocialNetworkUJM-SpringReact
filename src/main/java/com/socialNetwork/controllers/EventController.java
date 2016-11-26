@@ -78,17 +78,11 @@ public class EventController {
     @RequestMapping(value="/editEvent")
     public String editEvent(@RequestParam("id") long idEvent) {
             Event event = eventRep.findOne(idEvent);
-
-            map.put("event", event);
-            eventRep.delete(idEvent);
-            return "eventUpdate";
-
-
+            
+            return "redirect:/eventUpdate";
         
     }
     
-        
-
                 
     @RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
         public String updateEvent(Model m, @Valid EventViewModel event) {
@@ -112,5 +106,4 @@ public class EventController {
     }  **/ 
 
         
-
 }
