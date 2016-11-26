@@ -3,6 +3,7 @@ package com.socialNetwork.controllers;
 import com.socialNetwork.model.Actuality;
 import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.ActualityRepository;
+import com.socialNetwork.utils.AuthentificationTools;
 import com.socialNetwork.viewmodel.ActualityViewModel;
 import javassist.NotFoundException;
 import javax.inject.Inject;
@@ -54,11 +55,8 @@ public class ActualityController {
      */
     @RequestMapping(value = "/addactuality", method = RequestMethod.POST)
     public String addActuality(Model m, @Valid ActualityViewModel actuality) {
-        
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CurrentUser u = (CurrentUser) auth.getPrincipal();
 
-        Actuality newActuality = actuality.parse(u.getUser());
+        Actuality newActuality = actuality.parse(AuthentificationTools.getCurrentUser());
         actualityRep.save(newActuality);
         
         return "redirect:/actualities";

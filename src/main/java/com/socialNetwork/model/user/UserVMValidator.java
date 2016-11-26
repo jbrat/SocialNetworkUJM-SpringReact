@@ -33,7 +33,7 @@ public class UserVMValidator {
 
     private void validateEmail() throws EmailAlreadyExistException {
         try {
-            if (userRepo.findOneByMail(userVM.getEmail()).get() instanceof User) {
+            if (userRepo.findOneByEmail(userVM.getEmail()).get() instanceof User) {
                 throw new EmailAlreadyExistException("The email which you entered had been already used");
             }
         }catch(NoSuchElementException e) {

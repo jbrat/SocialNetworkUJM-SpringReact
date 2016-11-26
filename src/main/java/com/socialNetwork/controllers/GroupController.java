@@ -3,6 +3,7 @@ package com.socialNetwork.controllers;
 import com.socialNetwork.model.FriendsGroup;
 import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.FriendsGroupRepository;
+import com.socialNetwork.utils.AuthentificationTools;
 import com.socialNetwork.viewmodel.FriendsGroupViewModel;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -52,11 +53,8 @@ public class GroupController {
      */
     @RequestMapping(value = "/addgroup", method = RequestMethod.POST)
     public String addGroup(Model m, @Valid FriendsGroupViewModel group) {
-  
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CurrentUser u = (CurrentUser) auth.getPrincipal();
-        
-        FriendsGroup newGroup = group.parse(u.getUser());
+
+        FriendsGroup newGroup = group.parse(AuthentificationTools.getCurrentUser());
         groupRep.save(newGroup);
             
         return "redirect:/groups";

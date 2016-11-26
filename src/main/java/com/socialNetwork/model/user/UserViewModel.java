@@ -19,10 +19,12 @@ public class UserViewModel {
     private String firstName = "";
     @NotEmpty
     private String email = "";
-    @NotEmpty
+
     private String password = "";
-    @NotEmpty
+
     private String passwordRepeated = "";
+
+    
     @NotNull
     private UserRole role = UserRole.USER;
 
@@ -81,8 +83,22 @@ public class UserViewModel {
     public void setRole(UserRole role) {
         this.role = role;
     }
-    
+
     public User parse() {
         return new User(lastName, firstName, login, new BCryptPasswordEncoder().encode(password), email);
+    }
+    
+    public User update(User u) {
+        if(!getEmail().equals(u.getEmail())) {
+            u.setEmail(getEmail());
+        } else if(!getLastName().equals(u.getLastName())) {
+            u.setLastName(getLastName());
+        } else if(!getFirstName().equals(u.getFirstName())) {
+            u.setFirstName(getFirstName());
+        } else if(!getLogin().equals(u.getLogin())) {
+            u.setLogin(getLogin());
+        }
+        
+        return u;
     }
 }

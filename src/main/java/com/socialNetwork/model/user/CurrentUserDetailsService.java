@@ -14,7 +14,7 @@ public class CurrentUserDetailsService implements UserDetailsService {
     
     @Override
     public CurrentUser loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepo.findOneByMail(email)
+        User user = userRepo.findOneByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("User with email=%s was not found", email)));
         return new CurrentUser(user);
     }

@@ -2,15 +2,13 @@
 <html>
     <head lang="en" th:replace="fragments/header :: header"/>
     <body>
-        
         <!-- Header -->
         <header id="top" class="header">
             <div class="text-vertical-center">
-                <h1>Registrer to UJM social Network</h1>
+                <h1>Update your profil to UJM social Network</h1>
             </div>
         </header>
-        
-        <form method="post" th:action="@{/register}" th:object="${user}">
+        <form method="post" th:action="@{/updateProfil}" th:object="${user}">
         <table class="table table-hover">
             <tr>
                 <td>
@@ -44,34 +42,15 @@
                     <input type="text" th:field="*{login}"  placeholder="Login..."/>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <label>Password : </label>
-                </td>
-                <td>
-                    <input type="password" th:field="*{password}"  placeholder="Password..."/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Confirm password :</label>
-                </td>
-                <td>
-                    <input type="password" th:field="*{passwordRepeated}"  placeholder="Password Repeated..."/>
-                </td>
-            </tr>
             <span th:if="${error}" th:text="${error}" style="color:red;"></span>
             </table>
 
             <button type="reset" class="btn btn-primary">Reset</button>
-            <button type="submit" class="btn btn-success btnright">Submit</button>
-           
+            <button type="submit" class="btn btn-success btnright">Submit</button>        
              
         </form>
-        
         <br/><br/>
-        <a th:href="@{/}"><button type="submit" class="btn btn-danger">Connect with facebook</button></a>
-        <a th:href="@{/login}"><button type="submit" class="btn btn-danger">Go back to Connect</button></a>  
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   
 </html>
+

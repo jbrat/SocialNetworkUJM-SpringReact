@@ -4,6 +4,7 @@ import com.socialNetwork.model.Actuality;
 import com.socialNetwork.model.Event;
 import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.EventRepository;
+import com.socialNetwork.utils.AuthentificationTools;
 import com.socialNetwork.viewmodel.EventViewModel;
 import java.util.Map;
 import javax.inject.Inject;
@@ -55,12 +56,8 @@ public class EventController {
      */
     @RequestMapping(value = "/addevent", method = RequestMethod.POST)
     public String addEvent(Model m, @Valid EventViewModel event) {
-  
-                
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CurrentUser u = (CurrentUser) auth.getPrincipal();
-        
-        Event newEvent = event.parse(u.getUser());
+
+        Event newEvent = event.parse(AuthentificationTools.getCurrentUser());
         eventRep.save(newEvent);
         
         return "redirect:/events";
