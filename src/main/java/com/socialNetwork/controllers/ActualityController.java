@@ -4,6 +4,7 @@ import com.socialNetwork.model.Actuality;
 import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.ActualityRepository;
 import com.socialNetwork.viewmodel.ActualityViewModel;
+import javassist.NotFoundException;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.security.core.Authentication;
@@ -63,18 +64,20 @@ public class ActualityController {
         return "redirect:/actualities";
     }
     
-    /**@RequestMapping("/deleteactuality/{idActuality}")
-    public String deleteActuality(@PathVariable int idActuality) {
-        
-        return "redirect:/actualities";
-    }**/
-    
     @RequestMapping(value="/deleteActuality")
     public String deleteEvent(@RequestParam("id") long idActuality) {
-      
+
+        Actuality actu = actualityRep.findOne(idActuality);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CurrentUser u = (CurrentUser) auth.getPrincipal();
+        
+        if(!u.getId().equals(actu.getPerson().getIdUser())) {
+            return "redirect:/";
+        }
+       
         actualityRep.delete(idActuality);
         
-            return "redirect:/actualities";
+        return "redirect:/actualities";
         
     }
     

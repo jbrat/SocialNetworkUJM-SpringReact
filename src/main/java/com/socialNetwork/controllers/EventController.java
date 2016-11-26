@@ -1,5 +1,6 @@
 package com.socialNetwork.controllers;
 
+import com.socialNetwork.model.Actuality;
 import com.socialNetwork.model.Event;
 import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.EventRepository;
@@ -64,18 +65,20 @@ public class EventController {
         return "redirect:/events";
     }
     
-    /** @RequestMapping("/deleteevents/{idEvent}")
-    public String deleteEvent(@PathVariable int idEvent) {
-        
-        return "redirect:/events";
-    }**/
-    
      @RequestMapping(value="/deleteEvent")
     public String deleteEvent(@RequestParam("id") long idEvent) {
       
-      //userRepo.findOne(idUser);
+        Event actu = eventRep.findOne(idEvent);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CurrentUser u = (CurrentUser) auth.getPrincipal();
+        
+        if(!u.getId().equals(actu.getOwner().getIdUser())) {
+            return "redirect:/";
+        }
+        
         eventRep.delete(idEvent);
-            return "redirect:/events";
+        
+        return "redirect:/events";
         
     }
     @RequestMapping("/updateevents/{idEvent}")
