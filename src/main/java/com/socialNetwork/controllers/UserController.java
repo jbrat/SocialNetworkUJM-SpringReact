@@ -7,6 +7,9 @@ import com.socialNetwork.model.user.User;
 import com.socialNetwork.model.user.UserVMValidator;
 import com.socialNetwork.model.user.UserViewModel;
 import com.socialNetwork.repository.UserRepository;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.security.core.Authentication;
@@ -17,6 +20,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Controller to manage the users
@@ -90,5 +95,37 @@ public class UserController {
     public String updateProfil(@PathVariable int idUser) {
         
         return "redirect:/profil";
+    }
+    
+    /**
+     * Method to have the current login User in JSON
+     * 
+     * @return User format JSON
+     */
+    @RequestMapping(value="/getCurrentUser", method = RequestMethod.GET)
+    public @ResponseBody User getCurrentUser() {
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CurrentUser u = (CurrentUser) auth.getPrincipal();
+        
+        return u.getUser();    
+    }
+    
+    /**
+     * Method for autocompletes, users
+     * 
+     * @return HashMap idUser nameUser format JSON
+     */
+    @RequestMapping(value="/autocomplete/users", method = RequestMethod.GET)
+    public @ResponseBody List<String> autocompleteUsers(@RequestParam("query") String userName) {
+        List<String> listUsers = new ArrayList<String>();
+
+        for(User u : userRepo.findAll()) {
+            listUsers.add(u.getFirstName() + u.getLastName());
+        }
+
+        
+        return null;
+        
     }
 }

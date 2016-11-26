@@ -2,9 +2,7 @@ package com.socialNetwork.viewmodel;
 
 import com.socialNetwork.model.FriendsGroup;
 import com.socialNetwork.model.user.User;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -18,22 +16,11 @@ public class FriendsGroupViewModel {
     @NotNull
     private String name;
     
-    @NotNull
-    private String owner;
-    
     /**
      * List of the participants in the group
      */
     //@OneToMany
-    private ArrayList<User> groupPeoples = new ArrayList<User>();
-    
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
+    private String users;
     
     public String getName() {
         return name;
@@ -42,29 +29,26 @@ public class FriendsGroupViewModel {
     public void setName(String name) {
         this.name = name;
     }
-    
-    public void addPeople(User p) {
-        groupPeoples.add(p);
+
+    public String getUsers() {
+        return users;
     }
-    
-    public boolean removePeople(User p) {
-        return groupPeoples.remove(p);
+
+    public void setUsers(String users) {
+        this.users = users;
     }
-    
-    public ArrayList<User> getPeoples() {
-        return groupPeoples;
-    }
+
     
     /**
      * Method to convert FriendsGroupViewModel into the Group model
      * 
      * @return Group
      */
-    public FriendsGroup parse() {
+    public FriendsGroup parse(User u) {
         
-        FriendsGroup group = new FriendsGroup(this.getOwner(), 
+        FriendsGroup group = new FriendsGroup(u, 
                 this.getName(),
-                this.getPeoples()
+                null
         );
         return group;
     }

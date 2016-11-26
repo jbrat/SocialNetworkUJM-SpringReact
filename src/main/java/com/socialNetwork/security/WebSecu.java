@@ -1,4 +1,5 @@
 package com.socialNetwork.security;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,14 +19,12 @@ public class WebSecu extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-              
-            .antMatchers("/", "/js/**", "/lib/**", "/images/**", "/fonts/**", "/css/**").permitAll()
+        http
+            .authorizeRequests()       
+            .antMatchers("/", "/facebook","/js/**", "/lib/**", "/images/**", "/fonts/**", "/css/**").permitAll()
             .antMatchers(HttpMethod.GET, "/register").permitAll()
             .antMatchers(HttpMethod.POST, "/register").permitAll()
-            .antMatchers("/**").hasAuthority("USER")
-            .antMatchers("/users/**").hasAuthority("ADMIN")
-            .anyRequest().fullyAuthenticated()
+            .antMatchers("/**").hasAnyAuthority("USER")
             .and()
             .formLogin()
             .loginPage("/login")
@@ -49,6 +48,4 @@ public class WebSecu extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService)
             .passwordEncoder(new BCryptPasswordEncoder());
     }
-
-
 }

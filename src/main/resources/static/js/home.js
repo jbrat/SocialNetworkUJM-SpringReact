@@ -78,7 +78,7 @@ $('.map').on('click', onMapClickHandler);
 /**
  * Footer Img for mail
  */
-$('.imgFooterMail').click(() => {
+$('.imgFooterMail').bind('click',() => {
     $('.imgFooterMail').text("ujmstudent@gmail.com");
     $('.imgFooterMail').attr('href', 'mailto:ujmstudent@gmail.com');
 });
@@ -90,4 +90,30 @@ $('.imgFooterMail').click(() => {
 $('#datetimepicker').datetimepicker({
     format: 'dd/MM/yyyy hh:mm:ss',
     language: 'fr'
+});
+
+/** 
+ * Autocomplete Users for Group
+ */
+$("#autocompleteUsers").autocomplete({
+    source: function (request, response) {
+        jQuery.get("/autocomplete/users", {
+            query: request.term
+        }, function (data) {
+            response(data);
+        });
+    },
+    minLength: 3
+});
+
+$('#addUser').bind('click', () => {
+    var user = $('autocompleteUsers').val();
+    
+    var users = $('users').val();
+    if(users === "") {
+        $('users').val(user);
+    } else {
+        $('users').val(users + ";" + user);
+    }
+    
 });

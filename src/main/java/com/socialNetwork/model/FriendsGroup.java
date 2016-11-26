@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -32,7 +33,8 @@ public class FriendsGroup implements Serializable {
     private String name;
     
     @NotNull
-    private String owner;
+    @OneToOne
+    private User owner;
     
     /**
      * List of the participants in the group
@@ -46,7 +48,7 @@ public class FriendsGroup implements Serializable {
         this.name = name;
     }
     
-    public FriendsGroup(String owner, String name, ArrayList<User> groupPeoples) {
+    public FriendsGroup(User owner, String name, ArrayList<User> groupPeoples) {
         this.owner = owner;
         this.name = name;
         this.groupPeoples = groupPeoples;
@@ -60,11 +62,11 @@ public class FriendsGroup implements Serializable {
         this.idGroup = idGroupe;
     }
 
-    public String getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
     
@@ -87,5 +89,4 @@ public class FriendsGroup implements Serializable {
     public ArrayList<User> getPeoples() {
         return groupPeoples;
     }
-
 }
