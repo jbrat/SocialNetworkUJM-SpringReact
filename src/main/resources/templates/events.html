@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head lang="en" th:replace="fragments/header :: header" />
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" />
     <body>
          <!-- Navigation -->
         <a id="menu-toggle" th:href="@{#}" class="btn btn-dark btn-lg toggle">
@@ -52,8 +53,6 @@
             </table>
             <hr />
             
-
-            <h2>Add Events</h2>
             <form method="post" th:action="@{/addevent}" th:object="${event}">
                 <div class="input-group input-group-lg" style="position:absolute;">
                     <span class="input-group-addon" id="sizing-addon1"><img src="images/logo_events.png"/></span>
@@ -71,8 +70,10 @@
                     <button type="reset" class="btn btn-primary">Reset</button>
                     <button type="submit" class="btn btn-success btnright">Submit</button>
                 </div>
-            </form>
-        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" />
+            </form>      
+            <br/>
+            <br/>
+            <br/>
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   
 </html>

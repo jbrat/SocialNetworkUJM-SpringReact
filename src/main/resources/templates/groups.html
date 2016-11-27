@@ -41,12 +41,12 @@
                     <td th:text="${group.name}"></td>
                     <td><a th:href="@{'/updategroup?id=' + ${group.idGroup}}"><button type="submit" class="btn btn-info">Update</button></a></td>
                     <!--td><a th:href="@{'/deletegroup?id=' + ${group.idGroup}}"><button type="submit" class="btn btn-danger">Delete</button></a></td-->
-                    <td><a th:href="@{'/deleteGroup?id='+ ${FriendsGroup.idGroup}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
+                    <td><a th:href="@{'/deleteGroup?id='+ ${group.idGroup}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
                 </tr>
                 </tbody>
             </table>
             <hr />
-            <h2>Add Groups</h2>
+            <h2 class="noreact">Add Groups</h2>
             <form method="post" th:action="@{/addgroup}" th:object="${group}">
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon" id="sizing-addon1"><img src="images/logo_groups.png"/></span>

@@ -37,4 +37,25 @@ tr:nth-child(even) {
     margin-right: 90px;
 }
 
+.noreact {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    background-color: lightseagreen;
+    text-align: center;
+    color: white;
+}
+
+.noreact {
+    box-shadow: 6px 6px 6px salmon;
+    margin-left: 100px;
+    transition: box-shadow 1s,margin-right 1s;
+}
+
+.noreact:hover {
+    box-shadow: 3px 3px 3px lightseagreen;
+   /* transition: box-shadow 1s;*/
+    margin-right: 90px;
+}
+
 

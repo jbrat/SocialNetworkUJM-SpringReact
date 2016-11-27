@@ -67,7 +67,9 @@ var libraries = [
 
 ];
 
-
+var json = '{"result":true,"email":1}',
+user = JSON.parse(json);
+alert(user.email);
 
 class MessageNew extends React.Component {
   render() {
@@ -88,7 +90,7 @@ class MessageNew extends React.Component {
         <form method="post" action="/messages" className="w3-container">
           <p>
           <label className="w3-label w3-text-brown"><b>Receiver</b></label>
-          <input className="w3-input w3-border w3-sand" ref="receiverInput" type="text"/>
+          <input className="w3-input w3-border w3-sand" ref="receiverInput" type="email"/>
           </p>
           <p>
           <label className="w3-label w3-text-brown"><b>Message</b></label>
@@ -114,7 +116,17 @@ class MessApp extends React.Component {
       ]
     };
   }
+  getInitialState(){
+      return { searchString: '' };
+  }
+  handleChange(e){
 
+      // If you comment out this line, the text box will not change its value.
+      // This is because in React, an input cannot change independently of the value
+      // that was assigned to it. In our case this is this.state.searchString.
+
+      this.setState({searchString:e.target.value});
+  }
   loadData(){
     superagent
       .get('/api/messages') // not HATEOS :(
@@ -161,10 +173,11 @@ class MessApp extends React.Component {
       </td>
       </tr>
       )));
-
     return (
       <div>
       <h1 className="react w3-brown">Welcome to the {this.props.title} of UJM</h1>
+      <hr/>
+      <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search ..." />
       <hr/>
       <table className="table table-hover">
         <thead>

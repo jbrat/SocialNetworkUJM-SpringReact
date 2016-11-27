@@ -82,11 +82,28 @@ public class EventController {
             return "redirect:/eventUpdate";
         
     }
+    
+                
+    @RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
+        public String updateEvent(Model m, @Valid EventViewModel event) {
         
-    @RequestMapping(value="/updateEvent/", method = RequestMethod.POST)
-    public String updateEvent(Event event) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CurrentUser u = (CurrentUser) auth.getPrincipal();
+        
+        Event newEvent = event.parse(u.getUser());
+        eventRep.save(newEvent);
+            
+            return "redirect:/events";
+            }
+        
+    /**@RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
+        public String updateEvent(@RequestParam("id") long idEvent) {
+            Event event = eventRep.findOne(idEvent);
             eventRep.save(event);
             
-            return "redirect:/event";  
-    }
+            return "redirect:/events";
+        
+    }  **/ 
+
+        
 }
