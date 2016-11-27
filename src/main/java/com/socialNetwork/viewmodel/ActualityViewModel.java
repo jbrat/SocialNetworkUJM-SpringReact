@@ -69,7 +69,16 @@ public class ActualityViewModel {
             new Date());
         
             return actuality;
-
+    }
+    
+    public Actuality update(Actuality actu) {
+        if(!actu.getTitle().equals(getTitle())) {
+            actu.setTitle(getTitle());
+        } else if(!actu.getMessage().equals(getMessage())) {
+            actu.setMessage(getMessage());
+        }
+        
+        return actu;
     }
     
 }

@@ -11,7 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,7 +51,7 @@ public class ActualityController {
      * 
      * @return String name of template
      */
-    @RequestMapping(value = "/addactuality", method = RequestMethod.POST)
+    @RequestMapping(value = "/addActuality", method = RequestMethod.POST)
     public String addActuality(Model m, @Valid ActualityViewModel actuality) {
 
         Actuality newActuality = actuality.parse(AuthentificationTools.getCurrentUser());
@@ -61,7 +60,7 @@ public class ActualityController {
         return "redirect:/actualities";
     }
     
-    @RequestMapping(value="/deleteActuality")
+    @RequestMapping(value="/deleteActuality", method = RequestMethod.GET)
     public String deleteEvent(@RequestParam("id") long idActuality) {
 
         Actuality actu = actualityRep.findOne(idActuality);
@@ -75,10 +74,32 @@ public class ActualityController {
         
     }
     
-    
-    @RequestMapping("/updateactuality/{idActuality}")
-    public String updateActuality(@PathVariable int idActuality) {
+    @RequestMapping(value="/updateActuality", method = RequestMethod.GET)
+    public String updateActuality(Model model, @RequestParam Long id) {
         
+        Actuality actuality = actualityRep.findOne(id);
+        System.out.println(actuality.getPerson().getIdUser());
+        System.out.println(AuthentificationTools.getCurrentUserId());
+        if(!actuality.getPerson().getIdUser().equals(AuthentificationTools.getCurrentUserId())) {
+            return "redirect:/actualities";
+        }
+        
+        model.addAttribute("actuality", actuality);
+        
+        return "updateActuality";
+    }
+    
+    @RequestMapping(value="/updateActuality", method = RequestMethod.POST)
+    public String updateActuality(Model model, @Valid ActualityViewModel actuality, @RequestParam Long idActuality) {
+        
+        Actuality actualityUpdate = actualityRep.findOne(idActuality);
+        if(!actualityUpdate.getPerson().getIdUser().equals(AuthentificationTools.getCurrentUserId())) {
+            return "redirect:/actualities";
+        }
+        
+        actualityRep.save(actuality.update(actualityUpdate));
+
         return "redirect:/actualities";
     }
+    
 }

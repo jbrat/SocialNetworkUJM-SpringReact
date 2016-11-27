@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en" th:replace="fragments/header :: header" />
+    <body>
+        <!-- Navigation -->
+        <a id="menu-toggle" th:href="@{#}" class="btn btn-dark btn-lg toggle">
+            <i class="fa fa-bars"></i>
+        </a>
+       
+        <nav lang="en" th:replace="fragments/sidebar :: sidebar"/>
+            
+        <!-- Header -->        
+        <header id="top" class="header">         
+            <div class="text-vertical-center">
+                <h1>Actualities</h1>
+                </div>
+        </header>
+            <h2 class="noreact">Update Actuality</h2>
+            <hr />
+            <form method="post" th:action="@{/updateActuality}" th:object="${actuality}">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon1"><img th:src="@{images/logo_actualities.png}" /></span>
+                    <input type="hidden" th:field="*{idActuality}"/>
+                    <input type="text" class="form-control" th:field="*{title}" aria-describedby="sizing-addon1" placeholder="Title..."/>  
+                    <input type="text" class="form-control" th:field="*{message}" aria-describedby="sizing-addon1" placeholder="Message..."/>
+                </div>
+                <br/>
+                <button type="reset" class="btn btn-primary">Reset</button>
+                <button type="submit" class="btn btn-success btnright">Submit</button>
+            </form>
+        <div lang="en" th:replace="fragments/footer :: footer"/>
+    </body>
+</html>
+

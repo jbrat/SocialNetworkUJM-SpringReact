@@ -49,12 +49,12 @@
                     <td th:text="${actuality.date}"></td>
 
                     <td>
-                        <a th:href="@{'/updateactuality?id=' + ${actuality.idActuality}}">
+                        <a th:href="@{'/updateActuality?id=' + ${actuality.idActuality}}">
                             <button type="submit" class="btn btn-info">Update</button>
                         </a>
                     </td>
                     <td>
-                        <a th:href="@{'/deleteactuality?id=' + ${actuality.idActuality}}">
+                        <a th:href="@{'/deleteActuality?id=' + ${actuality.idActuality}}">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </a>
                     </td>
@@ -64,7 +64,7 @@
             <hr />
             <h2 class="noreact">Add Actuality</h2>
             <hr/>
-            <form method="post" th:action="@{/addactuality}" th:object="${actuality}">
+            <form method="post" th:action="@{/addActuality}" th:object="${actuality}">
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon" id="sizing-addon1"><img src="images/logo_actualities.png"/></span>
                     <input type="text" class="form-control" th:field="*{title}" aria-describedby="sizing-addon1" placeholder="Title..."/>  
