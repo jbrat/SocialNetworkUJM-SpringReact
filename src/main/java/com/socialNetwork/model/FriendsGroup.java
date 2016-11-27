@@ -24,7 +24,7 @@ public class FriendsGroup implements Serializable {
     @Id
     @NotNull
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long idGroup;
+    private Long idGroup;
     
     /**
      * Name of the group
@@ -58,7 +58,7 @@ public class FriendsGroup implements Serializable {
         return idGroup;
     }
     
-    public void setIdGroup(int idGroupe) {
+    public void setIdGroup(Long idGroupe) {
         this.idGroup = idGroupe;
     }
 

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Controller to manage the groups
@@ -51,7 +52,7 @@ public class GroupController {
      * 
      * @return String name of template
      */
-    @RequestMapping(value = "/addgroup", method = RequestMethod.POST)
+    @RequestMapping(value = "/addGroup", method = RequestMethod.POST)
     public String addGroup(Model m, @Valid FriendsGroupViewModel group) {
 
         FriendsGroup newGroup = group.parse(AuthentificationTools.getCurrentUser());
@@ -60,15 +61,43 @@ public class GroupController {
         return "redirect:/groups";
     }
     
-    @RequestMapping("/deletegroup/{idGroup}")
-    public String deleteGroup(@PathVariable int idGroup) {
+    @RequestMapping("/deleteGroup")
+    public String deleteGroup(@RequestParam Long id) {
+        
+        FriendsGroup group = groupRep.findOne(id);
+        if(!group.getOwner().getIdUser().equals(AuthentificationTools.getCurrentUserId())) {
+            return "redirect:/groups";
+        }
+        
+        groupRep.delete(group);
         
         return "redirect:/groups";
     }
     
-    @RequestMapping("/updategroup/{idGroup}")
-    public String updateGroup(@PathVariable int idGroup) {
+    @RequestMapping("/updateGroup")
+    public String updateGroup(Model model, @RequestParam Long id) {
+        
+        FriendsGroup group = groupRep.findOne(id);
+        if(!group.getOwner().getIdUser().equals(AuthentificationTools.getCurrentUserId())) {
+            return "redirect:/groups";
+        }
+        
+        model.addAttribute("group", new FriendsGroupViewModel(group));
+        
+        return "updateGroup";
+    }
+    
+    @RequestMapping(value="/updateGroup", method = RequestMethod.POST)
+    public String updateGroupPost(Model model, @RequestParam Long idGroup, @Valid FriendsGroupViewModel groupVM) {
+        
+        FriendsGroup group = groupRep.findOne(idGroup);
+        if(!group.getOwner().getIdUser().equals(AuthentificationTools.getCurrentUserId())) {
+            return "redirect:/groups";
+        }
+        
+        groupRep.save(groupVM.update(group));
         
         return "redirect:/groups";
+       
     }
 }

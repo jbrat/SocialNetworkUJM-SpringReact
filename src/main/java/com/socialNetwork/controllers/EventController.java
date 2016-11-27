@@ -77,7 +77,7 @@ public class EventController {
     }
     
     @RequestMapping(value="/updateEvent", method = RequestMethod.GET)
-    public String editEvent(Model model, @RequestParam("id") long idEvent) {
+    public String updateEvent(Model model, @RequestParam("id") long idEvent) {
 
         Event event = eventRep.findOne(idEvent);
         if(!event.getOwner().getIdUser().equals(AuthentificationTools.getCurrentUserId())) {
@@ -90,7 +90,7 @@ public class EventController {
     }
                   
     @RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
-    public String updateEvent(Model m, @Valid EventViewModel event, @RequestParam("idEvent") long idEvent) {
+    public String updateEventPost(Model m, @Valid EventViewModel event, @RequestParam("idEvent") long idEvent) {
             
         Event updateEvent = eventRep.findOne(idEvent);
         if(!updateEvent.getOwner().getIdUser().equals(AuthentificationTools.getCurrentUserId())) {

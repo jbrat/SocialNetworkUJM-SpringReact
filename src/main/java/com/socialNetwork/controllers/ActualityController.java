@@ -90,7 +90,7 @@ public class ActualityController {
     }
     
     @RequestMapping(value="/updateActuality", method = RequestMethod.POST)
-    public String updateActuality(Model model, @Valid ActualityViewModel actuality, @RequestParam Long idActuality) {
+    public String updateActualityPost(Model model, @Valid ActualityViewModel actuality, @RequestParam Long idActuality) {
         
         Actuality actualityUpdate = actualityRep.findOne(idActuality);
         if(!actualityUpdate.getPerson().getIdUser().equals(AuthentificationTools.getCurrentUserId())) {
