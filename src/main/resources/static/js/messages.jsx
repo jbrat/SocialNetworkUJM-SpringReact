@@ -1,23 +1,15 @@
-//var json = '{"result":true,"email":1}',
-//user = JSON.parse(json);
-//alert(user.email);
-var i = 1;
-function test(){
-  i = 2;
-}
-test();
-alert(i);
-var user="";
-function load(){
+function load() {
   superagent
     .get('/getCurrentUser') // not HATEOS :(
-    .end( function(e, res) {
-      user = JSON.parse(res.body);
-      done()
+    .end( function(e, res) 
+        var user = res.body;
+        alert(user.firstName);
+        done()
     })
 }
 load();
-alert(user.email);
+
+
 class MessageNew extends React.Component {
   render() {
     var addMess = event => {
