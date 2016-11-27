@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" />
     <head lang="en" th:replace="fragments/header :: header" />
     <body>
          <!-- Navigation -->
@@ -16,19 +17,26 @@
                 </div>
             </header>
             <h2 th:text=" 'Update Event:' + ' ' + ${event.idEvent}"></h2>
-            <!--form method="post" th:action="@{/updateEvent}" th:object="${event}"-->
-            <form method="post" th:action="@{'/updateEvent?id=' + ${event.idEvent}}" th:object="${event}">
+
+            <form method="post" th:action="@{'/updateEvent'}" th:object="${event}">
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon" id="sizing-addon1"><img src="images/logo_events.png"/></span>
-                    <input type="text" class="form-control" th:field="*{owner}" aria-describedby="sizing-addon1" placeholder="Owner..."/>
+                    <input type="hidden" th:field="*{idEvent}"/>
                     <input type="text" class="form-control" th:field="*{name}" aria-describedby="sizing-addon1" placeholder="Name..."/>  
                     <input type="text" class="form-control" th:field="*{description}" aria-describedby="sizing-addon1" placeholder="Description..."/>
-                    <input type="date" class="form-control" th:field="*{date}" aria-describedby="sizing-addon1" placeholder="DD/MM/YYYY..."/>
+                    <span class="input-append" id="datetimepicker">
+                        <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text" th:field="*{date}"/><br />
+                        <span class="add-on">
+                            <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar">
+                            </i>
+                        </span>
+                    </span>
                 </div>
                 <br />
                 <input type="reset" value="Reset" class="btn btn-primary"/>
                 <input type="submit" value="Submit" class="btn btn-success btnright"/>
             </form>
+            <span th:if="${error}" th:text="${error}"/>
         <div lang="en" th:replace="fragments/footer :: footer"/>
     </body>   
 </html>

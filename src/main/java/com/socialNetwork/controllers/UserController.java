@@ -113,7 +113,8 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
            CurrentUser u = (CurrentUser) auth.getPrincipal();
-           model.addAttribute("user", u.getUser());    
+           model.addAttribute("user", u.getUser());   
+           
            return "updatePassword";
         } else {
            return "redirect:/login";
@@ -124,7 +125,7 @@ public class UserController {
     public String updatePassword(Model model, @RequestParam String password, @RequestParam String passwordRepeated) {
   
         if(!password.equals(passwordRepeated)) {
-            model.addAttribute("error", "The two password isn't similar");
+            model.addAttribute("error", "The two passwords isn't similar");
             return "updatePassword";
         }
         

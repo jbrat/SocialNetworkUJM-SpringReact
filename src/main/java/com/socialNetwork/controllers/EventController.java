@@ -5,6 +5,7 @@ import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.EventRepository;
 import com.socialNetwork.utils.AuthentificationTools;
 import com.socialNetwork.viewmodel.EventViewModel;
+import javassist.NotFoundException;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.security.core.Authentication;
@@ -75,35 +76,29 @@ public class EventController {
   
     }
     
-    @RequestMapping(value="/editEvent")
-    public String editEvent(@RequestParam("id") long idEvent) {
-            Event event = eventRep.findOne(idEvent);
-            
-            return "redirect:/eventUpdate";
-        
-    }
-    
-                
-    @RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
-        public String updateEvent(Model m, @Valid EventViewModel event) {
-        
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CurrentUser u = (CurrentUser) auth.getPrincipal();
-        
-        Event newEvent = event.parse(u.getUser());
-        eventRep.save(newEvent);
-            
-            return "redirect:/events";
-            }
-        
-    /**@RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
-        public String updateEvent(@RequestParam("id") long idEvent) {
-            Event event = eventRep.findOne(idEvent);
-            eventRep.save(event);
-            
-            return "redirect:/events";
-        
-    }  **/ 
+    @RequestMapping(value="/updateEvent", method = RequestMethod.GET)
+    public String editEvent(Model model, @RequestParam("id") long idEvent) {
 
+        Event event = eventRep.findOne(idEvent);
+        if(!event.getOwner().getIdUser().equals(AuthentificationTools.getCurrentUserId())) {
+            return "redirect:/events";
+        }
         
+        model.addAttribute("event", event);
+
+        return "updateEvent"; 
+    }
+                  
+    @RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
+    public String updateEvent(Model m, @Valid EventViewModel event, @RequestParam("idEvent") long idEvent) {
+            
+        Event updateEvent = eventRep.findOne(idEvent);
+        if(!updateEvent.getOwner().getIdUser().equals(AuthentificationTools.getCurrentUserId())) {
+            return "redirect:/events";
+        }
+        
+        eventRep.save(event.update(updateEvent));
+            
+        return "redirect:/events";
+    }  
 }

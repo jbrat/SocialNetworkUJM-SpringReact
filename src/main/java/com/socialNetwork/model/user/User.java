@@ -28,7 +28,7 @@ public class User implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idUser;
+    private Long idUser;
    
     /**
      * login for the Person
@@ -85,7 +85,7 @@ public class User implements Serializable {
         this.role = UserRole.USER;
     }
 
-    public long getIdUser() {
+    public Long getIdUser() {
         return idUser;
     }
     

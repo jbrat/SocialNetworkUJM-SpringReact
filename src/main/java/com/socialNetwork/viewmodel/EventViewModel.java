@@ -84,4 +84,23 @@ public class EventViewModel {
                 new Date());
         }
     }
+    
+    public Event update(Event e) {
+        if(!e.getName().equals(getName())) {
+            e.setName(getName());
+        } else if (!e.getDescription().equals(getDescription())){
+            e.setDescription(getDescription());
+        }
+        
+        try {
+            if (!e.getDate().equals(DateOperation.shortFormat(getDate()))) {
+                e.setDate(new Date(getDate()));
+            } 
+        } catch(ParseException ex) {
+            return e;
+        }
+        
+        return e;
+    }
+    
 }
