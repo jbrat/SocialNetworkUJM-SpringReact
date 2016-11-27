@@ -10,6 +10,7 @@ import com.socialNetwork.repository.UserRepository;
 import com.socialNetwork.utils.AuthentificationTools;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.security.core.Authentication;
@@ -170,8 +171,11 @@ public class UserController {
         List<String> listUsers = new ArrayList<String>();
 
         for(User u : userRepo.findAll()) {
-            listUsers.add(u.getFirstName() + u.getLastName());
+            listUsers.add(u.getFirstName() + " " + u.getLastName());
         }        
-        return null;      
+        
+        List<String> result = listUsers.stream().filter(t -> t.contains(userName)).collect(Collectors.toList());
+        
+        return result;      
     }
 }

@@ -2,16 +2,18 @@ package com.socialNetwork.controllers;
 
 import com.socialNetwork.model.FriendsGroup;
 import com.socialNetwork.model.user.CurrentUser;
+import com.socialNetwork.model.user.User;
 import com.socialNetwork.repository.FriendsGroupRepository;
+import com.socialNetwork.repository.UserRepository;
 import com.socialNetwork.utils.AuthentificationTools;
 import com.socialNetwork.viewmodel.FriendsGroupViewModel;
+import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,16 +26,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class GroupController {
     @Inject
-    public FriendsGroupRepository groupRep;
+    private FriendsGroupRepository groupRep;
+        
+    @Inject
+    private UserRepository userRep;
+    
     
     /**
      * Method to join the groups page
      * 
      * @return String name of template
      */
-     @RequestMapping("/groups") 
-    public String home(
-            Model model,FriendsGroupViewModel group) {
+    @RequestMapping("/groups") 
+    public String home( Model model, FriendsGroupViewModel group) {
         model.addAttribute("group", group);
         
         model.addAttribute("groups", groupRep.findAll());
@@ -55,9 +60,10 @@ public class GroupController {
     @RequestMapping(value = "/addGroup", method = RequestMethod.POST)
     public String addGroup(Model m, @Valid FriendsGroupViewModel group) {
 
-        FriendsGroup newGroup = group.parse(AuthentificationTools.getCurrentUser());
-        groupRep.save(newGroup);
-            
+        FriendsGroup newGroup = group.parse(AuthentificationTools.getCurrentUser(), (List<User>) userRep.findAll());
+      ;
+        groupRep.save(newGroup);  
+        
         return "redirect:/groups";
     }
     

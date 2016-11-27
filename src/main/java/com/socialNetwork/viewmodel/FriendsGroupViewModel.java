@@ -2,6 +2,10 @@ package com.socialNetwork.viewmodel;
 
 import com.socialNetwork.model.FriendsGroup;
 import com.socialNetwork.model.user.User;
+import com.socialNetwork.repository.UserRepository;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -9,6 +13,10 @@ import javax.validation.constraints.NotNull;
  * @author kevin
  */
 public class FriendsGroupViewModel {
+    
+    @Inject 
+    private UserRepository userRep;
+    
     /**
      * Name of the group
      */
@@ -70,12 +78,14 @@ public class FriendsGroupViewModel {
      * 
      * @return Group
      */
-    public FriendsGroup parse(User u) {
-        
+    public FriendsGroup parse(User u, List<User> users) {
+
         FriendsGroup group = new FriendsGroup(u, 
-                this.getName(),
-                null
+            getName(),
+            getPeoples(getListUsers(), users)
         );
+
+        System.out.println("TEST"+group.getIdGroup());
         return group;
     }
     
@@ -87,4 +97,26 @@ public class FriendsGroupViewModel {
         return group;
     }
     
+    private ArrayList<User> getPeoples(String listUsersParam, List<User> usersDB) {
+        ArrayList<String> names = new ArrayList<String>();
+        
+        if(listUsersParam.contains(";")) {
+            String[] params = listUsersParam.split(";");
+            for(String param : params) {
+                names.add(param);
+            }
+        } else {
+            names.add(listUsersParam);
+        }
+        
+        ArrayList<User> returnResult = new ArrayList<User>();
+        for(User user : usersDB) {
+            String pattern = user.getFirstName()+ " " + user.getLastName();
+            if(names.contains(pattern)) {
+                returnResult.add(user);
+            }
+        }
+        
+        return returnResult;
+    }
 }

@@ -3,10 +3,13 @@ package com.socialNetwork.model;
 import com.socialNetwork.model.user.User;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -18,11 +21,11 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class FriendsGroup implements Serializable {
     
+    private static final long serialVersionUID = 1L;
     /**
      * Id of the group
      */
     @Id
-    @NotNull
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long idGroup;
     
@@ -39,22 +42,20 @@ public class FriendsGroup implements Serializable {
     /**
      * List of the participants in the group
      */
-    //@OneToMany
-    private ArrayList<User> groupPeoples = new ArrayList<User>();
+    @OneToMany
+    private Set<User> groupPeoples = new HashSet<User>();
     
     public FriendsGroup() {}
-    
-    public FriendsGroup(String name) {
-        this.name = name;
-    }
-    
+
     public FriendsGroup(User owner, String name, ArrayList<User> groupPeoples) {
         this.owner = owner;
         this.name = name;
-        this.groupPeoples = groupPeoples;
+        for(User u : groupPeoples) {
+            this.groupPeoples.add(u);
+        }
     }
     
-    public long getIdGroup() {
+    public Long getIdGroup() {
         return idGroup;
     }
     
@@ -86,7 +87,7 @@ public class FriendsGroup implements Serializable {
         return groupPeoples.remove(p);
     }
     
-    public ArrayList<User> getPeoples() {
+    public Set<User> getPeoples() {
         return groupPeoples;
     }
 }

@@ -107,13 +107,14 @@ $("#autocompleteUsers").autocomplete({
 });
 
 $('#addUser').bind('click', () => {
-    var user = $('autocompleteUsers').val();
+    var user = $('#autocompleteUsers').val();
+    var users = $('#users').val();
     
-    var users = $('users').val();
     if(users === "") {
-        $('users').val(user);
+        $('#users').val(user);
     } else {
-        $('users').val(users + ";" + user);
+        $('#users').val(users + ";" + user);
     }
     
+    $("#autocompleteUsers").val("");
 });
