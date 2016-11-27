@@ -1,3 +1,4 @@
+src/main/resources/application.yml
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -23,4 +24,4 @@ nbdist/
 .nb-gradle/
 
 nbactions.xml
-src/main/resources/application.yml
+
