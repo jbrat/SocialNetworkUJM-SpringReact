@@ -118,3 +118,8 @@ $('#addUser').bind('click', () => {
     
     $("#autocompleteUsers").val("");
 });
+
+
+function myFunction() {
+    location.reload();
+}

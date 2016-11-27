@@ -1,76 +1,23 @@
-// Let's create a "real-time search" component
-
-var SearchExample = React.createClass({
-
-    getInitialState: function(){
-        return { searchString: '' };
-    },
-
-    handleChange: function(e){
-
-        // If you comment out this line, the text box will not change its value.
-        // This is because in React, an input cannot change independently of the value
-        // that was assigned to it. In our case this is this.state.searchString.
-
-        this.setState({searchString:e.target.value});
-    },
-
-    render: function() {
-
-        var libraries = this.props.items,
-            searchString = this.state.searchString.trim().toLowerCase();
-
-
-        if(searchString.length > 0){
-
-            // We are searching. Filter the results.
-
-            libraries = libraries.filter(function(l){
-                return l.name.toLowerCase().match( searchString );
-            });
-
-        }
-
-        return <div>
-                    <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
-
-                    <ul>
-
-                        { libraries.map(function(l){
-                            return <li>{l.name} <a href={l.url}>{l.url}</a></li>
-                        }) }
-
-                    </ul>
-
-                </div>;
-
-    }
-});
-
-
-var libraries = [
-
-    { name: 'Backbone.js', url: 'http://documentcloud.github.io/backbone/'},
-    { name: 'AngularJS', url: 'https://angularjs.org/'},
-    { name: 'jQuery', url: 'http://jquery.com/'},
-    { name: 'Prototype', url: 'http://www.prototypejs.org/'},
-    { name: 'React', url: 'http://facebook.github.io/react/'},
-    { name: 'Ember', url: 'http://emberjs.com/'},
-    { name: 'Knockout.js', url: 'http://knockoutjs.com/'},
-    { name: 'Dojo', url: 'http://dojotoolkit.org/'},
-    { name: 'Mootools', url: 'http://mootools.net/'},
-    { name: 'Underscore', url: 'http://documentcloud.github.io/underscore/'},
-    { name: 'Lodash', url: 'http://lodash.com/'},
-    { name: 'Moment', url: 'http://momentjs.com/'},
-    { name: 'Express', url: 'http://expressjs.com/'},
-    { name: 'Koa', url: 'http://koajs.com/'},
-
-];
-
-var json = '{"result":true,"email":1}',
-user = JSON.parse(json);
+//var json = '{"result":true,"email":1}',
+//user = JSON.parse(json);
+//alert(user.email);
+var i = 1;
+function test(){
+  i = 2;
+}
+test();
+alert(i);
+var user="";
+function load(){
+  superagent
+    .get('/getCurrentUser') // not HATEOS :(
+    .end( function(e, res) {
+      user = JSON.parse(res.body);
+      done()
+    })
+}
+load();
 alert(user.email);
-
 class MessageNew extends React.Component {
   render() {
     var addMess = event => {
@@ -116,17 +63,7 @@ class MessApp extends React.Component {
       ]
     };
   }
-  getInitialState(){
-      return { searchString: '' };
-  }
-  handleChange(e){
 
-      // If you comment out this line, the text box will not change its value.
-      // This is because in React, an input cannot change independently of the value
-      // that was assigned to it. In our case this is this.state.searchString.
-
-      this.setState({searchString:e.target.value});
-  }
   loadData(){
     superagent
       .get('/api/messages') // not HATEOS :(
@@ -137,12 +74,22 @@ class MessApp extends React.Component {
       })
   }
 
+  loadDataUser(){
+    superagent
+      .get('/getCurrentUser') // not HATEOS :(
+      .end( function(e, res) {
+        var user = JSON.parse(res.body);
+        alert(user.email);
+        done()
+      })
+  }
   componentDidMount() {
     this.loadData()
+    this.loadDataUser()
   }
 
   addMessage(receiver, message) {
-    var newMess = {sender : "test", receiver, message, date : new Date()};
+    var newMess = {sender : user.email, receiver, message, date : new Date()};
     superagent
       .post('/api/messages') // not HATEOS :(
       .set('Content-Type', 'application/json')
@@ -176,8 +123,6 @@ class MessApp extends React.Component {
     return (
       <div>
       <h1 className="react w3-brown">Welcome to the {this.props.title} of UJM</h1>
-      <hr/>
-      <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search ..." />
       <hr/>
       <table className="table table-hover">
         <thead>
@@ -216,8 +161,6 @@ class MessApp extends React.Component {
           {SenderReceiverMesssageDate}
         </tbody>
         </table>
-
-
       <hr/>
       <MessageNew onAdd={ this.addMessage.bind(this) }></MessageNew>
       </div>
@@ -228,7 +171,6 @@ class MessApp extends React.Component {
 
 ReactDOM.render(
   <div>
-  <SearchExample items={ libraries } />,
   <MessApp title="Messenger"></MessApp>
   </div>,
   document.getElementById('container')

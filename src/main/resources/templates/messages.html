@@ -16,11 +16,12 @@
                 <p id="welcome"><span th:if="${user}" th:text="'Welcome ' + ${user.lastName} + ' ' + ${user.firstName} + '.'"></span></p>
             </div>
         </header>
-        
+        <button class="btn btn-danger" onclick="myFunction()">Refresh</button>
         <div id="container"><p class="redMessage"> No React reading... Sorry... Maybe reload the page</p></div>
        
         <script type="text/babel" src="js/messages.jsx"></script>
-        
+        <button class="btn btn-danger btnright" onclick="myFunction()">Refresh</button>
+
     </body>
     
     <div lang="en" th:replace="fragments/footermessages :: footermessages"/>

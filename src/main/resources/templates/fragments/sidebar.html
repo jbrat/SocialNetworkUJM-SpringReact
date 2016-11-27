@@ -28,20 +28,20 @@
                <a th:href="@{/information}" onclick="$('#menu-close').click();">Information</a>
             </li>
             <li th:if="${user}">
-               <a th:href="@{/logout}" onclick="$('#menu-close').click();">Disconnect</a>
-            </li>
-            <li>
-               <a href="#contact" onclick="$('#menu-close').click();">Contact</a>
-            </li>
-            <li th:if="${user}">
                <a th:href="@{/updatePassword}" onclick="$('#menu-close').click();">Update Password</a>
             </li>
             <li th:if="${user}">
                <a th:href="@{'/updateuser?id=' + ${user.idUser}}" onclick="$('#menu-close').click();">Update Profile</a>
             </li>
             <li th:if="${user}">
+               <a th:href="@{/logout}" onclick="$('#menu-close').click();">Disconnect</a>
+            </li>
+            <li th:if="${user}">
                <!--a th:href="@{'/deleteuser?id=' + ${user.idUser}}" onclick="$('#menu-close').click();">Delete Profile</a-->
                <a th:href="@{'/deleteUser?id='+ ${user.idUser}}" onclick="$('#menu-close').click();">Delete Profile</a>
+            </li>
+            <li>
+               <a href="#contact" onclick="$('#menu-close').click();">Contact</a>
             </li>
        </ul>
    </nav>
