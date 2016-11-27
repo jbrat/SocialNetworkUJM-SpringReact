@@ -5,7 +5,6 @@ import com.socialNetwork.model.user.CurrentUser;
 import com.socialNetwork.repository.ActualityRepository;
 import com.socialNetwork.utils.AuthentificationTools;
 import com.socialNetwork.viewmodel.ActualityViewModel;
-import javassist.NotFoundException;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.security.core.Authentication;
