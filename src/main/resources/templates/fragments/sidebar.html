@@ -25,9 +25,6 @@
                <a th:href="@{/profil}" onclick="$('#menu-close').click();">Profile</a>
             </li>
             <li th:if="${user}">
-               <a th:href="@{/information}" onclick="$('#menu-close').click();">Information</a>
-            </li>
-            <li th:if="${user}">
                <a th:href="@{/updatePassword}" onclick="$('#menu-close').click();">Update Password</a>
             </li>
             <li th:if="${user}">
