@@ -1,3 +1,9 @@
+/*
+ *
+ * Class MessageNew extends React Component to create a new message.
+ *
+ */
+
 class MessageNew extends React.Component {
   render() {
     var addMess = event => {
@@ -14,14 +20,15 @@ class MessageNew extends React.Component {
         <div className="w3-container w3-brown">
         <h2>Messenger</h2>
         </div>
-        <form method="post" action="/messages" className="w3-container">
+        <form method="post" action="/api/messages" className="w3-container">
           <p>
           <label className="w3-label w3-text-brown"><b>Receiver</b></label>
-          <input className="w3-input w3-border w3-sand" ref="receiverInput" type="email"/>
+          <input className="w3-input w3-border w3-sand foo-things" ref="receiverInput" type="email" placeholder="Email..."  required="required" />
+          <span className="redMessage" style={{visibility: "hidden"}}>Not Empty</span>
           </p>
           <p>
           <label className="w3-label w3-text-brown"><b>Message</b></label>
-          <input className="w3-input w3-border w3-sand" ref="messageInput" type="text"/>
+          <input className="w3-input w3-border w3-sand" type="text"ref="messageInput" placeholder="Messages..."/>
           </p>
           <p>
           <bouton type="reset" className="w3-btn w3-blue">Reset</bouton>
@@ -33,9 +40,37 @@ class MessageNew extends React.Component {
   }
 }
 
+/**
+  *
+  * Class Message React for Delete
+  *
+  */
+class Message extends React.Component {
+
+  render() {
+    var v = this.props.v;
+    var rm = event => this.props.onDel(v);
+    return (
+      <div>
+      {this.props.v} {this.props.vsender} {this.props.vreceiver} {this.props.vmessage} {this.props.vdate}
+      <button className="btn btn-danger" onClick={rm}>Delete</button>
+      </div>
+      )
+  }
+}
+
+/*
+ *
+ * Class MessApp extends React Component to manage the all Mesenger.
+ *
+ */
 
 class MessApp extends React.Component {
-
+  /*
+   *
+   * Constructor
+   *
+   */
    constructor(props) {
     super(props);
     this.state = {
@@ -44,6 +79,11 @@ class MessApp extends React.Component {
     };
   }
 
+  /*
+   *
+   * function loadData to have messages.
+   *
+   */
   loadData(){
     superagent
       .get('/api/messages') // not HATEOS :(
@@ -54,34 +94,64 @@ class MessApp extends React.Component {
       })
   }
 
-  loadDataUser(){
+
+  /*
+   *
+   * function componentDidMount to load function.
+   *
+   */
+  componentDidMount() {
+    this.loadData()
+  }
+
+  /*
+   *
+   * function to add a message.
+   *
+   */
+  addMessage(receiver, message) {
+
     superagent
       .get('/getCurrentUser') // not HATEOS :(
       .end( function(e, res) {
+        console.log('Response ok:', res.ok);
+        console.log('Response text:', res.text);
         var user = (res.body);
-        alert(user.email);
+        var useremail = user.email;
+        var newMess = {sender : useremail, receiver : receiver, message : message, date : new Date()};
+        console.log(newMess);
+        superagent
+          .post('/api/messages') // not HATEOS :(
+          .set('Content-Type', 'application/json')
+          .send(newMess)
+          .end( function(err, response) {
+            if (err == null) {
+              super.setState({
+                mess: [...this.state.mess, newMess]
+              });
+            }
+          }.bind(this));
+
       })
-  }
-  componentDidMount() {
-    this.loadData()
-    this.loadDataUser()
+
   }
 
-  addMessage(receiver, message) {
-    var newMess = {sender : user.email, receiver, message, date : new Date()};
+  deleteMessage(v){
+    alert("ICI"+this);
     superagent
-      .post('/api/messages') // not HATEOS :(
-      .set('Content-Type', 'application/json')
-      .send(newMess)
-      .end( function(err, response) {
-        if (err == null) {
-          this.setState({
-            mess: [...this.state.mess, newMess]
-          });
-        }
-      }.bind(this));
+    .delete(v._links.self.href) // HATEOS!
+    .end( (err, response) => {
+      this.setState({
+        mess : [this.state.mess.filter(i => i!=v)]
+      })
+    });
   }
 
+  /*
+   *
+   * function render of MessApp.
+   *
+   */
   render(){
     var SenderReceiverMesssageDate = (this.state.mess.map(listemess => (
       <tr key={listemess.id_message} >
@@ -96,6 +166,9 @@ class MessApp extends React.Component {
       </td>
       <td>
       {listemess.date}
+      </td>
+      <td>
+      <Message v={listemess.id_message} vsender={listemess.sender} vreceiver={listemess.receiver} vmessage={listemess.message} vdate={listemess.date}  onDel={ this.deleteMessage.bind(this) }></Message>
       </td>
       </tr>
       )));
@@ -118,6 +191,9 @@ class MessApp extends React.Component {
                 <th>
                   Date
                 </th>
+                <th>
+                  Delete
+                </th>
             </tr>
         </thead>
         <tfoot>
@@ -134,6 +210,9 @@ class MessApp extends React.Component {
                 <th>
                   Date
                 </th>
+                <th>
+                  Delete
+                </th>
             </tr>
         </tfoot>
         <tbody>
@@ -148,6 +227,13 @@ class MessApp extends React.Component {
   }
 }
 
+
+
+/*
+ *
+ * Main ReactDOM render to manage the all Mesenger.
+ *
+ */
 ReactDOM.render(
   <div>
   <MessApp title="Messenger"></MessApp>

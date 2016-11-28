@@ -120,6 +120,9 @@ $('#addUser').bind('click', () => {
 });
 
 
+/**
+ * Refresh for React Messages
+ */
 function myFunction() {
     location.reload();
 }

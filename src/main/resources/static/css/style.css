@@ -61,4 +61,8 @@ tr:nth-child(even) {
 
 #foo-thing:valid + .redMessage { 
     visibility: visible!important; 
+}
+
+.foo-things:valid + .redMessage { 
+    visibility: visible!important; 
 } 
