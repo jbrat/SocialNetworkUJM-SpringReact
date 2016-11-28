@@ -2,6 +2,13 @@
 <html>
     <head lang="en" th:replace="fragments/header :: header"/>
     <body>
+        <!-- Navigation -->
+        <a id="menu-toggle" th:href="@{#}" class="btn btn-dark btn-lg toggle">
+            <i class="fa fa-bars"></i>
+        </a>
+         
+        <nav lang="en" th:replace="fragments/sidebar :: sidebar"/>
+        
         <!-- Header -->
         <header id="top" class="header">
             <div class="text-vertical-center">

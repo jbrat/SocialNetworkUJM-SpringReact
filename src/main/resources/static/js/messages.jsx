@@ -1,15 +1,3 @@
-function load() {
-  superagent
-    .get('/getCurrentUser') // not HATEOS :(
-    .end( function(e, res) 
-        var user = res.body;
-        alert(user.firstName);
-        done()
-    })
-}
-load();
-
-
 class MessageNew extends React.Component {
   render() {
     var addMess = event => {
@@ -70,9 +58,8 @@ class MessApp extends React.Component {
     superagent
       .get('/getCurrentUser') // not HATEOS :(
       .end( function(e, res) {
-        var user = JSON.parse(res.body);
+        var user = (res.body);
         alert(user.email);
-        done()
       })
   }
   componentDidMount() {

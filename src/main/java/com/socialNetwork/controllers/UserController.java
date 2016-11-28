@@ -91,6 +91,12 @@ public class UserController {
     
     @RequestMapping(value="/updateUser", method = RequestMethod.GET)
     public String updateUser(Model model, @RequestParam("id") long idUser) {
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+            CurrentUser u = (CurrentUser) auth.getPrincipal();
+            model.addAttribute("user", u.getUser());
+        } 
        
         if(!AuthentificationTools.getCurrentUserId().equals(idUser)) {
             return "redirect:/profil";
