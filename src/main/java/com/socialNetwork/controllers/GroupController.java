@@ -83,6 +83,12 @@ public class GroupController {
     @RequestMapping("/updateGroup")
     public String updateGroup(Model model, @RequestParam Long id) {
         
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+            CurrentUser u = (CurrentUser) auth.getPrincipal();
+            model.addAttribute("user", u.getUser());
+        }  
+        
         FriendsGroup group = groupRep.findOne(id);
         if(!group.getOwner().getIdUser().equals(AuthentificationTools.getCurrentUserId())) {
             return "redirect:/groups";

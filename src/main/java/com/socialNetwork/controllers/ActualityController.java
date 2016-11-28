@@ -77,6 +77,12 @@ public class ActualityController {
     @RequestMapping(value="/updateActuality", method = RequestMethod.GET)
     public String updateActuality(Model model, @RequestParam Long id) {
         
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+            CurrentUser u = (CurrentUser) auth.getPrincipal();
+            model.addAttribute("user", u.getUser());
+        }  
+        
         Actuality actuality = actualityRep.findOne(id);
         System.out.println(actuality.getPerson().getIdUser());
         System.out.println(AuthentificationTools.getCurrentUserId());

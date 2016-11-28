@@ -79,6 +79,12 @@ public class EventController {
     @RequestMapping(value="/updateEvent", method = RequestMethod.GET)
     public String updateEvent(Model model, @RequestParam("id") long idEvent) {
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+            CurrentUser u = (CurrentUser) auth.getPrincipal();
+            model.addAttribute("user", u.getUser());
+        }  
+        
         Event event = eventRep.findOne(idEvent);
         if(!event.getOwner().getIdUser().equals(AuthentificationTools.getCurrentUserId())) {
             return "redirect:/events";
