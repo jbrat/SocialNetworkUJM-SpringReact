@@ -1,6 +1,10 @@
 package com.socialNetwork.viewmodel;
 
 import com.socialNetwork.model.Information;
+import com.socialNetwork.model.user.User;
+import com.socialNetwork.repository.UserRepository;
+import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -8,15 +12,26 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author kevin
  */
 public class InformationViewModel {
+    @Inject
+    private UserRepository userRepo;
     
-    @NotEmpty
+    private Long idInformation;
+    @NotNull
     private String phoneNumber = "";
-    @NotEmpty
+    @NotNull
     private String street = "";
-    @NotEmpty
+    @NotNull
     private String city = "";
-    @NotEmpty
+    @NotNull
     private String postalCode = "";
+    
+    public Long getIdInformation() {
+        return idInformation;
+    }
+    
+    public void setIdInformation(Long idInformation) {
+        this.idInformation = idInformation;
+    }
     
     public String getPhoneNumber() {
         return phoneNumber;
@@ -50,7 +65,36 @@ public class InformationViewModel {
         this.postalCode = postalCode;
     }
     
-    public Information parse() {
-        return new Information(phoneNumber, street, city, postalCode);
+    /**
+     * Method to convert InformationViewModel into the Information model
+     * 
+     * @param User the owner of the creation
+     * 
+     * @return Information
+     */
+    public Information parse(User u) {
+        
+        Information information = new Information(u,
+            this.getIdInformation(),
+            this.getPhoneNumber(), 
+            this.getStreet(), 
+            this.getCity(),
+            this.getPostalCode());
+        
+            return information;
+    }
+    
+    public Information update(Information info) {
+        if(!info.getPhoneNumber().equals(getPhoneNumber())) {
+            info.setPhoneNumber(getPhoneNumber());
+        } else if(!info.getStreet().equals(getStreet())) {
+            info.setStreet(getStreet());
+        }if(!info.getCity().equals(getCity())) {
+            info.setCity(getCity());
+        } else if(!info.getPostalCode().equals(getPostalCode())) {
+            info.setPostalCode(getPostalCode());
+        }
+        
+        return info;
     }
 }

@@ -1,10 +1,12 @@
 package com.socialNetwork.model;
 
+import com.socialNetwork.model.user.User;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -14,6 +16,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Information implements Serializable {
     
+    
     /**
      * Id of the class for the database
      */
@@ -21,6 +24,13 @@ public class Information implements Serializable {
     @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idInformation;
+    
+    /**
+     * The Owner
+     */
+    @OneToOne
+    @NotNull
+    private User person;
     
     /**
      * phoneNumber of a person
@@ -44,13 +54,21 @@ public class Information implements Serializable {
     
     public Information() {}
     
-    public Information(String phoneNumber, String street, String city, String postalCode) {
+    public Information(User person, Long idInformation,String phoneNumber, String street, String city, String postalCode) {
+        this.person = person;
+        this.idInformation = idInformation;
         this.phoneNumber = phoneNumber;
         this.street = street;
         this.city = city;
         this.postalCode = postalCode;
     }
-    
+     public User getPerson() {
+        return person;
+    }
+
+    public void setPerson(User person) {
+        this.person = person;
+    }
     public long getIdInformation() {
         return idInformation;
     }

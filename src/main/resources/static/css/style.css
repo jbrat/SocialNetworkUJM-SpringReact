@@ -57,3 +57,8 @@ tr:nth-child(even) {
    /* transition: box-shadow 1s;*/
     margin-right: 90px;
 }
+
+
+#foo-thing:valid + .redMessage { 
+    visibility: visible!important; 
+} 

@@ -2,6 +2,12 @@
 <html>
     <head lang="en" th:replace="fragments/header :: header"/>
     <body>
+        <!-- Navigation -->
+        <a id="menu-toggle" th:href="@{#}" class="btn btn-dark btn-lg toggle">
+            <i class="fa fa-bars"></i>
+        </a>
+        
+        <nav lang="en" th:replace="fragments/sidebar :: sidebar"/>
         
         <!-- Header -->
         <header id="top" class="header">
@@ -41,15 +47,15 @@
                     <td th:text="${information.street}"></td>
                     <td th:text="${information.city}"></td>
                     <td th:text="${information.postalCode}"></td>
-                    <td><a th:href="@{'/updateinformations?id=' + ${information.idInformation}}"><button type="submit" class="btn btn-info">Update</button></a></td>
-                    <td><a th:href="@{'/deleteinformations?id=' + ${information.idInformation}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
+                    <td><a th:href="@{'/updateInformation?id=' + ${information.idInformation}}"><button type="submit" class="btn btn-info">Update</button></a></td>
+                    <td><a th:href="@{'/deleteInformation?id=' + ${information.idInformation}}"><button type="submit" class="btn btn-danger">Delete</button></a></td>
                 </tr>
                 </tbody>
             </table>
             <hr />
             <hr/>
             
-        <form method="post" th:action="@{/addinformation}" th:object="${information}">
+        <form method="post" th:action="@{/addInformation}" th:object="${information}">
         <table class="table table-hover">
             <tr>
                 <td>

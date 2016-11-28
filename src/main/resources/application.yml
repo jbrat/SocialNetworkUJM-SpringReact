@@ -3,16 +3,16 @@ spring:
     datasource:
         url: jdbc:mysql://localhost:3306/pwaProject?useSSL=false
         username: root
-        password: **
+        password: *
         validationQuery: SELECT 1
         testWhileIdle: true
     jpa:
         show-sql: true
         hibernate:
             # line fo create and update the database
-            #ddl-auto: create-drop  
+            ddl-auto: create-drop  
             # line to add in the database to don't alter it or / drop 
-            ddl-auto: update 
+            #ddl-auto: update 
             naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
             
 # API Rest #

@@ -61,11 +61,11 @@ public class ActualityController {
     }
     
     @RequestMapping(value="/deleteActuality", method = RequestMethod.GET)
-    public String deleteEvent(@RequestParam("id") long idActuality) {
+    public String deleteActuality(@RequestParam("id") long idActuality) {
 
         Actuality actu = actualityRep.findOne(idActuality);
         if(!AuthentificationTools.getCurrentUserId().equals(actu.getPerson().getIdUser())) {
-            return "redirect:/";
+            return "redirect:/actualities";
         }
        
         actualityRep.delete(idActuality);

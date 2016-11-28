@@ -67,7 +67,7 @@ public class EventController {
         Event actu = eventRep.findOne(idEvent);
         
         if(!AuthentificationTools.getCurrentUserId().equals(actu.getOwner().getIdUser())) {
-            return "redirect:/";
+            return "redirect:/events";
         }
         
         eventRep.delete(idEvent);
