@@ -52,8 +52,9 @@ $ mvn spring-boot:run
 You can access on the social network with : http://localhost:8080 
 
 ### Organisation and contributors of the projets 
-* [retrospective.md] [Contributors & organisation]
-* [auto-evaluation.md.md] [Time spend on the projects, an evaluation]
+* [Contributors & organisation](retrospective.md)
+* [Time spend on the projects, an evaluation](auto-evaluation.md)
+
 ### Development
 
 Want to contribute? Great!
