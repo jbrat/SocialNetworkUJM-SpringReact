@@ -12,4 +12,5 @@ import org.springframework.data.repository.query.Param;
  */
 public interface MessageRepository extends CrudRepository<Message, Long>{
     List<Message> findMessageByReceiver(@Param("receiver") String receiver);
+    List<Message> findMessageBySender(@Param("sender") String sender);
 }
