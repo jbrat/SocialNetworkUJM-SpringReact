@@ -11,7 +11,7 @@ There is two part in our project the templating part without React and the React
 
 Youssef work very sometimes on the templating part to do the delete function in controller. He gots 5 commits.
 
-Kevin done what he learn in class with the practical work during the courses. He work on the part of templates of Events, Actuality and Groups principaly and the end on the React part Messages and on the design of the website. He work on the templating part Events, Groups & Actuality, repository, React with the Messages, controllers, model, templates, js.
+Kevin done what he learn in class with the practical work during the courses. He work on the part of templates of Events, Actuality and Groups principaly and the end on the React part Messages and on the design of the website. He work on the templating part Events, Groups & Actuality, repository, React with the Messages, controllers, model, templates, js, css.
 
 Julien work on all the part because he have all the knowledges about React, Spring. So he works on the templating part first of all and at the end of the projet he works on the React part. 
 He works on the security of the application, the architecture. He helps Kevin for the React part to get the current user and correct a beug in the message. 
