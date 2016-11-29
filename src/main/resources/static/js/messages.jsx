@@ -86,12 +86,19 @@ class MessApp extends React.Component {
    */
   loadData(){
     superagent
-      .get('/api/messages') // not HATEOS :(
-      .end( (err, response) => {
-          if (err == null) {
-            this.setState({mess: response.body._embedded.messages});
-          }
-      })
+      .get('/getCurrentUser') // not HATEOS :(
+      .end( function(e, res) {
+        var user = (res.body);
+        var useremail = user.email;
+
+        superagent
+          .get('http://localhost:8080/api/messages/search/findMessageByReceiver?receiver='+useremail)
+          .end( function(err, response) {
+            if (err == null) {
+                this.setState({mess: response.body._embedded.messages});
+            }
+          }.bind(this));
+      }.bind(this));
   }
 
 
@@ -114,8 +121,6 @@ class MessApp extends React.Component {
     superagent
       .get('/getCurrentUser') // not HATEOS :(
       .end( function(e, res) {
-        console.log('Response ok:', res.ok);
-        console.log('Response text:', res.text);
         var user = (res.body);
         var useremail = user.email;
         var newMess = {sender : useremail, receiver : receiver, message : message, date : new Date()};

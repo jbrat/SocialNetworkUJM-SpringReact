@@ -35,7 +35,6 @@ public class Message implements Serializable {
     /**
      * The Sender of the message
      */
-    //@ManyToOne 
     @NotNull
     private String sender;
     
