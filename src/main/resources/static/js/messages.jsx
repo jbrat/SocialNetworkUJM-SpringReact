@@ -70,19 +70,18 @@ class MessApp extends React.Component {
             mess: []
         };
     }
-
     /*
      * Function loadData to ge the messages from the restAPI
      */
     loadData() {
         superagent
-            .get('/getCurrentUser') 
+            .get('/getCurrentUser')
             .end( function(e, res) {
                 var user = (res.body);
                 var useremail = user.email;
 
                 superagent
-                    .get('http://localhost:8080/api/messages/search/findMessageByReceiver?receiver='+useremail)
+                    .get('/api/messages/search/findMessageByReceiver?receiver='+useremail)
                     .end( function(err, response) {
                         if (err == null) {
                             this.setState({mess: response.body._embedded.messages});
@@ -107,13 +106,13 @@ class MessApp extends React.Component {
     addMessage(receiver, message) {
 
         superagent
-            .get('/getCurrentUser') 
+            .get('/getCurrentUser')
             .end( function(e, res) {
                 var useremail = res.body.email;
                 var newMess = {
-                    sender : useremail, 
-                    receiver : receiver, 
-                    message : message, 
+                    sender : useremail,
+                    receiver : receiver,
+                    message : message,
                     date : new Date()
                 };
 
@@ -193,9 +192,118 @@ class MessApp extends React.Component {
                         {SenderReceiverMesssageDate}
                     </tbody>
                 </table>
-                <hr/>
-
                 <MessageNew onAdd={ this.addMessage.bind(this) }></MessageNew>
+                <hr/>
+            </div>
+        )
+    }
+}
+
+
+/*
+ * Class MessAppSender extends React Component to manage the all Mesenger sender.
+ */
+class MessAppSender extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            mess: []
+        };
+    }
+
+    /*
+     * Function loadData to ge the messages from the restAPI
+     */
+    loadData() {
+        superagent
+            .get('/getCurrentUser')
+            .end( function(e, res) {
+                var user = (res.body);
+                var useremail = user.email;
+
+                superagent
+                    .get('/api/messages/search/findMessageBySender?sender='+useremail)
+                    .end( function(err, response) {
+                        if (err == null) {
+                            this.setState({mess: response.body._embedded.messages});
+                        }
+                    }.bind(this));
+            }.bind(this));
+    }
+
+
+    /*
+     * Function componentDidMount which called before load the component react, this function is used to set datas
+     */
+    componentDidMount() {
+        this.loadData()
+    }
+
+    deleteMessage(v){
+
+        superagent
+            .delete(v._links.self.href)
+            .end( (err, response) => {
+                this.setState({
+                    mess : [this.state.mess.filter(i => i!=v)]
+                })
+            });
+    }
+
+    /*
+     * Function render of MessApp.
+     */
+    render() {
+        var SenderReceiverMesssageDate = (this.state.mess.map(listemess => (
+            <tr key={listemess.id_message} >
+                <td>
+                    {listemess.sender}
+                </td>
+                <td>
+                    {listemess.receiver}
+                </td>
+                <td>
+                    {listemess.message}
+                </td>
+                <td>
+                    {listemess.date}
+                </td>
+                <td>
+                    <Message v={listemess.id_message} vsender={listemess.sender} vreceiver={listemess.receiver} vmessage={listemess.message} vdate={listemess.date}  onDel={ this.deleteMessage.bind(this) }></Message>
+                </td>
+            </tr>
+        )));
+
+        return (
+            <div>
+                <h1 className="react w3-brown">Welcome to the {this.props.title} of UJM</h1>
+                <hr/>
+                <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Sender</th>
+                            <th>Receiver</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Sender</th>
+                            <th>Receiver</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Delete</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {SenderReceiverMesssageDate}
+                    </tbody>
+                </table>
+                <hr/>
             </div>
         )
     }
@@ -206,6 +314,7 @@ class MessApp extends React.Component {
  */
 ReactDOM.render(
   <div>
-    <MessApp title="Messenger"></MessApp>
+    <MessAppSender title="Sender Messenger"></MessAppSender>
+    <MessApp title="Receiver Messenger"></MessApp>
   </div>, document.getElementById('container')
 )
