@@ -9,12 +9,12 @@
 #### Contributors
 There is two part in our project the templating part without React and the React part. 
 
-Youssef work sometimes on the templating part to do the delete function in controller. He gots 5 commits.
+Youssef work very sometimes on the templating part to do the delete function in controller. He gots 5 commits.
 
-Kevin work principaly on the React part and on the design of the website, he help on the templating part sometimes for controllers. He gots around 30 commits
+Kevin done what he learn in class with the practical work during the courses. He work on the part of templates of Events, Actuality and Groups principaly and the end on the React part Messages and on the design of the website. He work on the templating part Events, Groups & Actuality, repository, React with the Messages, controllers, model, templates, js.
 
 Julien work on all the part because he have all the knowledges about React, Spring. So he works on the templating part first of all and at the end of the projet he works on the React part. 
-In totaly he gots around 60 commits in the project on every parts. He works on the security of the application, the architecture. He helps Kevin for the React part to get the current user and correct a beug in the message. 
+He works on the security of the application, the architecture. He helps Kevin for the React part to get the current user and correct a beug in the message. 
 He develop all the templating part, controllers, repository, model, utils, security, tools. 
 
 ### “Good Development Practices”
@@ -25,4 +25,13 @@ On Github we do our commit in english, we din't work in pair programming. To per
 So to conclude at the end we are happy about our work, we respect the deadline, we do lot's of functionalites, the good practises are respected and we use github.
 
 
-We don't have time to put it in online but julien have got a private dedicated server so he can run on it or we can use the solution about cloud, appengine (google) or heroku. Julien didn't have time to do it. 
+We don't have time to put it in online but Julien have got a private dedicated server so he can run on it or we can use the solution about cloud, appengine (google) or heroku. Julien didn't have time to do it. 
+
+### Sources
+http://getbootstrap.com/ is using for the principal design.
+http://www.w3schools.com/css/ is using for the principal CSS function.
+http://www.w3schools.com/js/ is using for the part of JS.
+All the images are extract on the Web.
+https://openclassrooms.com/courses/react-js to learn about React.js.
+http://stackoverflow.com/questions/35901920/deleting-an-item-in-reactjs to create delete with the function splice (In the part of React). 
+
