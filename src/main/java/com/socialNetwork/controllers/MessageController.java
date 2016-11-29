@@ -36,15 +36,6 @@ public class MessageController {
         }   
         return "messages";
     }
-    /**
-     * Method to secure the API messages URL
-     * 
-     * @return String name of template
-     */
-    @RequestMapping("/api/messages")
-    public String secureAPIMessages() {
-        return "redirect:/";
-    }
     
     @RequestMapping("/getMessageByPerson/{idPerson}")
     public String getMessageByPerson(@PathVariable int idPerson) {
