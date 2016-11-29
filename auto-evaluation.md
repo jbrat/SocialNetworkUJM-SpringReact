@@ -29,9 +29,14 @@ We don't have time to put it in online but Julien have got a private dedicated s
 
 ### Sources
 http://getbootstrap.com/ is using for the principal design.
+
 http://www.w3schools.com/css/ is using for the principal CSS function.
+
 http://www.w3schools.com/js/ is using for the part of JS.
+
 All the images are extract on the Web.
+
 https://openclassrooms.com/courses/react-js to learn about React.js.
+
 http://stackoverflow.com/questions/35901920/deleting-an-item-in-reactjs to create delete with the function splice (In the part of React). 
 
