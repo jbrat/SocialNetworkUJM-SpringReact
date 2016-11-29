@@ -41,6 +41,7 @@ public class Message implements Serializable {
     /**
      * The message String, HTML
      */
+    @NotNull
     private String message;
     
     /**
@@ -55,7 +56,7 @@ public class Message implements Serializable {
         this.receiver = receiver;
         this.sender = sender;
         
-        if(checkEmptyMessage(message)) {
+        if(!checkEmptyMessage(message)) {
             this.message = message;
         }
         
@@ -91,7 +92,7 @@ public class Message implements Serializable {
     }
     
     public void setMessage(String message) {
-        if(checkEmptyMessage(message)) {
+        if(!checkEmptyMessage(message)) {
             this.message = message;
         }
     }
