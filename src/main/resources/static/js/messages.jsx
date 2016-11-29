@@ -27,7 +27,7 @@ class MessageNew extends React.Component {
                 </p>
                 <p>
                     <label className="w3-label w3-text-brown"><b>Message</b></label>
-                    <input className="w3-input w3-border w3-sand" type="text"ref="messageInput" placeholder="Messages..."/>
+                    <input className="w3-input w3-border w3-sand" type="text" ref="messageInput" placeholder="Messages..."/>
                 </p>
                 <p>
                     <bouton type="reset" className="w3-btn w3-blue">Reset</bouton>
@@ -39,37 +39,32 @@ class MessageNew extends React.Component {
   }
 }
 
-/**
-  *
-  * Class Message React for Delete
-  *
-  */
-class Message extends React.Component {
-
-  render() {
-    var v = this.props.v;
-    var rm = event => this.props.onDel(v);
-    return (
-        <div>
-            {this.props.v} {this.props.vsender} {this.props.vreceiver} {this.props.vmessage} {this.props.vdate}
-            <button className="btn btn-danger" onClick={rm}>Delete</button>
-        </div>
-      )
-  }
-}
-
 /*
- * Class MessApp extends React Component to manage the all Mesenger.
+ * Class MessAppReceiver extends React Component to manage the all Mesenger.
  */
-class MessApp extends React.Component {
+class MessAppReceiver extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             mess: []
         };
     }
+
+    // Function delete to get the messages from the restAPI
+
+    delete(listemess){
+      superagent
+          .delete(listemess._links.self.href)
+          .end( (err, response) => {
+            const newState = this.state.mess;
+            if (newState.indexOf(listemess) > -1) {
+              newState.splice(newState.indexOf(listemess), 1);
+              this.setState({mess: newState})
+            }
+          });
+    }
+
     /*
      * Function loadData to ge the messages from the restAPI
      */
@@ -130,16 +125,6 @@ class MessApp extends React.Component {
             }.bind(this));
     }
 
-    deleteMessage(v){
-
-        superagent
-            .delete(v._links.self.href)
-            .end( (err, response) => {
-                this.setState({
-                    mess : [this.state.mess.filter(i => i!=v)]
-                })
-            });
-    }
 
     /*
      * Function render of MessApp.
@@ -160,7 +145,7 @@ class MessApp extends React.Component {
                     {listemess.date}
                 </td>
                 <td>
-                    <Message v={listemess.id_message} vsender={listemess.sender} vreceiver={listemess.receiver} vmessage={listemess.message} vdate={listemess.date}  onDel={ this.deleteMessage.bind(this) }></Message>
+                  <button className="btn btn-danger" onClick={this.delete.bind(this, listemess)}>Delete</button>
                 </td>
             </tr>
         )));
@@ -207,10 +192,23 @@ class MessAppSender extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             mess: []
         };
+    }
+
+    // Function delete to get the messages from the restAPI
+
+    delete(listemess){
+      superagent
+          .delete(listemess._links.self.href)
+          .end( (err, response) => {
+            const newState = this.state.mess;
+            if (newState.indexOf(listemess) > -1) {
+              newState.splice(newState.indexOf(listemess), 1);
+              this.setState({mess: newState})
+            }
+          });
     }
 
     /*
@@ -240,18 +238,6 @@ class MessAppSender extends React.Component {
     componentDidMount() {
         this.loadData()
     }
-
-    deleteMessage(v){
-
-        superagent
-            .delete(v._links.self.href)
-            .end( (err, response) => {
-                this.setState({
-                    mess : [this.state.mess.filter(i => i!=v)]
-                })
-            });
-    }
-
     /*
      * Function render of MessApp.
      */
@@ -271,7 +257,7 @@ class MessAppSender extends React.Component {
                     {listemess.date}
                 </td>
                 <td>
-                    <Message v={listemess.id_message} vsender={listemess.sender} vreceiver={listemess.receiver} vmessage={listemess.message} vdate={listemess.date}  onDel={ this.deleteMessage.bind(this) }></Message>
+                    <button className="btn btn-danger" onClick={this.delete.bind(this, listemess)}>Delete</button>
                 </td>
             </tr>
         )));
@@ -315,6 +301,6 @@ class MessAppSender extends React.Component {
 ReactDOM.render(
   <div>
     <MessAppSender title="Sender Messenger"></MessAppSender>
-    <MessApp title="Receiver Messenger"></MessApp>
+    <MessAppReceiver title="Receiver Messenger"></MessAppReceiver>
   </div>, document.getElementById('container')
 )
