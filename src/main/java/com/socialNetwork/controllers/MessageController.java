@@ -43,7 +43,7 @@ public class MessageController {
      */
     @RequestMapping("/api/messages")
     public String secureAPIMessages() {
-        return "redirect:/index";
+        return "redirect:/";
     }
     
     @RequestMapping("/getMessageByPerson/{idPerson}")
