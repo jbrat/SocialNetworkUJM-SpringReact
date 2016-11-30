@@ -48,6 +48,7 @@ If you don't use an IDE :
 $ mvn clean install 
 $ mvn spring-boot:run
 ```
+`` Before launch the application you need to configure your database access in the application.yml in src/main/resources/, put your login, password and database name MySQL``` 
 
 You can access on the social network with : http://localhost:8080 
 
