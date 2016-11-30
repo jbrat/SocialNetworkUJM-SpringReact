@@ -28,7 +28,7 @@ public class Actuality implements Serializable{
     private long idActuality;
     
     /**
-     * The Owner
+     * The Owner of the actuality
      */
     @OneToOne
     @NotNull
@@ -54,6 +54,14 @@ public class Actuality implements Serializable{
     
     public Actuality() {}
     
+    /**
+     * Constructor Actuality
+     * 
+     * @param person the owner of the actuality
+     * @param title
+     * @param message
+     * @param date 
+     */
     public Actuality(User person, String title, String message, Date date) {
         this.person = person;
         this.title = title;
