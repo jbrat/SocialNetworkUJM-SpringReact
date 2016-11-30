@@ -40,3 +40,11 @@ https://openclassrooms.com/courses/react-js to learn about React.js.
 
 http://stackoverflow.com/questions/35901920/deleting-an-item-in-reactjs to create delete with the function splice (In the part of React). 
 
+https://spring.io/guides/gs/securing-web/ to manage the security
+
+https://spring.io/guides/tutorials/spring-boot-oauth2/ for Facebook implementation
+
+http://stackoverflow.com/ help for the differents erros
+
+https://docs.oracle.com/javase/8/docs/ java doc 8
+
