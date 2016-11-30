@@ -1,26 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.socialNetwork.viewmodel;
 
 import com.socialNetwork.model.Actuality;
 import com.socialNetwork.model.user.User;
 import com.socialNetwork.repository.UserRepository;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
 /**
- *
- * @author kevin
+ * Class ActualityViewModel to load actuality model from the view
+ * 
+ * @author UJM's students
  */
 public class ActualityViewModel {
     
+    /**
+     * User repository to get informations of users in the database
+     */
     @Inject
     private UserRepository userRepo;
     
@@ -55,9 +51,9 @@ public class ActualityViewModel {
 
     
      /**
-     * Method to convert ActualityViewModel into the Actuality model
+     * Method to load a Actuality model from view form
      * 
-     * @param User the owner of the creation
+     * @param User the owner of the actuality
      * 
      * @return Actuality
      */
@@ -71,6 +67,13 @@ public class ActualityViewModel {
             return actuality;
     }
     
+    /**
+     * Method to update an actuality from the view
+     * 
+     * @param actu actuality to be modify
+     * 
+     * @return actuality which had been modifyed
+     */
     public Actuality update(Actuality actu) {
         if(!actu.getTitle().equals(getTitle())) {
             actu.setTitle(getTitle());

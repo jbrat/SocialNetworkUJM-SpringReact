@@ -9,11 +9,15 @@ import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
 /**
- *
- * @author kevin
+ * Class FriendsGroupViewModel to load a group from the view
+ * 
+ * @author UJM's students
  */
 public class FriendsGroupViewModel {
     
+    /**
+     * User repository to get informations about users in database
+     */
     @Inject 
     private UserRepository userRep;
     
@@ -74,9 +78,9 @@ public class FriendsGroupViewModel {
     
 
     /**
-     * Method to convert FriendsGroupViewModel into the Group model
+     * Method to load a FriendsGroup from the view
      * 
-     * @return Group
+     * @return FriendsGroup
      */
     public FriendsGroup parse(User u, List<User> users) {
 
@@ -84,11 +88,17 @@ public class FriendsGroupViewModel {
             getName(),
             getPeoples(getListUsers(), users)
         );
-
-        System.out.println("TEST"+group.getIdGroup());
+        
         return group;
     }
     
+    /**
+     * Method to update a group from the view 
+     * 
+     * @param group group to be modify
+     * 
+     * @return group which had been modifyed
+     */
     public FriendsGroup update(FriendsGroup group) {
         if(!group.getName().equals(getName())) {
             group.setName(getName());
@@ -97,6 +107,14 @@ public class FriendsGroupViewModel {
         return group;
     }
     
+    /**
+     * Method to add the differents participants of a group from the view String
+     * 
+     * @param listUsersParam String with username "Jean Monnet; Test test"...
+     * @param usersDB the list of users from database
+     * 
+     * @return LIst of users
+     */
     private ArrayList<User> getPeoples(String listUsersParam, List<User> usersDB) {
         ArrayList<String> names = new ArrayList<String>();
         

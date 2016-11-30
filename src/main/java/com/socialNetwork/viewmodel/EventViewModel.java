@@ -13,8 +13,9 @@ import java.util.Date;
 import javax.validation.constraints.NotNull;
 
 /**
- *
- * @author julien
+ * Class EventViewModel to load event from view
+ *  
+ * @author UJM's students
  */
 public class EventViewModel {
     
@@ -59,9 +60,9 @@ public class EventViewModel {
     }
     
     /**
-     * Method to convert EventViewModel into the Event model
+     * Method to load an Event model from the view
      * 
-     * @param User the owner of the creation
+     * @param User the owner of the event
      * 
      * @return Event
      */
@@ -85,6 +86,13 @@ public class EventViewModel {
         }
     }
     
+    /**
+     * Method to update an event from the view
+     * 
+     * @param e event to be modify
+     * 
+     * @return event which had been modifyed
+     */
     public Event update(Event e) {
         if(!e.getName().equals(getName())) {
             e.setName(getName());
