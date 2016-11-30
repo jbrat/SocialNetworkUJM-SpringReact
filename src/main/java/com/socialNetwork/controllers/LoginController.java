@@ -17,16 +17,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
 
+    /**
+     * Method to access at the form login with GET Request
+     * 
+     * @param model Thymeleaf model
+     * @param error login errors
+     * 
+     * @return template login form
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String getLoginPage(Model model, @RequestParam Optional<String> error) {
         
+        // if the user already connected, redirect to home
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
             return "redirect:/";
         }
-       
         model.addAttribute("error", error);
+        
         return "login";
     }
-
 }

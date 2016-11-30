@@ -18,13 +18,14 @@ public class HomeController {
     /**
      * Method to access to the home page of the application 
      * 
-     * @param model for thymeleaf
+     * @param model Thymeleaf model
      * 
-     * @return template
+     * @return template index
      */
     @RequestMapping("/") 
     public String home(Model model) {
        
+        // load user if he is authenticated
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
            CurrentUser u = (CurrentUser) auth.getPrincipal();

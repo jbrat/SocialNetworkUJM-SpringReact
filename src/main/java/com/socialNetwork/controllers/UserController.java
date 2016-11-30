@@ -32,14 +32,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class UserController {
     
+    /**
+     * Validator for the form user
+     */
     @Inject
     private UserVMValidator userVMValidator;
     
+    /**
+     * User repository to persist in database
+     */
     @Inject
     private UserRepository userRepo;
     
     /**
-     * Method to join the users page
+     * Method to load the register form
+     * 
+     * @param model Thymeleaf model
+     * @param userVM the viewModel to load model from view
      * 
      * @return String name of template
      */
@@ -50,6 +59,15 @@ public class UserController {
         return "register";
     }
 
+    /**
+     * Method to add a user from POST request
+     * 
+     * @param model Thymeleaf model
+     * @param user ViewModel to load the model from the view request post
+     * @param bindingResult
+     * 
+     * @return redirection to login form
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String handleUserCreate(Model model, @Valid UserViewModel user, BindingResult bindingResult) {
         
@@ -57,10 +75,8 @@ public class UserController {
             userVMValidator.validateUserVM(user);
             User u = user.parse();
             userRepo.save(user.parse());
-
             
         } catch (PasswordNotMatchException | EmailAlreadyExistException ex) {
-            System.out.println(ex.getMessage());
             model.addAttribute("error", ex.getMessage());
             model.addAttribute("user", user);
             
@@ -71,24 +87,36 @@ public class UserController {
     }
     
     /**
-     * Method to join the login page
+     * Method to load the profil page
+     * 
+     * @param model Thymeleaf model
      * 
      * @return String name of template
      */
     @RequestMapping(value="/profil", method = RequestMethod.GET)
     public String getProfil(Model model) {
-             
+
+        // if user is connected load the profil
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
-           CurrentUser u = (CurrentUser) auth.getPrincipal();
-           model.addAttribute("user", u.getUser());
-           
-           return "profil";
+            CurrentUser u = (CurrentUser) auth.getPrincipal();
+            model.addAttribute("user", u.getUser());
+
+            return "profil";
         } else {
+            // else redirect to login form
             return "redirect:/login";
         }
     }
     
+    /**
+     * Method to load the form update user
+     * 
+     * @param model Thymeleaf model
+     * @param idUser 
+     * 
+     * @return template update User with user loaded by id
+     */
     @RequestMapping(value="/updateUser", method = RequestMethod.GET)
     public String updateUser(Model model, @RequestParam("id") long idUser) {
         
@@ -101,12 +129,18 @@ public class UserController {
         if(!AuthentificationTools.getCurrentUserId().equals(idUser)) {
             return "redirect:/profil";
         }
-       
         model.addAttribute("user", AuthentificationTools.getCurrentUser());
         
         return "updateProfil";
     }
     
+    /**
+     * Method to update a profil with POST Request
+     * 
+     * @param user ViewModel to load the model user from the post request view
+     * 
+     * @return redirection to profil
+     */
     @RequestMapping(value="/updateProfil", method = RequestMethod.POST)
     public String updateUser(@Valid UserViewModel user) {
   
@@ -115,6 +149,13 @@ public class UserController {
         return "redirect:/profil";
     }
     
+    /**
+     * Method to load the update password form 
+     * 
+     * @param model Thymeleaf model
+     * 
+     * @return template form update password with password of actual user loaded
+     */
     @RequestMapping(value="/updatePassword", method = RequestMethod.GET)
     public String updatePassword(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -128,6 +169,15 @@ public class UserController {
         }    
     }
     
+    /**
+     * Method to update password for the actual user with POST Request
+     * 
+     * @param model Thymeleaf model
+     * @param password
+     * @param passwordRepeated
+     * 
+     * @return redirection to profil when password is updated
+     */
     @RequestMapping(value="/UpdatePassword", method = RequestMethod.POST)
     public String updatePassword(Model model, @RequestParam String password, @RequestParam String passwordRepeated) {
   
@@ -140,9 +190,16 @@ public class UserController {
         u.setPasswordHash(new BCryptPasswordEncoder().encode(password));
         userRepo.save(u);
         
-        return "redirect:/logout";
+        return "redirect:/profil";
     }
     
+    /**
+     * Method to delete a user with his ID
+     * 
+     * @param idUser
+     * 
+     * @return redirection to disconnect the user when he was deleted
+     */
     @RequestMapping(value="/deleteUser")
     public String deleteUser(@RequestParam("id") long idUser) {
 
@@ -152,25 +209,23 @@ public class UserController {
         
         userRepo.delete(idUser);
         
-        return "redirect:/logout";
-        
+        return "redirect:/logout";  
     }
     
     /**
-     * Method to have the current login User in JSON
+     * Method to get the current User from GET Request
      * 
      * @return User format JSON
      */
     @RequestMapping(value="/getCurrentUser", method = RequestMethod.GET)
     public @ResponseBody User getCurrentUser() {
-        
         return AuthentificationTools.getCurrentUser();    
     }
     
     /**
-     * Method for autocompletes, users
+     * Method to get the users from a pattern name, use for autocompletion
      * 
-     * @return HashMap idUser nameUser format JSON
+     * @return list of nameUser format JSON
      */
     @RequestMapping(value="/autocomplete/users", method = RequestMethod.GET)
     public @ResponseBody List<String> autocompleteUsers(@RequestParam("query") String userName) {
