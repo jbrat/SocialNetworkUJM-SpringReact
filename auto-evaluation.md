@@ -44,7 +44,9 @@ https://spring.io/guides/gs/securing-web/ to manage the security
 
 https://spring.io/guides/tutorials/spring-boot-oauth2/ for Facebook implementation
 
-http://stackoverflow.com/ help for the differents erros
+http://docs.spring.io/spring-social-facebook/docs/current/reference/htmlsingle/  Facebook implementation
+
+http://stackoverflow.com/ help for the differents errors
 
 https://docs.oracle.com/javase/8/docs/ java doc 8
 
