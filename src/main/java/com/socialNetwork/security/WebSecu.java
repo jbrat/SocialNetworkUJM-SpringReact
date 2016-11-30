@@ -10,13 +10,28 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ * Class for the security of applications with patterns URL, authentication
+ * 
+ * @author UJM's students
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecu extends WebSecurityConfigurerAdapter {
     
+    /**
+     * The user detail service to interact with current user
+     */
     @Autowired
     private UserDetailsService userDetailsService;
 
+    /**
+     * Method to configure the principal routes of the application
+     * 
+     * @param http
+     * 
+     * @throws Exception 
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -43,6 +58,13 @@ public class WebSecu extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
     }
 
+    /**
+     * Use Bcrypt encryption for login form, encrypt the password to login 
+     * 
+     * @param auth
+     * 
+     * @throws Exception 
+     */
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)

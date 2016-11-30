@@ -8,12 +8,26 @@ import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletCon
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
+/**
+ * Class to load a HTTP access
+ * 
+ * @author UJM's students
+ */
 @Configuration
 public class SSLConfig {
 
+/**
+ * Load the http port value from application.yml
+ */
 @Value("${server.http.port}")
 private int httpPort;
 
+/**
+ * Bean which use to have the HTTP connection for the social network 
+ * 
+ * @return ServletContainer
+ */
 @Bean
 public EmbeddedServletContainerCustomizer containerCustomizer() {
     return new EmbeddedServletContainerCustomizer() {

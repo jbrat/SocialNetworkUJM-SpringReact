@@ -7,14 +7,14 @@ import java.util.Date;
 /**
  * Class to get special format for date
  * 
- * @author julien
+ * @author UJM's students
  */
 public class DateOperation {
     
     /**
      * Method to return string format date : 27/06/06 21:36
      * 
-     * @param Date date
+     * @param date
      * 
      * @return String date
      */
@@ -25,7 +25,8 @@ public class DateOperation {
     
     /**
      * Method to return a date with format : 27/06/06 21:36
-     * @param String dateString
+     * 
+     * @param dateString
      * 
      * @return Date format 27/06/06 21:36
      * 
