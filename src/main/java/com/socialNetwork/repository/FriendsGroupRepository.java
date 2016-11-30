@@ -9,5 +9,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author UJM's students
  */
 public interface FriendsGroupRepository extends CrudRepository<FriendsGroup, Long>{
-
+    
 }
