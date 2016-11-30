@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 /**
- * Class Person which use to have informations for a Person
+ * Class User 
  * 
  * @author UJM student's
  */

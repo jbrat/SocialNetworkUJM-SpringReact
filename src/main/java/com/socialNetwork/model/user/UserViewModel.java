@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * Class to create a user with the form 
+ * Class ViewModel to load a user from the view
  *
  * @author UJM's students
  */
@@ -84,10 +84,22 @@ public class UserViewModel {
         this.role = role;
     }
 
+    /**
+     * Method to load a User from model
+     * 
+     * @return user 
+     */
     public User parse() {
         return new User(lastName, firstName, login, new BCryptPasswordEncoder().encode(password), email);
     }
     
+    /**
+     * Method to update a User model from the view informations
+     * 
+     * @param u user to be modify
+     * 
+     * @return user modify
+     */
     public User update(User u) {
         if(!getEmail().equals(u.getEmail())) {
             u.setEmail(getEmail());
